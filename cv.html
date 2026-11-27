@@ -151,7 +151,7 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
     <div class="intro">
       <div>
         <h1>Currículum completo</h1>
-        <p>Publicaciones con factor de impacto y cuartil, congresos, proyectos y tesis dirigidas. Las citas se recogen cada semana de varias fuentes.</p>
+        <p>Publicaciones con factor de impacto y cuartil, congresos, proyectos, tesis dirigidas y los datos y el código publicados en abierto. Las citas se recogen cada semana de varias fuentes.</p>
       </div>
       <div class="upd" id="upd">Cargando datos…</div>
     </div>
@@ -166,7 +166,7 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
   <footer><span>© 2026 Sergi Trilles Oliver</span><span>Citas: Google Scholar</span></footer>
 </div>
 
-<script src="i18n.js?v=14"></script>
+<script src="i18n.js?v=19"></script>
 <script>
 (function(){
   var root=document.documentElement;
@@ -211,7 +211,8 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
     {id:'publicaciones',name:'Publicaciones',count:function(d){return d.pubs.length},render:renderPubs},
     {id:'congresos',name:'Congresos',count:function(d){return d.confs.length},render:renderConfs},
     {id:'proyectos',name:'Proyectos',count:function(d){return d.projects.length},render:renderProjects},
-    {id:'docencia',name:'Tesis y TFM',count:function(d){return d.theses.length},render:renderTheses}
+    {id:'docencia',name:'Tesis y TFM',count:function(d){return d.theses.length},render:renderTheses},
+    {id:'datos',name:'Datos y código',count:function(d){return d.openscience?d.openscience.items.length:0},render:renderOpen}
   ];
   function route(){
     var id=(location.hash||'#publicaciones').slice(1), tab=TABS.find(function(t){return t.id===id})||TABS[0];
@@ -430,6 +431,28 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
       $('tlist').innerHTML=L.map(function(t){return '<li class="row"><span class="yr">'+(t.y||'en curso')+'</span><div><span class="ttl">'+esc(t.t)+'</span>'+
         ((t.au&&t.au.length)?'<div class="au">'+esc(t.au.join(', '))+'</div>':'')+
         '<div class="venue">'+esc(t.ent||'')+((t.codir&&t.codir.length)?' · <span>codirección:</span> '+esc(t.codir.join(', ')):'')+'</div></div><div><span class="b">'+esc(t.kind)+'</span></div></li>'}).join('')||'<li class="empty">Sin resultados.</li>';
+    }
+  }
+
+  /* datos, código y paquetes de reproducibilidad publicados en Zenodo */
+  var OS={type:'',q:''};
+  function renderOpen(v){
+    var t=I18N.t;
+    var items=(D.openscience&&D.openscience.items)||[], LAB={dataset:'Datos',software:'Código',publication:'Documento'};
+    var c=function(k){return items.filter(function(x){return x.type===k}).length};
+    v.innerHTML='<p class="note" style="margin:0 0 14px;color:var(--muted)">'+esc(t('Conjuntos de datos, código y paquetes de reproducibilidad publicados en abierto en Zenodo, con su DOI.'))+'</p>'+
+      '<div class="filters"><input type="search" id="oq" placeholder="'+esc(t('Buscar título'))+'" aria-label="'+esc(t('Buscar datos y código'))+'">'+
+      chipGroup('',[['dataset',t('Datos')+' ('+c('dataset')+')'],['software',t('Código')+' ('+c('software')+')'],['publication',t('Documentos')+' ('+c('publication')+')'],['',t('Todo')]],OS,'type')+'<span class="count" id="ocount"></span></div><ul class="rows" id="olist"></ul>';
+    $('oq').addEventListener('input',function(e){OS.q=e.target.value;draw()});
+    v.querySelectorAll('.chip[data-k=type]').forEach(function(b){b.onclick=function(){OS.type=b.dataset.v;v.querySelectorAll('.chip[data-k=type]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});draw()}});
+    draw();
+    function draw(){
+      var q=OS.q.toLowerCase();
+      var L=items.filter(function(x){return (!OS.type||x.type===OS.type)&&(!q||(x.t||'').toLowerCase().indexOf(q)>=0)});
+      $('ocount').textContent=t('{n} resultados',{n:L.length});
+      $('olist').innerHTML=L.map(function(x){var href=x.doi?'https://doi.org/'+x.doi:'#';
+        return '<li class="row"><span class="yr">'+(x.y||'')+'</span><div><a class="ttl" href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(x.t)+'</a>'+
+          '<div class="venue">Zenodo'+(x.doi?' · '+esc(x.doi):'')+'</div></div><div><span class="b">'+esc(t(LAB[x.type]||x.type))+'</span></div></li>'}).join('')||'<li class="empty">'+esc(t('Sin resultados.'))+'</li>';
     }
   }
 
