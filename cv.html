@@ -159,7 +159,7 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
   <footer><span>© 2026 Sergi Trilles Oliver</span><span>Citas: Google Scholar, OpenAlex, Semantic Scholar y Crossref</span></footer>
 </div>
 
-<script src="i18n.js?v=7"></script>
+<script src="i18n.js?v=8"></script>
 <script>
 (function(){
   var root=document.documentElement;
@@ -284,7 +284,8 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
     items.forEach(function(i){N[i.y]=N[i.y]||{};C[i.y]=C[i.y]||{};N[i.y][i.k]=(N[i.y][i.k]||0)+1;C[i.y][i.k]=(C[i.y][i.k]||0)+i.c});
     var leg='<div class="legend">'+TY.map(function(s){return '<span><i style="background:'+s.color+'"></i>'+s.label+'</span>'}).join('')+'</div>';
     el.innerHTML='<div class="chart" id="ch1"><h3>Publicaciones por año y tipo</h3>'+leg+'</div>'+
-      '<div class="chart" id="ch2"><h3>Citas según el año de publicación</h3>'+leg+'</div>';
+      '<div class="chart" id="ch2"><h3>Citas según el año de publicación</h3>'+leg+
+      '<p class="note" style="margin:0 0 4px">'+((D.profiles.scholar&&!D.profiles.scholar.manual)?'Fuente: Google Scholar':'Fuente: OpenAlex, Crossref y Semantic Scholar (la cifra más alta)')+'</p></div>';
     columns($('ch1'),{years:years,series:TY,val:function(y,k){return (N[y]||{})[k]},totalLabel:'Total',aria:'Publicaciones por año, apiladas por tipo'});
     columns($('ch2'),{years:years,series:TY,val:function(y,k){return (C[y]||{})[k]},totalLabel:'Total',aria:'Citas por año de publicación, apiladas por tipo'});
   }

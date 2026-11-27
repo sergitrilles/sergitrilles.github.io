@@ -285,6 +285,8 @@
     'Publicaciones por año, apiladas por tipo': ['Publicacions per any, apilades per tipus', 'Publications per year, stacked by type'],
     'Citas por año de publicación, apiladas por tipo': ['Cites per any de publicació, apilades per tipus', 'Citations per year of publication, stacked by type'],
     'Artículos': ['Articles', 'Articles'],
+    'Fuente: Google Scholar': ['Font: Google Scholar', 'Source: Google Scholar'],
+    'Fuente: OpenAlex, Crossref y Semantic Scholar (la cifra más alta)': ['Font: OpenAlex, Crossref i Semantic Scholar (la xifra més alta)', 'Source: OpenAlex, Crossref and Semantic Scholar (highest figure)'],
     'Capítulos': ['Capítols', 'Chapters'],
     'Libros e informes': ['Llibres i informes', 'Books and reports'],
     'Ver como tabla': ['Veure com a taula', 'Show as table'],
