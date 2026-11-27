@@ -13,7 +13,7 @@
 :root{
   --bg:#EEF0EB; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8; --soft:#F4F5F2;
   --sucre:#FF6A3D; --vine:#2F6B3E; --blue:#2B55E6;
-  --q1:#104281; --q2:#256abf; --q3:#3987e5; --q4:#86b6ef; --qn:#C5CAC3; --qt1:#fff; --qt2:#fff; --qt3:#fff; --qt4:#0D1B33; --cites:#256abf;
+  --q1:#104281; --q2:#256abf; --q3:#3987e5; --q4:#86b6ef; --qn:#C5CAC3; --qt1:#fff; --qt2:#fff; --qt3:#fff; --qt4:#0D1B33; --cites:#256abf; --t1:#2a78d6; --t2:#eb6834; --t3:#1baf7a; --t4:#eda100;
   --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body:"Geist", "Segoe UI", system-ui, sans-serif;
   --f-mono:"Geist Mono", ui-monospace, "Cascadia Mono", monospace;
@@ -21,10 +21,10 @@
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A; --soft:#1F231F;
-  --sucre:#FF7A50; --vine:#7CC08A; --blue:#7C9BFF; --q1:#9ec5f4; --q2:#5598e7; --q3:#2a78d6; --q4:#184f95; --qn:#454B45; --qt1:#0D1B33; --qt2:#0D1B33; --qt3:#fff; --qt4:#fff; --cites:#5598e7; color-scheme:dark }}
+  --sucre:#FF7A50; --vine:#7CC08A; --blue:#7C9BFF; --q1:#9ec5f4; --q2:#5598e7; --q3:#2a78d6; --q4:#184f95; --qn:#454B45; --qt1:#0D1B33; --qt2:#0D1B33; --qt3:#fff; --qt4:#fff; --cites:#5598e7; --t1:#3987e5; --t2:#d95926; --t3:#199e70; --t4:#c98500; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A; --soft:#1F231F;
-  --sucre:#FF7A50; --vine:#7CC08A; --blue:#7C9BFF; --q1:#9ec5f4; --q2:#5598e7; --q3:#2a78d6; --q4:#184f95; --qn:#454B45; --qt1:#0D1B33; --qt2:#0D1B33; --qt3:#fff; --qt4:#fff; --cites:#5598e7; color-scheme:dark }
+  --sucre:#FF7A50; --vine:#7CC08A; --blue:#7C9BFF; --q1:#9ec5f4; --q2:#5598e7; --q3:#2a78d6; --q4:#184f95; --qn:#454B45; --qt1:#0D1B33; --qt2:#0D1B33; --qt3:#fff; --qt4:#fff; --cites:#5598e7; --t1:#3987e5; --t2:#d95926; --t3:#199e70; --t4:#c98500; color-scheme:dark }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--f-body);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
@@ -150,6 +150,7 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
     </div>
     <div class="sources" id="sources" aria-label="Citas por fuente"></div>
     <div class="kpis" id="kpis"></div>
+    <div class="charts" id="charts" style="margin:18px 0 0"></div>
   </section>
 
   <nav class="tabs" id="tabs" aria-label="Secciones del CV"></nav>
@@ -158,7 +159,7 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
   <footer><span>© 2026 Sergi Trilles Oliver</span><span>Citas: Google Scholar, OpenAlex, Semantic Scholar y Crossref</span></footer>
 </div>
 
-<script src="i18n.js?v=6"></script>
+<script src="i18n.js?v=7"></script>
 <script>
 (function(){
   var root=document.documentElement;
@@ -195,6 +196,7 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
     var st=d.stats;
     $('kpis').innerHTML=[['artículos',st.articles],['Q1 (JCR o SJR)',st.q1],['Top 10 %',st.top10],['como primer autor',st.first],['congresos',st.confs],['capítulos',st.chapters],['proyectos como IP',st.ip],['tesis dirigidas',st.phd],['TFM',st.tfm]]
       .map(function(k){return '<span class="kpi"><b>'+fmt(k[1])+'</b> '+k[0]+'</span>'}).join('');
+    renderCharts($('charts'));
     TABS.forEach(function(t){t.n=t.count(d)});
     $('tabs').innerHTML=TABS.map(function(t){return '<a href="#'+t.id+'" data-id="'+t.id+'">'+t.name+'<span>'+t.n+'</span></a>'}).join('');
     if(!init.done){addEventListener('hashchange',route);document.addEventListener('langchange',function(){init(D)});init.done=true;}
@@ -271,24 +273,27 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
     box.appendChild(btn); box.appendChild(tbl);
   }
   function renderCharts(el){
-    var arts=D.pubs.filter(function(p){return p.kind==='Artículo'&&p.y});
-    if(!arts.length){el.hidden=true;return}
-    var y0=Math.min.apply(null,arts.map(function(p){return p.y})), y1=Math.max.apply(null,arts.map(function(p){return p.y})), years=[];
-    for(var y=y0;y<=y1;y++)years.push(y);
-    var byQ={}, byC={};
-    arts.forEach(function(p){var k=p.qb?('q'+p.qb):'n'; byQ[p.y]=byQ[p.y]||{}; byQ[p.y][k]=(byQ[p.y][k]||0)+1; byC[p.y]=(byC[p.y]||0)+(p.cmax||0)});
-    var QS=[{key:'q1',label:'Q1',color:'var(--q1)'},{key:'q2',label:'Q2',color:'var(--q2)'},{key:'q3',label:'Q3',color:'var(--q3)'},{key:'q4',label:'Q4',color:'var(--q4)'},{key:'n',label:'Sin cuartil',color:'var(--qn)'}];
-    el.innerHTML='<div class="chart" id="ch1"><h3>Artículos por año y cuartil</h3><div class="legend">'+QS.map(function(s){return '<span><i style="background:'+s.color+'"></i>'+s.label+'</span>'}).join('')+'</div></div>'+
-      '<div class="chart" id="ch2"><h3>Citas según el año de publicación</h3><div class="legend"><span>Citas que han recibido los artículos de cada año</span></div></div>';
-    columns($('ch1'),{years:years,series:QS,val:function(y,k){return (byQ[y]||{})[k]},totalLabel:'Total',aria:'Artículos por año, apilados por cuartil'});
-    columns($('ch2'),{years:years,series:[{key:'c',label:'Citas',color:'var(--cites)'}],val:function(y){return byC[y]},aria:'Citas por año de publicación'});
+    // todo lo publicado: artículos, comunicaciones (sin las que ya están como capítulo), capítulos, libros e informes
+    var TY=[{key:'art',label:'Artículos',color:'var(--t1)'},{key:'conf',label:'Congresos',color:'var(--t2)'},{key:'cap',label:'Capítulos',color:'var(--t3)'},{key:'otro',label:'Libros e informes',color:'var(--t4)'}];
+    var items=D.pubs.filter(function(p){return p.y}).map(function(p){return {y:p.y,k:p.kind==='Artículo'?'art':p.kind==='Capítulo'?'cap':'otro',c:p.cmax||0}})
+      .concat(D.confs.filter(function(x){return x.y&&!x.dup}).map(function(x){return {y:x.y,k:'conf',c:x.cmax||0}}));
+    if(!items.length){el.hidden=true;return}
+    var ys=items.map(function(i){return i.y}), years=[];
+    for(var y=Math.min.apply(null,ys);y<=Math.max.apply(null,ys);y++)years.push(y);
+    var N={},C={};
+    items.forEach(function(i){N[i.y]=N[i.y]||{};C[i.y]=C[i.y]||{};N[i.y][i.k]=(N[i.y][i.k]||0)+1;C[i.y][i.k]=(C[i.y][i.k]||0)+i.c});
+    var leg='<div class="legend">'+TY.map(function(s){return '<span><i style="background:'+s.color+'"></i>'+s.label+'</span>'}).join('')+'</div>';
+    el.innerHTML='<div class="chart" id="ch1"><h3>Publicaciones por año y tipo</h3>'+leg+'</div>'+
+      '<div class="chart" id="ch2"><h3>Citas según el año de publicación</h3>'+leg+'</div>';
+    columns($('ch1'),{years:years,series:TY,val:function(y,k){return (N[y]||{})[k]},totalLabel:'Total',aria:'Publicaciones por año, apiladas por tipo'});
+    columns($('ch2'),{years:years,series:TY,val:function(y,k){return (C[y]||{})[k]},totalLabel:'Total',aria:'Citas por año de publicación, apiladas por tipo'});
   }
 
   /* ───── Publicaciones ───── */
   var PS={q:'',kind:'Artículo',qt:'',from:'',sort:'y',first:false,top:false,lim:40};
   function renderPubs(v){
     var years=Array.from(new Set(D.pubs.map(function(p){return p.y}).filter(Boolean))).sort();
-    v.innerHTML='<div class="charts" id="charts"></div><div class="filters">'+
+    v.innerHTML='<div class="filters">'+
       '<input type="search" id="pq" placeholder="Buscar título, revista o coautor" value="'+esc(PS.q)+'" aria-label="Buscar publicaciones">'+
       '<select id="pkind" aria-label="Tipo"><option value="">Todos los tipos</option>'+['Artículo','Capítulo','Libro','Informe'].map(function(k){return '<option value="'+k+'"'+(PS.kind===k?' selected':'')+'>'+k+'</option>'}).join('')+'</select>'+
       '<select id="pqt" aria-label="Cuartil"><option value="">Cualquier cuartil</option>'+['1','2','3','4'].map(function(q){return '<option value="'+q+'"'+(PS.qt===q?' selected':'')+'>Q'+q+'</option>'}).join('')+'<option value="none"'+(PS.qt==='none'?' selected':'')+'>Sin cuartil</option></select>'+
@@ -297,7 +302,6 @@ footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-con
       '<button type="button" class="chip" id="pfirst" aria-pressed="'+PS.first+'">Primer autor</button>'+
       '<button type="button" class="chip" id="ptop" aria-pressed="'+PS.top+'">Top 10 %</button>'+
       '<span class="count" id="pcount"></span></div><ul class="rows" id="plist"></ul><div class="more" id="pmore"></div>';
-    renderCharts($('charts'));
     function bind(id,ev,fn){$(id).addEventListener(ev,fn)}
     bind('pq','input',function(e){PS.q=e.target.value;PS.lim=40;draw()});
     bind('pkind','change',function(e){PS.kind=e.target.value;PS.lim=40;draw()});
