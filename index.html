@@ -60,7 +60,8 @@ h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.0
 .t{background:var(--tile);border-radius:var(--r);padding:24px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
   transition:transform .25s ease, box-shadow .25s ease}
 @media (hover:hover){.t:hover{transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.35)}}
-.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}
+.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.r2{grid-row:span 2}
+.lines.two{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}.lines.two li{border-top:0;padding-top:0}
 .tag{font:500 13px var(--f-body);color:var(--muted)}
 h2{font-size:22px;font-weight:800}
 h3{font-size:30px;font-weight:800;line-height:1}
@@ -301,7 +302,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     </article>
 
     <!-- 5 -->
-    <section class="t s2" id="publicaciones" aria-labelledby="pub-h">
+    <section class="t s2 r2" id="publicaciones" aria-labelledby="pub-h">
       <h2 id="pub-h">Publicaciones recientes</h2>
       <ul class="pubs" id="latest"></ul>
       <a class="go" href="cv.html">Todas las publicaciones, con factor de impacto y filtros</a>
@@ -316,6 +317,12 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
         <li>Ciudades y agricultura inteligentes</li>
         <li>Pensamiento computacional en la escuela</li>
       </ul>
+    </section>
+
+    <section class="t s2" aria-labelledby="div-h">
+      <h2 id="div-h">Divulgación</h2>
+      <p>Me encontrarás con un kit de Sucre en estas ferias y actividades:</p>
+      <div class="chips"><span>MedNight</span><span>FirUJICiència</span><span>Connecta amb la Ciència</span><span>Practica la UJI</span><span>Ingenio Games</span></div>
     </section>
 
     <!-- 6 -->
@@ -347,18 +354,13 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     </section>
 
     <!-- 7 -->
-    <section class="t s2" aria-labelledby="otros-h">
+    <section class="t s4" aria-labelledby="otros-h">
       <h2 id="otros-h">Otros proyectos</h2>
-      <ul class="lines">
+      <ul class="lines two">
         <li>CoAIoT: plataforma de IA para el Internet de las Cosas (Becas Leonardo, Fundación BBVA)</li>
         <li><a href="https://nextcity-project.eu" target="_blank" rel="noopener">NexTCity</a>: gemelos digitales para ciudades sostenibles (Horizon Europe)</li>
       </ul>
       <a class="go" href="cv.html#proyectos">Todos los proyectos, con filtros</a>
-    </section>
-    <section class="t s2" aria-labelledby="div-h">
-      <h2 id="div-h">Divulgación</h2>
-      <p>Me encontrarás con un kit de Sucre en estas ferias y actividades:</p>
-      <div class="chips"><span>MedNight</span><span>FirUJICiència</span><span>Connecta amb la Ciència</span><span>Practica la UJI</span><span>Ingenio Games</span></div>
     </section>
   </main>
 
@@ -507,12 +509,15 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     var band=el('rect',{x:x0,y:0,width:0,height:0,fill:'var(--coi)','fill-opacity':.08},svg);
     var mark=el('circle',{r:6,fill:'none',stroke:'var(--warn)','stroke-width':2.5,opacity:0},svg);
     var lo=19.5, hi=27.5;
+    function rescale(){var all=[].concat.apply([],data), mn=Math.min.apply(null,all), mx=Math.max.apply(null,all); lo=lo+((mn-.4)-lo)*.25; hi=hi+((Math.max(mx+.4,mn+2.6))-hi)*.25;}
+    (function(){var all=[].concat.apply([],data); lo=Math.min.apply(null,all)-.4; hi=Math.max(Math.max.apply(null,all)+.4,lo+3);})();
     function Y(v){return y1-(v-lo)/(hi-lo)*(y1-y0)}
     function X(i){return x0+i*(x1-x0)/(N-1)}
     function status(s){ if(s===shown) return; shown=s;
       $('anTxt').innerHTML= s==='anom' ? '<span class="anom">anomalía en el sensor 3</span> · los otros 3 de la comunidad no la ven' : 'comunidad estable · 4 sensores'; }
     function draw(){
-      band.setAttribute('y',Y(23.2));band.setAttribute('height',Y(20.3)-Y(23.2));band.setAttribute('width',x1-x0);
+      rescale();
+      band.setAttribute('y',Y(Math.min(23.2,hi)));band.setAttribute('height',Math.max(0,Y(Math.max(20.3,lo))-Y(Math.min(23.2,hi))));band.setAttribute('width',x1-x0);
       for(var s=0;s<S;s++)lines[s].setAttribute('points',data[s].map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1)}).join(' '));
       var last=N-1, v=data[2][last];
       if(v>24){mark.setAttribute('cx',X(last));mark.setAttribute('cy',Y(v));mark.setAttribute('opacity',1);status('anom');}
