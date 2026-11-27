@@ -174,7 +174,10 @@ input[type=range]{width:100%;accent-color:currentColor;min-width:0}
 .lines{list-style:none;margin:0;padding:0;display:grid}
 .lines li{padding:9px 0;border-top:1px solid var(--line);font-size:15px}
 .lines li:first-child{border-top:0;padding-top:0}
-.pubs{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.pubs{list-style:none;margin:0;padding:0;display:grid;gap:14px;align-content:start}
+#publicaciones .pubs{flex:1 1 0;min-height:0;overflow:hidden;align-content:space-between}
+.pubs li[hidden]{display:none}
+@media (max-width:620px){#publicaciones .pubs{flex:none;overflow:visible}}
 .pubs a{text-decoration:none;font-weight:500;line-height:1.35}
 .pubs a:hover{text-decoration:underline}
 .pubs small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
@@ -236,6 +239,18 @@ body{background-attachment:fixed}
 .brand .plate{transition:border-color .2s}
 .brand:hover .plate{border-color:#2FBF71}
 @media (max-width:960px){.chs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* divulgación: fotos de talleres */
+.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:auto}
+.shots a{display:block;border-radius:4px;overflow:hidden;aspect-ratio:4/3;background:var(--bg)}
+.shots img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.shots a:hover img{transform:scale(1.06)}
+.lb{border:0;padding:0;background:transparent;width:min(1100px,94vw);max-width:none;max-height:none;overflow:visible}
+.lb::backdrop{background:rgba(10,12,10,.82)}
+.lb figure{margin:0;display:grid;gap:10px}
+.lb img{width:100%;height:auto;max-height:82vh;object-fit:contain;display:block;border-radius:4px}
+.lb figcaption{color:#F1F3EE;font:500 13px var(--f-mono);text-align:center}
+.lb button{position:absolute;top:-14px;right:-14px;width:34px;height:34px;border-radius:50%;border:0;background:#F1F3EE;color:#141714;font:600 20px/1 var(--f-body);cursor:pointer}
 /* marca: nodo IoT con LED de estado */
 .node{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 14px var(--f-mono);color:var(--ink);letter-spacing:.02em}
 .node .led{width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
@@ -353,6 +368,11 @@ body{background-attachment:fixed}
       <h2 id="div-h">Divulgación</h2>
       <p>Me encontrarás con un kit de Sucre en estas ferias y actividades:</p>
       <div class="chips"><span>MedNight</span><span>FirUJICiència</span><span>Connecta amb la Ciència</span><span>Practica la UJI</span><span>Ingenio Games</span></div>
+      <div class="shots">
+        <a href="img/divulgacion/valldalba.jpg" data-cap="Taller de Sucre en una escuela de Vall d'Alba"><img src="img/divulgacion/valldalba-s.jpg" alt="Taller de Sucre en una escuela de Vall d'Alba" width="480" height="360" loading="lazy"></a>
+        <a href="img/divulgacion/albocasser.jpg" data-cap="Fin del taller de Sucre en Albocàsser"><img src="img/divulgacion/albocasser-s.jpg" alt="Fin del taller de Sucre en Albocàsser" width="480" height="360" loading="lazy"></a>
+        <a href="img/divulgacion/albea.jpg" data-cap="Formación docente con el kit Sucre"><img src="img/divulgacion/albea-s.jpg" alt="Formación docente con el kit Sucre" width="480" height="360" loading="lazy"></a>
+      </div>
     </section>
 
     <!-- 6 -->
@@ -384,10 +404,11 @@ body{background-attachment:fixed}
     </section>
 
   </main>
+  <dialog class="lb" id="lb"><figure><img alt=""><figcaption></figcaption></figure><button type="button" id="lbClose" aria-label="Cerrar">×</button></dialog>
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=15"></script>
+<script src="i18n.js?v=16"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
@@ -478,6 +499,19 @@ body{background-attachment:fixed}
     });
   })();
 
+
+  /* divulgación: ver la foto en grande */
+  var lb=$('lb');
+  document.querySelectorAll('.shots a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(!lb.showModal) return; e.preventDefault();
+      var im=lb.querySelector('img'); im.src=a.getAttribute('href'); im.alt=a.querySelector('img').alt;
+      lb.querySelector('figcaption').textContent=I18N.t(a.dataset.cap); lb.showModal();
+    });
+  });
+  $('lbClose').addEventListener('click',function(){lb.close()});
+  lb.addEventListener('click',function(e){if(e.target===lb)lb.close()});
+
   /* Datos vivos: data/cv.json se regenera cada semana */
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var DATA=null;
@@ -507,13 +541,23 @@ body{background-attachment:fixed}
     $('kHi').textContent='índice h '+sch.h+(sch.i10?' · i10 '+sch.i10:'');
     $('kArt').textContent=st.articles; $('kQ1').textContent=st.q1; $('kIP').textContent=st.ip;
     citeBars(sch.hist); if(counted||REDUCE) $('bars').classList.add('on');
-    var arts=d.pubs.filter(function(p){return p.kind==='Artículo'}).slice(0,5);
+    var arts=d.pubs.filter(function(p){return p.kind==='Artículo'}).slice(0,12);
     $('latest').innerHTML=arts.map(function(p){
       var extra=(p.qb?'. Q'+p.qb:'')+(p.jcr?', '+t('FI {x}',{x:nf(p.jcr)}):'');
       var href=p.doi?'https://doi.org/'+p.doi:(p.url||'cv.html');
       return '<li><a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(p.t)+'</a><small>'+esc(p.src||'')+', '+p.y+extra+'</small></li>';
     }).join('');
+    fitPubs();
   }
+  /* tantas publicaciones como quepan en la baldosa, sin huecos */
+  function fitPubs(){
+    var ul=$('latest'), li=[].slice.call(ul.children); if(!li.length) return;
+    li.forEach(function(x){x.hidden=false});
+    if(matchMedia('(max-width:620px)').matches){ li.forEach(function(x,i){x.hidden=i>=5}); return; }
+    var lim=ul.getBoundingClientRect().bottom+1;
+    li.forEach(function(x,i){ if(i>=3 && x.getBoundingClientRect().bottom>lim) x.hidden=true; });
+  }
+  var rT; addEventListener('resize',function(){clearTimeout(rT);rT=setTimeout(fitPubs,120)});
   fetch('data/cv.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){DATA=d;paintData();}).catch(function(){});
   document.addEventListener('langchange',function(){paintData();paintTele();});
 
