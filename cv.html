@@ -196,7 +196,7 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
   <footer><span>© 2026 Sergi Trilles Oliver</span><span class="org"><a href="https://www.uji.es/institucional/estructura/personal/?p_profesor=178620" target="_blank" rel="noopener">Universitat Jaume I</a> · <a href="https://www.init.uji.es/en/the-institute/" target="_blank" rel="noopener">INIT</a> · <a href="https://geotec.uji.es/" target="_blank" rel="noopener">GEOTEC</a></span><span>Citas: Google Scholar</span></footer>
 </div>
 
-<script src="i18n.js?v=20"></script>
+<script src="i18n.js?v=21"></script>
 <script>
 (function(){
   var root=document.documentElement;
@@ -241,7 +241,7 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
     {id:'publicaciones',name:'Publicaciones',count:function(d){return d.pubs.length},render:renderPubs},
     {id:'congresos',name:'Congresos',count:function(d){return d.confs.length},render:renderConfs},
     {id:'proyectos',name:'Proyectos',count:function(d){return d.projects.length},render:renderProjects},
-    {id:'becas',name:'Becas',count:function(d){return becas(d).length},render:renderBecas},
+    {id:'becas',name:'Becas pre y postdoc',count:function(d){return becas(d).length},render:renderBecas},
     {id:'docencia',name:'Tesis y TFM',count:function(d){return d.theses.length},render:renderTheses},
     {id:'datos',name:'Datos y código',count:function(d){return d.openscience?d.openscience.items.length:0},render:renderOpen}
   ];
@@ -466,9 +466,9 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
   }
 
 
-  /* becas y contratos personales: ayudas personales del CVN y la Beca Leonardo (que el CVN guarda como proyecto) */
+  /* becas predoctoral y postdoctorales (ayudas personales del CVN); las estancias siguen en Proyectos */
   function becas(d){
-    return (d.projects||[]).filter(function(p){return p.kind==='Ayuda personal'||/becas? leonardo/i.test(p.call||'')})
+    return (d.projects||[]).filter(function(p){return p.kind==='Ayuda personal'&&/doctoral/i.test(p.t||'')})
       .sort(function(a,b){return (b.start||'').localeCompare(a.start||'')});
   }
   function becaInfo(p){
@@ -483,7 +483,7 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
   function renderBecas(v){
     var t=I18N.t, L=becas(D);
     var yr=function(s,e){var a=(s||'').slice(0,4), b=(e||'').slice(0,4); return a&&b&&a!==b?a+'–'+b.slice(2):a||b||''};
-    v.innerHTML='<p class="note" style="margin:0 0 14px;color:var(--muted)">'+esc(t('Becas, contratos y estancias de investigación obtenidos en convocatorias competitivas a título personal.'))+'</p>'+
+    v.innerHTML='<p class="note" style="margin:0 0 14px;color:var(--muted)">'+esc(t('Beca predoctoral y contratos postdoctorales obtenidos en convocatorias competitivas.'))+'</p>'+
       '<ul class="rows bec">'+L.map(function(p){var b=becaInfo(p);
         return '<li class="row"><span class="yr">'+yr(p.start,p.end)+'</span><div><span class="ttl">'+esc(t(b.n))+'</span>'+
           (b.x?'<div class="au">'+esc(b.x)+'</div>':'')+
