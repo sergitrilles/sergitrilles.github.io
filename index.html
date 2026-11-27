@@ -7,9 +7,9 @@
 <meta name="description" content="Sergi Trilles Oliver, profesor titular en la Universitat Jaume I. Inteligencia artificial en dispositivos IoT, datos geoespaciales y pensamiento computacional.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: baldosas por filas de altura pareja. 1 presentación + foto · 2 impacto (Scholar) · 3 proyectos · 4 productos · 5 publicaciones + investigación · 6 premios + contacto · 7 otros proyectos + divulgación */
+/* Layout: panel de instrumentación IoT; baldosas por filas de altura pareja. 1 presentación + foto · 2 impacto (Scholar) · 3 proyectos · 4 productos · 5 publicaciones + investigación · 6 premios + contacto · 7 otros proyectos + divulgación */
 :root{
   --bg:#EEF0EB; --dot:#D9DDD4; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8;
   --sucre:#FF6A3D; --sucre-ink:#2B0E05; --night:#1B1F3A;
@@ -18,9 +18,10 @@
   --coi:#7B3FD0; --coi-soft:#EFE6FD; --coi-ink:#22093F;
   --imp:#141714; --imp-ink:#F1F3EE; --imp-bar:#8EA2FF; --imp-muted:#A7B0A8;
   --blue:#2B55E6;
-  --f-head:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body:"Geist", "Segoe UI", system-ui, sans-serif;
-  --r:20px;
+  --f-head:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body:"Archivo", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+  --r:6px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#0F110F; --dot:#1F231F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
@@ -43,7 +44,7 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--
 a{color:inherit;text-underline-offset:3px}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 p{margin:0}
-h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1,h2,h3{font-family:var(--f-head);font-stretch:125%;margin:0;text-wrap:balance;letter-spacing:-.01em}
 .wrap{max-width:1160px;margin:0 auto;display:grid;gap:14px}
 
 .top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:4px 4px 6px;font:500 14.5px var(--f-body)}
@@ -51,29 +52,28 @@ h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.0
 .top nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .top nav a{text-decoration:none;color:var(--muted)}
 .top nav a:hover{color:var(--ink)}
-.langs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--tile)}
-.langs button{font:500 12px var(--f-body);background:none;border:0;color:var(--muted);padding:3px 8px;border-radius:999px;cursor:pointer}
+.langs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:6px;padding:2px;background:var(--tile)}
+.langs button{font:500 12px var(--f-mono);background:none;border:0;color:var(--muted);padding:3px 8px;border-radius:4px;cursor:pointer}
 .langs button[aria-pressed="true"]{background:var(--ink);color:var(--tile)}
 .theme{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:4px}
 
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .t{background:var(--tile);border-radius:var(--r);padding:24px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
   transition:transform .25s ease, box-shadow .25s ease}
-@media (hover:hover){.t:hover{transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.35)}}
 .s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.r2{grid-row:span 2}
 .lines.two{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}.lines.two li{border-top:0;padding-top:0}
-.tag{font:500 13px var(--f-body);color:var(--muted)}
-h2{font-size:22px;font-weight:800}
+.tag{font:500 12.5px var(--f-mono);color:var(--muted)}
+h2{font-size:21px;font-weight:800}
 h3{font-size:30px;font-weight:800;line-height:1}
 .go{font-weight:600;margin-top:auto}
 
 /* 1 · presentación + foto */
 .hero{padding:36px;justify-content:center}
-.hero h1{font-size:clamp(46px,6.4vw,84px);font-weight:800;line-height:.92;letter-spacing:-.04em}
+.hero h1{font-size:clamp(44px,6vw,80px);font-weight:900;line-height:.9;letter-spacing:-.02em}
 .hero .txt{display:grid;gap:12px;max-width:46em}
 .hero .txt p:first-child{font-size:19px;line-height:1.45}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.btn{font:500 14px var(--f-body);border-radius:999px;padding:9px 16px;border:1px solid var(--line);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
+.btn{font:500 14px var(--f-body);border-radius:6px;padding:9px 16px;border:1px solid var(--line);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
 .btn.primary{background:var(--ink);color:var(--tile);border-color:var(--ink)}
 .photo{padding:0;min-height:300px}
 .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
@@ -83,7 +83,7 @@ h3{font-size:30px;font-weight:800;line-height:1}
 /* 2 · impacto */
 .impact{background:var(--imp);color:var(--imp-ink);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr) minmax(0,1.2fr);gap:28px;align-items:center;padding:26px 30px}
 .impact .tag{color:var(--imp-muted)}
-.impact .big{font:800 clamp(52px,6vw,76px)/.9 var(--f-head);letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.impact .big{font:600 clamp(50px,5.6vw,72px)/.9 var(--f-mono);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .impact .sub{color:var(--imp-muted);font-size:14px;margin-top:6px}
 .bars{position:relative}
 .bars svg{width:100%;height:auto;display:block;overflow:visible}
@@ -94,7 +94,7 @@ h3{font-size:30px;font-weight:800;line-height:1}
 .figs{display:grid;gap:12px}
 .figs div{display:flex;align-items:baseline;gap:10px;border-top:1px solid color-mix(in srgb,var(--imp-muted) 35%,transparent);padding-top:10px}
 .figs div:first-child{border-top:0;padding-top:0}
-.figs b{font:800 30px/1 var(--f-head);letter-spacing:-.03em;font-variant-numeric:tabular-nums;min-width:2.2em}
+.figs b{font:600 28px/1 var(--f-mono);letter-spacing:-.03em;font-variant-numeric:tabular-nums;min-width:2.2em}
 .figs span{color:var(--imp-muted);font-size:14px;line-height:1.3}
 
 /* 3 · proyectos */
@@ -104,8 +104,8 @@ h3{font-size:30px;font-weight:800;line-height:1}
 .coi{background:var(--coi-soft);color:var(--coi-ink)}.coi .go,.coi .tag{color:var(--coi)}
 .viz{width:100%;height:auto;display:block;overflow:visible}
 .viz text{font:500 11px var(--f-body);fill:currentColor}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13.5px;font-weight:500}
-.pbtn{font:600 14px var(--f-body);border-radius:999px;padding:8px 15px;border:0;cursor:pointer;color:#fff}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font:500 13px var(--f-mono)}
+.pbtn{font:600 14px var(--f-body);border-radius:6px;padding:8px 15px;border:0;cursor:pointer;color:#fff}
 .lia .pbtn{background:var(--lia)}.coi .pbtn{background:var(--coi)}
 :root[data-theme="dark"] .pbtn{color:#0F110F}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pbtn{color:#0F110F}}
@@ -167,13 +167,13 @@ input[type=range]{width:100%;accent-color:currentColor;min-width:0}
 .pubs a:hover{text-decoration:underline}
 .pubs small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
 .awards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.awards li{background:var(--bg);border-radius:14px;padding:14px;display:grid;gap:4px;font-size:14.5px;line-height:1.35}
-.awards .y{font:800 22px/1 var(--f-head);color:var(--muted)}
+.awards li{background:var(--bg);border-radius:4px;padding:14px;display:grid;gap:4px;font-size:14.5px;line-height:1.35}
+.awards .y{font:600 18px/1 var(--f-mono);color:var(--muted)}
 .collab{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
 .collab b{font-weight:600}
 .links{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:500;margin-top:auto;padding-top:6px;border-top:1px solid var(--line)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{font-size:14px;padding:7px 12px;border-radius:999px;background:var(--bg)}
+.chips span{font:500 13px var(--f-mono);padding:7px 11px;border-radius:4px;background:var(--bg)}
 footer{font-size:13px;color:var(--muted);padding:6px 4px}
 
 @media (max-width:960px){
@@ -190,12 +190,19 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
   .sim{grid-template-columns:minmax(0,1fr)}.phone{justify-self:center}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* marca: nodo IoT con LED de estado */
+.node{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 14px var(--f-mono);color:var(--ink);letter-spacing:.02em}
+.node .led{width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
+.node small{font:500 11px var(--f-mono);color:var(--muted);padding:2px 6px;border:1px solid var(--line);border-radius:4px}
+@keyframes led{50%{box-shadow:0 0 0 6px color-mix(in srgb,#2FBF71 0%,transparent)}}
+@media (prefers-reduced-motion:reduce){.node .led{animation:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="me-link" href="./">Sergi Trilles</a>
+    <a class="node" href="./" aria-label="Inicio"><i class="led" aria-hidden="true"></i><span>st-01</span><small>online</small></a>
     <nav>
       <a href="#proyectos">Proyectos</a><a href="#investigacion">Investigación</a><a href="cv.html">CV</a><a href="#contacto">Contacto</a>
       <span class="langs" role="group" aria-label="Idioma"><button type="button" data-lang="es">ES</button><button type="button" data-lang="va">VA</button><button type="button" data-lang="en">EN</button></span>
@@ -366,7 +373,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=12"></script>
+<script src="i18n.js?v=13"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;

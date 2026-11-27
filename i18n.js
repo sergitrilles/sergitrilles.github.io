@@ -12,6 +12,7 @@
     /* comunes */
     'Cambiar entre tema claro y oscuro': ['Canviar entre tema clar i fosc', 'Switch between light and dark theme'],
     'Idioma': ['Idioma', 'Language'],
+    'Inicio': ['Inici', 'Home'],
     'productos': ['productes', 'products'],
     'investigación': ['recerca', 'research'],
     'cv completo': ['cv complet', 'full cv'],
