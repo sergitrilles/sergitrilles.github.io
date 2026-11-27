@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CV · Sergi Trilles</title>
+<meta name="description" content="Currículum completo de Sergi Trilles Oliver: publicaciones con factor de impacto, congresos, proyectos y tesis dirigidas. Se actualiza solo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: el mismo sistema bento de la portada; arriba las cifras por fuente, debajo pestañas con listas filtrables */
+:root{
+  --bg:#EEF0EB; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8; --soft:#F4F5F2;
+  --sucre:#FF6A3D; --vine:#2F6B3E; --blue:#2B55E6;
+  --q1:#2F6B3E; --q2:#7A9A3A; --q3:#C08A1E; --q4:#B4532A;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Geist", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "Cascadia Mono", monospace;
+  --r:22px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A; --soft:#1F231F;
+  --sucre:#FF7A50; --vine:#7CC08A; --blue:#7C9BFF; --q1:#7CC08A; --q2:#B5CF6B; --q3:#E5B44C; --q4:#F08A5D; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A; --soft:#1F231F;
+  --sucre:#FF7A50; --vine:#7CC08A; --blue:#7C9BFF; --q1:#7CC08A; --q2:#B5CF6B; --q3:#E5B44C; --q4:#F08A5D; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:14px}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font:500 13px var(--f-mono);color:var(--muted)}
+header.top a{text-decoration:none} header.top a:hover{color:var(--ink)}
+.theme{background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 10px;font:inherit;cursor:pointer}
+.t{background:var(--tile);border-radius:var(--r);padding:22px;min-width:0}
+h1,h2{font-family:var(--f-display);margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1{font-size:clamp(34px,4.6vw,54px);font-weight:800;line-height:1}
+h2{font-size:22px;font-weight:800}
+.label{font:500 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.intro{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.intro p{color:var(--muted);max-width:56ch;margin:8px 0 0}
+.upd{font:500 12.5px var(--f-mono);color:var(--muted);text-align:right}
+.upd b{color:var(--ink);font-weight:500}
+/* fuentes de citas */
+.sources{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:18px}
+.src{background:var(--soft);border-radius:14px;padding:12px 14px;display:grid;gap:2px;min-width:0}
+.src b{font:800 26px/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.src span{font:500 11.5px var(--f-mono);color:var(--muted)}
+.src.off{opacity:.55}
+.src small{font-size:11.5px;color:var(--muted)}
+.kpis{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.kpi{font:500 13px var(--f-mono);padding:6px 11px;border-radius:999px;background:var(--soft)}
+.kpi b{font-weight:600}
+/* pestañas */
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:env(safe-area-inset-top,0px);z-index:4;background:var(--bg);padding-block:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav.tabs a{font:500 14px var(--f-body);text-decoration:none;padding:9px 15px;border-radius:999px;background:var(--tile);color:var(--muted)}
+nav.tabs a[aria-current="page"]{background:var(--ink);color:var(--tile)}
+nav.tabs a span{font:500 12px var(--f-mono);opacity:.7;margin-left:4px}
+/* filtros */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.filters input[type=search]{flex:1 1 220px;min-width:0;font:inherit;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink)}
+.filters select{font:500 13px var(--f-body);padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink)}
+.chip{font:500 13px var(--f-body);padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--tile);border-color:var(--ink)}
+.count{font:500 12.5px var(--f-mono);color:var(--muted);margin-left:auto}
+/* filas */
+.rows{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;padding:14px 0;border-top:1px solid var(--line);align-items:start}
+.row:first-child{border-top:0}
+.yr{font:500 13.5px var(--f-mono);color:var(--muted);padding-top:2px;font-variant-numeric:tabular-nums}
+.ttl{font-weight:600;line-height:1.35;text-decoration:none}
+a.ttl:hover{text-decoration:underline}
+.au{font-size:13.5px;color:var(--muted);margin-top:3px}
+.au b{color:var(--ink);font-weight:600}
+.venue{font-size:13.5px;margin-top:2px;font-style:italic}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.b{font:500 11.5px var(--f-mono);padding:3px 8px;border-radius:6px;background:var(--soft);white-space:nowrap}
+.b.q{color:#fff}
+.b.q1{background:var(--q1)}.b.q2{background:var(--q2)}.b.q3{background:var(--q3)}.b.q4{background:var(--q4)}
+:root[data-theme="dark"] .b.q, .dk .b.q{color:#0F110F}
+.b.new{background:var(--sucre);color:#fff}
+.b.ip{background:var(--vine);color:var(--tile)}
+.side{text-align:right;min-width:78px}
+.cites{font:800 22px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.cites small{display:block;font:500 11px var(--f-mono);color:var(--muted);margin-top:3px}
+.money{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.empty{padding:30px 0;color:var(--muted);text-align:center}
+.more{margin-top:12px;display:flex;justify-content:center}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid2 .t h2{margin-bottom:10px}
+.simple{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:14px}
+.simple li{display:grid;grid-template-columns:46px minmax(0,1fr);gap:10px}
+.simple .yr{font-size:12.5px}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.err{background:var(--tile);border-radius:var(--r);padding:22px}
+footer{font:400 12.5px var(--f-mono);color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:6px}
+@media (max-width:980px){.sources{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.sources{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:minmax(0,1fr)}
+  .row{grid-template-columns:minmax(0,1fr) auto}.row .yr{grid-column:1/-1;padding:0}.upd{text-align:left}}
+.langs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}
+.langs button{font:500 12px var(--f-mono);background:none;border:0;color:var(--muted);padding:3px 8px;border-radius:999px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--tile)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="index.html">← sergi trilles</a>
+    <span style="display:flex;gap:8px;align-items:center"><span class="langs" role="group" aria-label="Idioma"><button type="button" data-lang="es">ES</button><button type="button" data-lang="va">VA</button><button type="button" data-lang="en">EN</button></span><button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">◐</button></span>
+  </header>
+
+  <section class="t">
+    <div class="intro">
+      <div>
+        <span class="label">Sergi Trilles Oliver</span>
+        <h1>Currículum completo</h1>
+        <p>Publicaciones con factor de impacto y cuartil, congresos, proyectos y tesis dirigidas. Las citas se recogen cada semana de varias fuentes.</p>
+      </div>
+      <div class="upd" id="upd">Cargando datos…</div>
+    </div>
+    <div class="sources" id="sources" aria-label="Citas por fuente"></div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <nav class="tabs" id="tabs" aria-label="Secciones del CV"></nav>
+  <main id="view" class="t" aria-live="polite"></main>
+
+  <footer><span>© 2026 Sergi Trilles Oliver</span><span>Citas: Google Scholar, OpenAlex, Semantic Scholar y Crossref</span></footer>
+</div>
+
+<script src="i18n.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  try{var s=localStorage.getItem('theme'); if(s) root.dataset.theme=s;}catch(e){}
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme=dark?'light':'dark'; try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}
+  });
+  function syncDk(){ var d = root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches; document.body.classList.toggle('dk', d); }
+  syncDk(); new MutationObserver(syncDk).observe(root,{attributes:true}); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncDk);
+
+  var D, $=function(id){return document.getElementById(id)};
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var fmt=function(n){return n==null?'—':I18N.nf(n,{useGrouping:'always'})};
+  var eur=function(n){return n?I18N.nf(Math.round(n),{useGrouping:'always'})+' €':''};
+  var yr=function(s){return s?String(s).slice(0,4):''};
+
+  var SRC=[['scholar','Google Scholar'],['scopus','Scopus'],['wos','Web of Science'],['openalex','OpenAlex'],['semanticscholar','Semantic Scholar'],['crossref','Crossref']];
+
+  fetch('data/cv.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(init).catch(function(){
+    $('view').outerHTML='<div class="err"><h2>No se han podido cargar los datos</h2><p class="note">La página lee <code>data/cv.json</code>. Si la abres como archivo local, el navegador lo bloquea: ábrela desde un servidor (GitHub Pages, o <code>python -m http.server</code> en la carpeta).</p></div>';
+    $('upd').textContent='';
+  });
+
+  function init(d){
+    D=d;
+    var up=new Date(d.updated.replace('Z',':00Z'));
+    $('upd').innerHTML='Actualizado el <b>'+up.toLocaleDateString(I18N.locale(),{day:'numeric',month:'long',year:'numeric'})+'</b>';
+    $('sources').innerHTML=SRC.map(function(s){
+      var p=d.profiles[s[0]];
+      if(!p) return '<div class="src off"><span>'+s[1]+'</span><b>—</b><small>sin clave de API</small></div>';
+      return '<div class="src"><span>'+s[1]+'</span><b>'+fmt(p.cites)+'</b><small>citas · h '+(p.h==null?'—':p.h)+''+'</small></div>';
+    }).join('');
+    var st=d.stats;
+    $('kpis').innerHTML=[['artículos',st.articles],['Q1 (JCR o SJR)',st.q1],['Top 10 %',st.top10],['como primer autor',st.first],['congresos',st.confs],['capítulos',st.chapters],['proyectos como IP',st.ip],['tesis dirigidas',st.phd],['TFM',st.tfm]]
+      .map(function(k){return '<span class="kpi"><b>'+fmt(k[1])+'</b> '+k[0]+'</span>'}).join('');
+    TABS.forEach(function(t){t.n=t.count(d)});
+    $('tabs').innerHTML=TABS.map(function(t){return '<a href="#'+t.id+'" data-id="'+t.id+'">'+t.name+'<span>'+t.n+'</span></a>'}).join('');
+    if(!init.done){addEventListener('hashchange',route);document.addEventListener('langchange',function(){init(D)});init.done=true;}
+    route();
+  }
+
+  var TABS=[
+    {id:'publicaciones',name:'Publicaciones',count:function(d){return d.pubs.length},render:renderPubs},
+    {id:'congresos',name:'Congresos',count:function(d){return d.confs.length},render:renderConfs},
+    {id:'proyectos',name:'Proyectos',count:function(d){return d.projects.length},render:renderProjects},
+    {id:'docencia',name:'Tesis y TFM',count:function(d){return d.theses.length},render:renderTheses}
+  ];
+  function route(){
+    var id=(location.hash||'#publicaciones').slice(1), tab=TABS.find(function(t){return t.id===id})||TABS[0];
+    document.querySelectorAll('#tabs a').forEach(function(a){a.toggleAttribute('aria-current',a.dataset.id===tab.id); if(a.dataset.id===tab.id)a.setAttribute('aria-current','page')});
+    tab.render($('view'));
+  }
+
+  function authorsHtml(au){
+    if(!au||!au.length) return '';
+    return '<div class="au">'+au.map(function(a){return /Trilles/.test(a)?'<b>'+esc(a)+'</b>':esc(a)}).join(', ')+'</div>';
+  }
+  function chipGroup(name,opts,state,key){
+    return opts.map(function(o){return '<button type="button" class="chip" data-k="'+key+'" data-v="'+esc(o[0])+'" aria-pressed="'+(state[key]===o[0])+'">'+o[1]+'</button>'}).join('');
+  }
+
+  /* ───── Publicaciones ───── */
+  var PS={q:'',kind:'Artículo',qt:'',from:'',sort:'y',first:false,top:false,lim:40};
+  function renderPubs(v){
+    var years=Array.from(new Set(D.pubs.map(function(p){return p.y}).filter(Boolean))).sort();
+    v.innerHTML='<div class="filters">'+
+      '<input type="search" id="pq" placeholder="Buscar título, revista o coautor" value="'+esc(PS.q)+'" aria-label="Buscar publicaciones">'+
+      '<select id="pkind" aria-label="Tipo"><option value="">Todos los tipos</option>'+['Artículo','Capítulo','Libro','Informe'].map(function(k){return '<option value="'+k+'"'+(PS.kind===k?' selected':'')+'>'+k+'</option>'}).join('')+'</select>'+
+      '<select id="pqt" aria-label="Cuartil"><option value="">Cualquier cuartil</option>'+['1','2','3','4'].map(function(q){return '<option value="'+q+'"'+(PS.qt===q?' selected':'')+'>Q'+q+'</option>'}).join('')+'<option value="none"'+(PS.qt==='none'?' selected':'')+'>Sin cuartil</option></select>'+
+      '<select id="pfrom" aria-label="Desde el año"><option value="">Desde siempre</option>'+years.map(function(y){return '<option value="'+y+'"'+(String(PS.from)===String(y)?' selected':'')+'>'+y+'</option>'}).join('')+'</select>'+
+      '<select id="psort" aria-label="Ordenar"><option value="y">Más recientes</option><option value="if"'+(PS.sort==='if'?' selected':'')+'>Mayor factor de impacto</option><option value="c"'+(PS.sort==='c'?' selected':'')+'>Más citados</option></select>'+
+      '<button type="button" class="chip" id="pfirst" aria-pressed="'+PS.first+'">Primer autor</button>'+
+      '<button type="button" class="chip" id="ptop" aria-pressed="'+PS.top+'">Top 10 %</button>'+
+      '<span class="count" id="pcount"></span></div><ul class="rows" id="plist"></ul><div class="more" id="pmore"></div>';
+    function bind(id,ev,fn){$(id).addEventListener(ev,fn)}
+    bind('pq','input',function(e){PS.q=e.target.value;PS.lim=40;draw()});
+    bind('pkind','change',function(e){PS.kind=e.target.value;PS.lim=40;draw()});
+    bind('pqt','change',function(e){PS.qt=e.target.value;PS.lim=40;draw()});
+    bind('pfrom','change',function(e){PS.from=e.target.value;PS.lim=40;draw()});
+    bind('psort','change',function(e){PS.sort=e.target.value;draw()});
+    bind('pfirst','click',function(e){PS.first=!PS.first;e.target.setAttribute('aria-pressed',PS.first);draw()});
+    bind('ptop','click',function(e){PS.top=!PS.top;e.target.setAttribute('aria-pressed',PS.top);draw()});
+    draw();
+    function draw(){
+      var q=PS.q.toLowerCase();
+      var L=D.pubs.filter(function(p){
+        if(PS.kind&&p.kind!==PS.kind) return false;
+        if(PS.qt==='none'&&p.qb) return false;
+        if(PS.qt&&PS.qt!=='none'&&String(p.qb)!==PS.qt) return false;
+        if(PS.from&&(p.y||0)<+PS.from) return false;
+        if(PS.first&&p.me!==1) return false;
+        if(PS.top&&!p.top10) return false;
+        if(q&&((p.t||'')+' '+(p.src||'')+' '+(p.au||[]).join(' ')).toLowerCase().indexOf(q)<0) return false;
+        return true;
+      });
+      L.sort(PS.sort==='if'?function(a,b){return (b.jcr||0)-(a.jcr||0)}:PS.sort==='c'?function(a,b){return (b.cmax||0)-(a.cmax||0)}:function(a,b){return (b.y||0)-(a.y||0)});
+      var cites=L.reduce(function(s,p){return s+(p.cmax||0)},0);
+      $('pcount').textContent=L.length+' resultados · '+fmt(cites)+' citas';
+      $('plist').innerHTML=L.slice(0,PS.lim).map(function(p){
+        var link=p.doi?'https://doi.org/'+p.doi:(p.url||'');
+        var b=[];
+        if(p.q) b.push('<span class="b q q'+p.q+'" title="Cuartil JCR (mejor categoría)">JCR Q'+p.q+'</span>');
+        if(p.sjrq) b.push('<span class="b q q'+p.sjrq+'" title="Cuartil SJR">SJR Q'+p.sjrq+'</span>');
+        if(p.jcr) b.push('<span class="b" title="Factor de impacto JCR">FI '+I18N.nf(p.jcr)+'</span>');
+        if(p.top10) b.push('<span class="b">Top 10 %</span>');
+        if(p.me===1) b.push('<span class="b">1.er autor</span>');
+        if(p.corr) b.push('<span class="b">autor de correspondencia</span>');
+        if(p.kind!=='Artículo') b.push('<span class="b">'+esc(p.kind)+'</span>');
+        if(p.origin!=='cv') b.push('<span class="b new">nuevo</span>');
+        if(p.oa) b.push('<a class="b" href="'+esc(p.oa)+'" target="_blank" rel="noopener">acceso abierto ↗</a>');
+        var c=p.cites||{}, tip=Object.keys(c).map(function(k){return k+': '+c[k]}).join(' · ');
+        return '<li class="row"><span class="yr">'+(p.y||'')+'</span><div>'+
+          (link?'<a class="ttl" href="'+esc(link)+'" target="_blank" rel="noopener">'+esc(p.t)+'</a>':'<span class="ttl">'+esc(p.t)+'</span>')+
+          authorsHtml(p.au)+(p.src?'<div class="venue">'+esc(p.src)+'</div>':'')+'<div class="badges">'+b.join('')+'</div></div>'+
+          '<div class="side"><div class="cites" title="'+esc(tip)+'">'+(p.cmax||0)+'<small>citas</small></div></div></li>';
+      }).join('')||'<li class="empty">Ninguna publicación cumple estos filtros.</li>';
+      $('pmore').innerHTML=L.length>PS.lim?'<button type="button" class="chip" id="pm">Ver '+(L.length-PS.lim)+' más</button>':'';
+      if($('pm')) $('pm').onclick=function(){PS.lim+=60;draw()};
+    }
+  }
+
+  /* ───── Congresos ───── */
+  var CS={q:'',intl:''};
+  function renderConfs(v){
+    v.innerHTML='<div class="filters"><input type="search" id="cq" placeholder="Buscar título o congreso" aria-label="Buscar congresos" value="'+esc(CS.q)+'">'+
+      chipGroup('',[['','Todos'],['1','Internacionales'],['0','Nacionales']],CS,'intl')+'<span class="count" id="ccount"></span></div><ul class="rows" id="clist"></ul>';
+    $('cq').addEventListener('input',function(e){CS.q=e.target.value;draw()});
+    v.querySelectorAll('.chip[data-k=intl]').forEach(function(b){b.onclick=function(){CS.intl=b.dataset.v;v.querySelectorAll('.chip[data-k=intl]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});draw()}});
+    draw();
+    function draw(){
+      var q=CS.q.toLowerCase();
+      var L=D.confs.filter(function(c){
+        if(CS.intl!==''&&String(+!!c.intl)!==CS.intl) return false;
+        return !q||((c.t||'')+' '+(c.ev||'')).toLowerCase().indexOf(q)>=0;
+      }).sort(function(a,b){return (b.y||0)-(a.y||0)});
+      $('ccount').textContent=L.length+' resultados';
+      $('clist').innerHTML=L.map(function(c){
+        return '<li class="row"><span class="yr">'+(c.y||'')+'</span><div>'+(c.url?'<a class="ttl" href="'+esc(c.url)+'" target="_blank" rel="noopener">'+esc(c.t)+'</a>':'<span class="ttl">'+esc(c.t)+'</span>')+authorsHtml(c.au)+
+          '<div class="venue">'+esc(c.ev||'')+(c.city?' · '+esc(c.city):'')+'</div><div class="badges">'+(c.intl?'<span class="b">internacional</span>':'')+'</div></div><div></div></li>';
+      }).join('')||'<li class="empty">Sin resultados.</li>';
+    }
+  }
+
+  /* ───── Proyectos ───── */
+  var PRS={q:'',role:'',scope:'',kind:'Proyecto'};
+  function renderProjects(v){
+    v.innerHTML='<div class="filters"><input type="search" id="prq" placeholder="Buscar proyecto o financiador" aria-label="Buscar proyectos" value="'+esc(PRS.q)+'">'+
+      chipGroup('',[['','Cualquier rol'],['IP','Como IP'],['Investigador','Como investigador']],PRS,'role')+
+      '<select id="prscope" aria-label="Ámbito"><option value="">Todos los ámbitos</option>'+['Internacional','Nacional','Autonómico','UJI','Otro'].map(function(s){return '<option value="'+s+'"'+(PRS.scope===s?' selected':'')+'>'+s+'</option>'}).join('')+'</select>'+
+      '<select id="prkind" aria-label="Tipo"><option value="">Proyectos y ayudas</option><option value="Proyecto"'+(PRS.kind==='Proyecto'?' selected':'')+'>Proyecto</option><option value="Ayuda personal"'+(PRS.kind==='Ayuda personal'?' selected':'')+'>Ayuda personal</option></select>'+
+      '<span class="count" id="prcount"></span></div><ul class="rows" id="prlist"></ul>';
+    $('prq').addEventListener('input',function(e){PRS.q=e.target.value;draw()});
+    $('prscope').addEventListener('change',function(e){PRS.scope=e.target.value;draw()});
+    $('prkind').addEventListener('change',function(e){PRS.kind=e.target.value;draw()});
+    v.querySelectorAll('.chip[data-k=role]').forEach(function(b){b.onclick=function(){PRS.role=b.dataset.v;v.querySelectorAll('.chip[data-k=role]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});draw()}});
+    draw();
+    function draw(){
+      var q=PRS.q.toLowerCase();
+      var L=D.projects.filter(function(p){
+        if(PRS.role&&p.role!==PRS.role) return false;
+        if(PRS.scope&&p.scope!==PRS.scope) return false;
+        if(PRS.kind&&p.kind!==PRS.kind) return false;
+        return !q||((p.t||'')+' '+(p.funder||'')+' '+(p.call||'')+' '+(p.ref||'')).toLowerCase().indexOf(q)>=0;
+      }).sort(function(a,b){return (b.start||'').localeCompare(a.start||'')});
+      var tot=L.reduce(function(s,p){return s+(p.amt||0)},0);
+      $('prcount').textContent=L.length+' resultados · '+eur(tot);
+      $('prlist').innerHTML=L.map(function(p){
+        var years=yr(p.start)+(p.end&&yr(p.end)!==yr(p.start)?'–'+yr(p.end):'');
+        return '<li class="row"><span class="yr">'+years+'</span><div>'+(p.url?'<a class="ttl" href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.t)+' ↗</a>':'<span class="ttl">'+esc(p.t)+'</span>')+
+          '<div class="venue">'+esc(p.funder||'')+(p.ref?' · '+esc(p.ref):'')+'</div><div class="badges">'+(p.role==='IP'?'<span class="b ip">IP</span>':'<span class="b">'+esc(p.role)+'</span>')+'<span class="b">'+esc(p.scope)+'</span>'+(p.kind!=='Proyecto'?'<span class="b">'+esc(p.kind)+'</span>':'')+'</div></div>'+
+          '<div class="side"><span class="money">'+eur(p.amt)+'</span></div></li>';
+      }).join('')||'<li class="empty">Sin resultados.</li>';
+    }
+  }
+
+  /* ───── Tesis y TFM ───── */
+  var TS={kind:'Tesis doctoral',q:''};
+  function renderTheses(v){
+    var c=function(k){return D.theses.filter(function(t){return t.kind===k}).length};
+    v.innerHTML='<div class="filters"><input type="search" id="tq" placeholder="Buscar título o universidad" aria-label="Buscar trabajos dirigidos">'+
+      chipGroup('',[['Tesis doctoral','Tesis ('+c('Tesis doctoral')+')'],['TFM','TFM ('+c('TFM')+')'],['TFG','TFG ('+c('TFG')+')'],['','Todo']],TS,'kind')+'<span class="count" id="tcount"></span></div><ul class="rows" id="tlist"></ul>'+
+      '';
+    $('tq').addEventListener('input',function(e){TS.q=e.target.value;draw()});
+    v.querySelectorAll('.chip[data-k=kind]').forEach(function(b){b.onclick=function(){TS.kind=b.dataset.v;v.querySelectorAll('.chip[data-k=kind]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});draw()}});
+    draw();
+    function draw(){
+      var q=TS.q.toLowerCase();
+      var L=D.theses.filter(function(t){return (!TS.kind||t.kind===TS.kind)&&(!q||((t.t||'')+' '+(t.ent||'')).toLowerCase().indexOf(q)>=0)}).sort(function(a,b){return (b.y||9999)-(a.y||9999)});
+      $('tcount').textContent=L.length+' resultados';
+      $('tlist').innerHTML=L.map(function(t){return '<li class="row"><span class="yr">'+(t.y||'en curso')+'</span><div><span class="ttl">'+esc(t.t)+'</span><div class="venue">'+esc(t.ent||'')+'</div></div><div><span class="b">'+esc(t.kind)+'</span></div></li>'}).join('')||'<li class="empty">Sin resultados.</li>';
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
