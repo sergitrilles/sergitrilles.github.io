@@ -203,6 +203,39 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
+
+/* telemetría en directo (Open-Meteo) */
+.tele{margin-top:10px;border:1px solid var(--line);border-radius:4px;padding:12px 14px 10px;display:grid;gap:10px;font-family:var(--f-mono);background:color-mix(in srgb,var(--bg) 45%,var(--tile))}
+.tele-h{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
+.tele-h .live{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:600}
+.tele-h .when{margin-left:auto}
+.tele .led{width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
+.aqi{padding:1px 7px;border-radius:4px;background:color-mix(in srgb,var(--q) 18%,transparent);color:var(--ink);border:1px solid color-mix(in srgb,var(--q) 55%,transparent)}
+.chs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ch{display:grid;gap:2px;min-width:0}
+.ch .k{font-size:11.5px;color:var(--muted)}
+.ch b{font-weight:600;font-size:13px;color:var(--muted);white-space:nowrap}
+.ch b .v{font-size:22px;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ch svg{width:100%;height:26px;display:block;overflow:visible;margin-top:4px}
+.ch path{fill:none;stroke:var(--blue);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1)}
+.ch .area{fill:var(--blue);fill-opacity:.08;stroke:none;stroke-dasharray:none;opacity:0;transition:opacity .8s .9s}
+.ch circle{fill:var(--blue);opacity:0;transition:opacity .3s 1.5s}
+.tele.on .ch path{stroke-dashoffset:0}.tele.on .ch .area{opacity:1}.tele.on .ch circle{opacity:1}
+.tele .src{font-size:11px;color:var(--muted)}
+
+/* impacto: las barras crecen al aparecer */
+.bars .col{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.bars.on .col{transform:none}
+
+/* fondo: el campo de puntos se ilumina alrededor del cursor */
+body{background-attachment:fixed}
+.wrap{position:relative;z-index:1}
+.field{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(#2FBF71 1.3px,transparent 1.7px);background-size:22px 22px;opacity:0;transition:opacity .5s;
+  -webkit-mask:radial-gradient(170px circle at var(--mx,-500px) var(--my,-500px),#000 0,transparent 100%);mask:radial-gradient(170px circle at var(--mx,-500px) var(--my,-500px),#000 0,transparent 100%)}
+.field.on{opacity:.75}
+.brand .plate{transition:border-color .2s}
+.brand:hover .plate{border-color:#2FBF71}
+@media (max-width:960px){.chs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* marca: nodo IoT con LED de estado */
 .node{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 14px var(--f-mono);color:var(--ink);letter-spacing:.02em}
 .node .led{width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
@@ -212,6 +245,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
 </style>
 </head>
 <body>
+<div class="field" id="field" aria-hidden="true"></div>
 <div class="wrap">
   <header class="top">
     <a class="node" href="./" aria-label="Inicio"><i class="led" aria-hidden="true"></i><span>st-01</span><small>online</small></a>
@@ -230,6 +264,16 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
         <p>Soy profesor titular en la Universitat Jaume I y subdirector del Institut de Noves Tecnologies de la Imatge (INIT), donde trabajo en el grupo GEOTEC.</p>
         <p>Investigo cómo conseguir que sensores pequeños decidan por sí mismos, sin depender de la nube, y cómo enseñar a programar desde los cuatro años. Casi todo lo que hago acaba en algo que se usa: un kit para escuelas, una estación para viñedos y plataformas para ciudades.</p>
         <div class="acts"><a class="btn primary" href="cv.html">Ver el CV completo</a><button class="btn" type="button" id="copyMail">strilles@uji.es</button></div>
+      </div>
+      <div class="tele" id="tele" hidden>
+        <div class="tele-h"><span class="live"><i class="led" aria-hidden="true"></i>en directo · Castelló de la Plana</span><span class="aqi" id="teleAqi"></span><span class="when" id="teleT"></span></div>
+        <div class="chs">
+          <div class="ch" data-k="temperature_2m"><span class="k">Temperatura</span><b><span class="v">–</span> °C</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+          <div class="ch" data-k="relative_humidity_2m"><span class="k">Humedad</span><b><span class="v">–</span> %</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+          <div class="ch" data-k="nitrogen_dioxide"><span class="k">NO₂</span><b><span class="v">–</span> µg/m³</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+          <div class="ch" data-k="pm2_5"><span class="k">PM2.5</span><b><span class="v">–</span> µg/m³</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+        </div>
+        <small class="src">Últimas 24 h · datos de Open-Meteo</small>
       </div>
     </section>
     <figure class="t photo" style="margin:0">
@@ -343,7 +387,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=14"></script>
+<script src="i18n.js?v=15"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
@@ -365,6 +409,75 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     if(css)e.setAttribute('style',(e.getAttribute('style')||'')+css);
     if(parent)parent.appendChild(e);return e}
 
+
+  /* impacto: cuenta hacia arriba cuando entra en pantalla */
+  var REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches, counted=false, seen=false, pendingCount=null;
+  function countTo(node,target){
+    pendingCount=function(){
+      var t0=performance.now(), dur=1400;
+      (function step(now){var k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+        node.textContent=I18N.nf(Math.round(target*e),{useGrouping:'always'});
+        if(k<1) requestAnimationFrame(step); else counted=true;})(t0);
+      $('bars').classList.add('on');
+    };
+    node.textContent=I18N.nf(0);
+    if(seen) pendingCount();
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ seen=true; io.disconnect(); if(pendingCount) pendingCount(); } },{threshold:.35});
+    io.observe(document.querySelector('.impact'));
+  } else seen=true;
+
+  /* fondo: los puntos se encienden alrededor del cursor */
+  if(!REDUCE && matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var f=$('field'), raf=0, mx=0, my=0;
+    addEventListener('pointermove',function(e){mx=e.clientX;my=e.clientY;f.classList.add('on');
+      if(!raf) raf=requestAnimationFrame(function(){raf=0;f.style.setProperty('--mx',mx+'px');f.style.setProperty('--my',my+'px')})},{passive:true});
+    document.documentElement.addEventListener('pointerleave',function(){f.classList.remove('on')});
+  }
+
+  /* telemetría en directo de Castelló (Open-Meteo, sin clave) */
+  var TELE=null;
+  function aqiLabel(a){ return a<=20?['aire: bueno','#2FBF71']:a<=40?['aire: razonable','#8CC63F']:a<=60?['aire: moderado','#E0B000']:a<=80?['aire: malo','#E57A2E']:a<=100?['aire: muy malo','#D2423A']:['aire: extremadamente malo','#8E2B7A']; }
+  function paintTele(){
+    var d=TELE; if(!d) return;
+    var box=$('tele');
+    box.querySelectorAll('.ch').forEach(function(ch){
+      var k=ch.dataset.k, cur=d.cur[k], ser=d.ser[k];
+      ch.querySelector('.v').textContent=cur==null?'–':I18N.nf(cur,{maximumFractionDigits:k==='relative_humidity_2m'?0:1});
+      var svg=ch.querySelector('svg'); if(svg.firstChild||!ser||ser.length<2) return;
+      var lo=Math.min.apply(null,ser), hi=Math.max.apply(null,ser), span=(hi-lo)||1, n=ser.length;
+      var pts=ser.map(function(v,i){return [i/(n-1)*100, 23-(v-lo)/span*20]});
+      var line='M'+pts.map(function(p){return p[0].toFixed(2)+','+p[1].toFixed(2)}).join('L');
+      el('path',{d:line+'L100,26L0,26Z','class':'area'},svg);
+      el('path',{d:line,pathLength:1},svg);
+      var last=pts[n-1]; el('circle',{cx:last[0],cy:last[1],r:2.2},svg);
+    });
+    if(d.aqi!=null){ var q=aqiLabel(d.aqi), a=$('teleAqi'); a.textContent=I18N.t(q[0]); a.style.setProperty('--q',q[1]); } else $('teleAqi').hidden=true;
+    $('teleT').textContent=I18N.t('a las {h}',{h:d.time.slice(11,16)});
+    box.hidden=false;
+    requestAnimationFrame(function(){requestAnimationFrame(function(){box.classList.add('on')})});
+  }
+  (function(){
+    var Q='latitude=39.99&longitude=-0.07&past_days=1&forecast_days=1&timezone=Europe%2FMadrid';
+    function get(u){return fetch(u).then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
+    Promise.all([
+      get('https://api.open-meteo.com/v1/forecast?'+Q+'&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m'),
+      get('https://air-quality-api.open-meteo.com/v1/air-quality?'+Q+'&current=european_aqi,pm2_5,nitrogen_dioxide&hourly=pm2_5,nitrogen_dioxide')
+    ]).then(function(rs){
+      var w=rs[0], a=rs[1]; if(!w||!w.current) return;
+      var cur={}, ser={};
+      function take(src,keys){ if(!src||!src.current) return;
+        var now=src.current.time.slice(0,13), idx=src.hourly.time.map(function(x){return x.slice(0,13)}).indexOf(now);
+        keys.forEach(function(k){ cur[k]=src.current[k];
+          var s=src.hourly[k]; if(idx<0) idx=s.length-1;
+          ser[k]=s.slice(Math.max(0,idx-23),idx+1).filter(function(v){return v!=null}); }); }
+      take(w,['temperature_2m','relative_humidity_2m']); take(a,['pm2_5','nitrogen_dioxide']);
+      TELE={cur:cur,ser:ser,time:w.current.time,aqi:a&&a.current?a.current.european_aqi:null};
+      paintTele();
+    });
+  })();
+
   /* Datos vivos: data/cv.json se regenera cada semana */
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var DATA=null;
@@ -375,7 +488,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     var tip=document.createElement('div'); tip.className='btip'; tip.hidden=true; box.appendChild(tip);
     hist.forEach(function(h,i){
       var x=band*i+(band-bw)/2, hgt=(H-B-T)*h[1]/max, y=H-B-hgt, r=Math.min(4,hgt,bw/2);
-      el('path',{d:'M'+x+','+(H-B)+'V'+(y+r)+'Q'+x+','+y+' '+(x+r)+','+y+'H'+(x+bw-r)+'Q'+(x+bw)+','+y+' '+(x+bw)+','+(y+r)+'V'+(H-B)+'Z',fill:'var(--imp-bar)'},svg);
+      el('path',{d:'M'+x+','+(H-B)+'V'+(y+r)+'Q'+x+','+y+' '+(x+r)+','+y+'H'+(x+bw-r)+'Q'+(x+bw)+','+y+' '+(x+bw)+','+(y+r)+'V'+(H-B)+'Z',fill:'var(--imp-bar)','class':'col',style:'transition-delay:'+(i*45)+'ms;'},svg);
       if(i%2===(n-1)%2) el('text',{x:x+bw/2,y:H-4,'text-anchor':'middle'},svg).textContent="'"+String(h[0]).slice(2);
       var hit=el('rect',{x:band*i,y:0,width:band,height:H-B,'class':'hit'},svg);
       hit.addEventListener('mouseenter',function(){
@@ -390,10 +503,10 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
   function paintData(){
     var d=DATA; if(!d) return;
     var sch=d.profiles.scholar||{}, st=d.stats, nf=I18N.nf;
-    if(sch.cites!=null) $('kCites').textContent=nf(sch.cites,{useGrouping:'always'});
+    if(sch.cites!=null){ if(!counted&&!REDUCE) countTo($('kCites'),sch.cites); else $('kCites').textContent=nf(sch.cites,{useGrouping:'always'}); }
     $('kHi').textContent='índice h '+sch.h+(sch.i10?' · i10 '+sch.i10:'');
     $('kArt').textContent=st.articles; $('kQ1').textContent=st.q1; $('kIP').textContent=st.ip;
-    citeBars(sch.hist);
+    citeBars(sch.hist); if(counted||REDUCE) $('bars').classList.add('on');
     var arts=d.pubs.filter(function(p){return p.kind==='Artículo'}).slice(0,5);
     $('latest').innerHTML=arts.map(function(p){
       var extra=(p.qb?'. Q'+p.qb:'')+(p.jcr?', '+t('FI {x}',{x:nf(p.jcr)}):'');
@@ -402,7 +515,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     }).join('');
   }
   fetch('data/cv.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){DATA=d;paintData();}).catch(function(){});
-  document.addEventListener('langchange',paintData);
+  document.addEventListener('langchange',function(){paintData();paintTele();});
 
 })();
 </script>
