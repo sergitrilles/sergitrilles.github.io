@@ -207,25 +207,17 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 
-/* telemetría en directo (Open-Meteo) */
-.tele{margin-top:10px;border:1px solid var(--line);border-radius:4px;padding:12px 14px 10px;display:grid;gap:10px;font-family:var(--f-mono);background:color-mix(in srgb,var(--bg) 45%,var(--tile))}
-.tele-h{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
-.tele-h .live{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:600}
-.tele-h .when{margin-left:auto}
-.tele .led{width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
-.aqi{padding:1px 7px;border-radius:4px;background:color-mix(in srgb,var(--q) 18%,transparent);color:var(--ink);border:1px solid color-mix(in srgb,var(--q) 55%,transparent)}
-.chs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.ch{display:grid;gap:2px;min-width:0}
-.ch .k{font-size:11.5px;color:var(--muted)}
-.ch b{font-weight:600;font-size:13px;color:var(--muted);white-space:nowrap}
-.ch b .v{font-size:22px;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.ch svg{width:100%;height:26px;display:block;overflow:visible;margin-top:4px}
-.ch path{fill:none;stroke:var(--blue);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1)}
-.ch .area{fill:var(--blue);fill-opacity:.08;stroke:none;stroke-dasharray:none;opacity:0;transition:opacity .8s .9s}
-.ch circle{fill:var(--blue);opacity:0;transition:opacity .3s 1.5s}
-.tele.on .ch path{stroke-dashoffset:0}.tele.on .ch .area{opacity:1}.tele.on .ch circle{opacity:1}
-.tele .src{font-size:11px;color:var(--muted)}
 
+/* proyectos y productos: cada baldosa enseña, en pequeño, lo que hace */
+.viz{position:relative;display:block;height:78px;border-radius:4px;background:var(--bg);overflow:hidden}
+.viz.dark{background:#181B30}
+.viz svg{position:absolute;inset:0 0 18px 0;width:100%;height:calc(100% - 18px);display:block}
+.viz small{position:absolute;left:8px;right:8px;bottom:4px;font:500 10.5px/1.2 var(--f-mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viz.dark small{color:#A9AEDB}
+.viz .ln{stroke:var(--line);stroke-width:1}
+.viz.dark .ln{stroke:#2E3358}
+.viz .risk{font:600 9.5px var(--f-mono)}
+.brand:hover .viz{outline:1px solid #2FBF71;outline-offset:-1px}
 /* impacto: las barras crecen al aparecer */
 .bars .col{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .bars.on .col{transform:none}
@@ -280,16 +272,6 @@ body{background-attachment:fixed}
         <p>Investigo cómo conseguir que sensores pequeños decidan por sí mismos, sin depender de la nube, y cómo enseñar a programar desde los cuatro años. Casi todo lo que hago acaba en algo que se usa: un kit para escuelas, una estación para viñedos y plataformas para ciudades.</p>
         <div class="acts"><a class="btn primary" href="cv.html">Ver el CV completo</a><button class="btn" type="button" id="copyMail">strilles@uji.es</button></div>
       </div>
-      <div class="tele" id="tele" hidden>
-        <div class="tele-h"><span class="live"><i class="led" aria-hidden="true"></i>en directo · Castelló de la Plana</span><span class="aqi" id="teleAqi"></span><span class="when" id="teleT"></span></div>
-        <div class="chs">
-          <div class="ch" data-k="temperature_2m"><span class="k">Temperatura</span><b><span class="v">–</span> °C</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
-          <div class="ch" data-k="relative_humidity_2m"><span class="k">Humedad</span><b><span class="v">–</span> %</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
-          <div class="ch" data-k="nitrogen_dioxide"><span class="k">NO₂</span><b><span class="v">–</span> µg/m³</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
-          <div class="ch" data-k="pm2_5"><span class="k">PM2.5</span><b><span class="v">–</span> µg/m³</b><svg viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true"></svg></div>
-        </div>
-        <small class="src">Últimas 24 h · datos de Open-Meteo</small>
-      </div>
     </section>
     <figure class="t photo" style="margin:0">
       <img src="img/foto.jpg" alt="Sergi Trilles" width="201" height="251">
@@ -314,24 +296,28 @@ body{background-attachment:fixed}
     <!-- 3 · proyectos y productos -->
     <a class="t brand" id="proyectos" href="https://lia.uji.es" target="_blank" rel="noopener">
       <span class="plate"><img src="img/logos/lia.png" alt="LIA · AIoT &amp; Communities" width="823" height="240"></span>
+      <span class="viz" data-viz="lia" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
       <span class="tag">Proyecto que dirijo · desde 2025</span>
       <span class="desc">Aprendizaje federado en comunidades de dispositivos AIoT.</span>
       <span class="go">lia.uji.es</span>
     </a>
     <a class="t brand" href="https://coiotia.uji.es" target="_blank" rel="noopener">
       <span class="plate dark"><img src="img/logos/coiotia.png" alt="CoIoTIA · Communities of IoT and AI" width="630" height="240"></span>
+      <span class="viz dark" data-viz="coi" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
       <span class="tag">Proyecto AEI · equipo de investigación</span>
       <span class="desc">Comunidades de IoT e IA que comparten micro-modelos TinyML.</span>
       <span class="go">coiotia.uji.es</span>
     </a>
     <a class="t brand" href="https://programasucre.com" target="_blank" rel="noopener">
       <span class="plate"><span class="sucre-logo" role="img" aria-label="Sucre"><svg viewBox="0 0 66 66" aria-hidden="true"><rect x="5" y="9" width="26" height="26" rx="6.5" fill="#1d1d1b"/><rect x="5" y="39" width="26" height="26" rx="6.5" fill="#1d1d1b"/><rect x="35" y="39" width="26" height="26" rx="6.5" fill="#1d1d1b"/><rect x="37" y="4" width="26" height="26" rx="6.5" fill="#1d1d1b" opacity=".5" transform="rotate(15 50 17)"/></svg><span aria-hidden="true">sucre</span></span></span>
+      <span class="viz" data-viz="sucre" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
       <span class="tag">Producto · desde 2016</span>
       <span class="desc">Kit y app para aprender pensamiento computacional desde los 4 años.</span>
       <span class="go">programasucre.com</span>
     </a>
     <a class="t brand" href="https://www.senviro.uji.es" target="_blank" rel="noopener">
       <span class="plate"><img src="img/logos/senviro.png" alt="SEnviro" width="283" height="83"></span>
+      <span class="viz" data-viz="senviro"><svg viewBox="0 0 240 64" aria-hidden="true"></svg><small></small></span>
       <span class="tag">Producto · viticultura de precisión</span>
       <span class="desc">Estación IoT que avisa al móvil del riesgo de mildiu en el viñedo.</span>
       <span class="go">senviro.uji.es</span>
@@ -409,7 +395,7 @@ body{background-attachment:fixed}
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=17"></script>
+<script src="i18n.js?v=18"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
@@ -458,48 +444,143 @@ body{background-attachment:fixed}
     document.documentElement.addEventListener('pointerleave',function(){f.classList.remove('on')});
   }
 
-  /* telemetría en directo de Castelló (Open-Meteo, sin clave) */
-  var TELE=null;
-  function aqiLabel(a){ return a<=20?['aire: bueno','#2FBF71']:a<=40?['aire: razonable','#8CC63F']:a<=60?['aire: moderado','#E0B000']:a<=80?['aire: malo','#E57A2E']:a<=100?['aire: muy malo','#D2423A']:['aire: extremadamente malo','#8E2B7A']; }
-  function paintTele(){
-    var d=TELE; if(!d) return;
-    var box=$('tele');
-    box.querySelectorAll('.ch').forEach(function(ch){
-      var k=ch.dataset.k, cur=d.cur[k], ser=d.ser[k];
-      ch.querySelector('.v').textContent=cur==null?'–':I18N.nf(cur,{maximumFractionDigits:k==='relative_humidity_2m'?0:1});
-      var svg=ch.querySelector('svg'); if(svg.firstChild||!ser||ser.length<2) return;
-      var lo=Math.min.apply(null,ser), hi=Math.max.apply(null,ser), span=(hi-lo)||1, n=ser.length;
-      var pts=ser.map(function(v,i){return [i/(n-1)*100, 23-(v-lo)/span*20]});
-      var line='M'+pts.map(function(p){return p[0].toFixed(2)+','+p[1].toFixed(2)}).join('L');
-      el('path',{d:line+'L100,26L0,26Z','class':'area'},svg);
-      el('path',{d:line,pathLength:1},svg);
-      var last=pts[n-1]; el('circle',{cx:last[0],cy:last[1],r:2.2},svg);
-    });
-    if(d.aqi!=null){ var q=aqiLabel(d.aqi), a=$('teleAqi'); a.textContent=I18N.t(q[0]); a.style.setProperty('--q',q[1]); } else $('teleAqi').hidden=true;
-    $('teleT').textContent=I18N.t('a las {h}',{h:d.time.slice(11,16)});
-    box.hidden=false;
-    requestAnimationFrame(function(){requestAnimationFrame(function(){box.classList.add('on')})});
-  }
+
+  /* proyectos y productos: animaciones pequeñas que cuentan qué hace cada uno */
+  var VZ={}, vizFast={};
+  document.querySelectorAll('.brand').forEach(function(b){
+    var v=b.querySelector('.viz'); if(!v) return;
+    b.addEventListener('mouseenter',function(){vizFast[v.dataset.viz]=1});
+    b.addEventListener('mouseleave',function(){vizFast[v.dataset.viz]=0});
+  });
+  function vz(k){var v=document.querySelector('.viz[data-viz="'+k+'"]');return v&&{svg:v.querySelector('svg'),lab:v.querySelector('small'),el:v}}
+  function lerp(a,b,k){return a+(b-a)*k}
+  function ease(k){return k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2}
+
+  /* LIA: los dispositivos entrenan, mandan su actualización al servidor y reciben el modelo global */
   (function(){
-    var Q='latitude=39.99&longitude=-0.07&past_days=1&forecast_days=1&timezone=Europe%2FMadrid';
-    function get(u){return fetch(u).then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
-    Promise.all([
-      get('https://api.open-meteo.com/v1/forecast?'+Q+'&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m'),
-      get('https://air-quality-api.open-meteo.com/v1/air-quality?'+Q+'&current=european_aqi,pm2_5,nitrogen_dioxide&hourly=pm2_5,nitrogen_dioxide')
-    ]).then(function(rs){
-      var w=rs[0], a=rs[1]; if(!w||!w.current) return;
-      var cur={}, ser={};
-      function take(src,keys){ if(!src||!src.current) return;
-        var now=src.current.time.slice(0,13), idx=src.hourly.time.map(function(x){return x.slice(0,13)}).indexOf(now);
-        keys.forEach(function(k){ cur[k]=src.current[k];
-          var s=src.hourly[k]; if(idx<0) idx=s.length-1;
-          ser[k]=s.slice(Math.max(0,idx-23),idx+1).filter(function(v){return v!=null}); }); }
-      take(w,['temperature_2m','relative_humidity_2m']); take(a,['pm2_5','nitrogen_dioxide']);
-      TELE={cur:cur,ser:ser,time:w.current.time,aqi:a&&a.current?a.current.european_aqi:null};
-      paintTele();
-    });
+    var V=vz('lia'); if(!V) return;
+    var C=[120,30], D=[[22,14],[22,46],[66,52],[174,52],[218,14],[218,46]], dots=[], devs=[], round=1;
+    D.forEach(function(d){el('line',{x1:d[0],y1:d[1],x2:C[0],y2:C[1],'class':'ln'},V.svg)});
+    D.forEach(function(d){devs.push(el('rect',{x:d[0]-6,y:d[1]-5,width:12,height:10,rx:2.5,fill:'var(--tile)',stroke:'var(--lia)','stroke-width':1.4},V.svg))});
+    el('circle',{cx:C[0],cy:C[1],r:11,fill:'var(--lia)',opacity:.12},V.svg);
+    var hub=el('circle',{cx:C[0],cy:C[1],r:6.5,fill:'var(--lia)'},V.svg);
+    D.forEach(function(){dots.push(el('circle',{r:2.4,fill:'var(--lia)',opacity:0},V.svg))});
+    function lab(){V.lab.textContent=t('ronda {n} · 6 dispositivos',{n:round})}
+    lab();
+    var ph=0, last=0;
+    VZ.lia=function(now,dt){
+      ph+=dt/(vizFast.lia?1300:2600); if(ph>=1){ph-=1;round++;lab();}
+      dots.forEach(function(p,i){
+        var d=D[i], k, x, y, o=1;
+        var sh=i*.03;
+        if(ph<.42){k=ease(Math.max(0,Math.min(1,(ph-sh)/.36)));x=lerp(d[0],C[0],k);y=lerp(d[1],C[1],k);o=k>0&&k<1?1:0}
+        else if(ph<.55){x=C[0];y=C[1];o=0}
+        else {k=ease(Math.max(0,Math.min(1,(ph-.55)/.38)));x=lerp(C[0],d[0],k);y=lerp(C[1],d[1],k);o=k<1?1:0}
+        p.setAttribute('cx',x);p.setAttribute('cy',y);p.setAttribute('opacity',o);
+        p.style.fill=ph<.5?'var(--lia)':'#2FBF71';
+        devs[i].style.fill=(ph>.9)?'color-mix(in srgb,#2FBF71 30%,var(--tile))':'var(--tile)';
+      });
+      hub.setAttribute('r',(ph>.42&&ph<.58)?8.5:6.5);
+    };
   })();
 
+  /* CoIoTIA: comunidades de dispositivos que se pasan un micro-modelo TinyML */
+  (function(){
+    var V=vz('coi'); if(!V) return;
+    var CL=[[40,34],[120,26],[200,36]], nodes=[];
+    CL.forEach(function(c,ci){
+      var g=[];
+      for(var i=0;i<6;i++){var a=i/6*Math.PI*2+ci, r=i%2?13:9;
+        g.push(el('circle',{cx:c[0]+Math.cos(a)*r,cy:c[1]+Math.sin(a)*r*.8,r:2.6,fill:'#7B6BD8'},V.svg))}
+      el('circle',{cx:c[0],cy:c[1],r:3.2,fill:'#C9B8FF'},V.svg);
+      nodes.push(g);
+    });
+    var pk=el('rect',{width:9,height:7,rx:1.5,fill:'#FFD166'},V.svg), from=0, ph=0;
+    function lab(){V.lab.textContent=t('micro-modelo TinyML → comunidad {k}',{k:(from+1)%3+1})}
+    lab();
+    VZ.coi=function(now,dt){
+      ph+=dt/(vizFast.coi?900:1800);
+      if(ph>=1){ph-=1;from=(from+1)%3;lab();}
+      var a=CL[from], b=CL[(from+1)%3], k=ease(Math.min(1,ph/.7));
+      var x=lerp(a[0],b[0],k), y=lerp(a[1],b[1],k)-Math.sin(k*Math.PI)*(from===2?-14:18);
+      pk.setAttribute('x',x-4.5);pk.setAttribute('y',y-3.5);
+      nodes.forEach(function(g,gi){var on=(gi===(from+1)%3&&ph>.7);g.forEach(function(n){n.style.fill=on?'#FFD166':'#7B6BD8'})});
+    };
+  })();
+
+  /* Sucre: un programa de bloques que se ejecuta paso a paso */
+  (function(){
+    var V=vz('sucre'); if(!V) return;
+    var B=['▶','♪','↻','◐','■'], blk=[], step=0, acc=0;
+    B.forEach(function(g,i){
+      var x=14+i*44;
+      if(i) el('line',{x1:x-14,y1:30,x2:x,y2:30,'class':'ln','stroke-width':2},V.svg);
+      blk.push(el('rect',{x:x,y:14,width:32,height:32,rx:7,fill:'var(--tile)',stroke:'#1d1d1b','stroke-width':1.4},V.svg));
+      var tx=el('text',{x:x+16,y:35,'text-anchor':'middle','font-size':15,'font-family':'IBM Plex Mono, monospace'},V.svg); tx.textContent=g; blk[i].tx=tx;
+    });
+    var led=el('circle',{cx:232,cy:8,r:3,fill:'#2FBF71'},V.svg);
+    function paint(){blk.forEach(function(r,i){var on=i===step;r.style.fill=on?'var(--sucre)':'var(--tile)';r.style.stroke=on?'var(--sucre)':'var(--muted)';r.tx.style.fill=on?'#fff':'var(--ink)'});
+      V.lab.textContent=t('ejecutando el bloque {i} de 5',{i:step+1})}
+    paint();
+    VZ.sucre=function(now,dt){acc+=dt; var per=vizFast.sucre?320:700; if(acc>=per){acc=0;step=(step+1)%B.length;paint();}
+      led.setAttribute('opacity',(now%900)<450?1:.25)};
+  })();
+
+  /* SEnviro: humedad de las últimas 48 h y riesgo de mildiu estimado con datos reales (Open-Meteo) */
+  var SEN=null;
+  function paintSen(){
+    var V=vz('senviro'); if(!V||!SEN) return;
+    var svg=V.svg; while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var h=SEN.hum, n=h.length, pts=h.map(function(v,i){return [6+i/(n-1)*228, 52-(v/100)*44]});
+    var line='M'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join('L');
+    el('line',{x1:6,x2:234,y1:52-.8*44,y2:52-.8*44,'class':'ln','stroke-dasharray':'3 3'},svg);
+    el('path',{d:line+'L234,56L6,56Z',fill:'var(--vine)','fill-opacity':.12},svg);
+    var pth=el('path',{d:line,fill:'none',stroke:'var(--vine)','stroke-width':1.6,'stroke-linejoin':'round',pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},svg);
+    pth.style.transition='stroke-dashoffset 1.8s ease'; requestAnimationFrame(function(){requestAnimationFrame(function(){pth.setAttribute('stroke-dashoffset',0)})});
+    var lp=pts[n-1]; el('circle',{cx:lp[0],cy:lp[1],r:2.6,fill:'var(--vine)'},svg);
+    var rk=SEN.risk, col={alto:'#C2410C',medio:'#C98500',bajo:'var(--vine)',reposo:'var(--muted)'}[rk];
+    var txt=t({alto:'riesgo de mildiu: alto',medio:'riesgo de mildiu: medio',bajo:'riesgo de mildiu: bajo',reposo:'viña en reposo'}[rk]);
+    var w=txt.length*5.9+12;
+    el('rect',{x:234-w,y:4,width:w,height:14,rx:3,fill:col,opacity:.14},svg);
+    var tt=el('text',{x:234-w/2,y:14,'text-anchor':'middle','class':'risk',fill:col},svg); tt.textContent=txt;
+    V.lab.textContent=t('HR 48 h · {t} °C · lluvia {r} mm',{t:I18N.nf(SEN.temp,{maximumFractionDigits:1}),r:I18N.nf(SEN.rain,{maximumFractionDigits:1})});
+    V.el.title=t('Datos de Open-Meteo para el interior de Castelló'); V.el.setAttribute('role','img'); V.el.setAttribute('aria-label',txt+'. '+V.lab.textContent);
+  }
+  (function(){
+    if(!vz('senviro')) return;
+    var u='https://api.open-meteo.com/v1/forecast?latitude=40.16&longitude=-0.16&current=temperature_2m&hourly=relative_humidity_2m,precipitation,temperature_2m&past_days=2&forecast_days=1&timezone=Europe%2FMadrid';
+    fetch(u).then(function(r){return r.ok?r.json():null}).then(function(d){
+      if(!d||!d.current) return;
+      var now=d.current.time.slice(0,13), idx=d.hourly.time.map(function(x){return x.slice(0,13)}).indexOf(now); if(idx<0) idx=d.hourly.time.length-1;
+      var from=Math.max(0,idx-47), hum=d.hourly.relative_humidity_2m.slice(from,idx+1), rain=d.hourly.precipitation.slice(from,idx+1).reduce(function(a,b){return a+(b||0)},0);
+      var t24=d.hourly.temperature_2m.slice(Math.max(0,idx-23),idx+1), tm=t24.reduce(function(a,b){return a+b},0)/t24.length;
+      var m=+d.current.time.slice(5,7), hm=hum.slice(-24).reduce(function(a,b){return a+b},0)/Math.min(24,hum.length);
+      /* regla de los tres dieces: más de 10 °C y más de 10 mm de lluvia con la viña brotada */
+      var risk=(m>=11||m<=3)?'reposo':(tm>=10&&rain>=10)?'alto':(tm>=10&&(rain>=3||hm>=85))?'medio':'bajo';
+      SEN={hum:hum.filter(function(v){return v!=null}),rain:rain,temp:d.current.temperature_2m,risk:risk};
+      paintSen();
+    }).catch(function(){});
+  })();
+  function paintViz(){
+    paintSen();
+    ['lia','coi','sucre'].forEach(function(k){if(VZ[k]) VZ[k](performance.now(),0)});
+  }
+
+  /* un solo bucle para todas; se para si no se ven o si se pide menos movimiento */
+  (function(){
+    var vis=true, lastT=0;
+    if('IntersectionObserver' in window){
+      var row=document.querySelector('.brand'); new IntersectionObserver(function(es){vis=es[0].isIntersecting},{rootMargin:'100px'}).observe(row);
+    }
+    for(var k0 in VZ) VZ[k0](performance.now(),0);
+    if(REDUCE){ return; }
+    function loop(now){
+      var dt=Math.min(64,now-(lastT||now)); lastT=now;
+      if(vis&&!document.hidden) for(var k in VZ) VZ[k](now,dt);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
 
   /* divulgación: ver la foto en grande */
   var lb=$('lb');
@@ -560,7 +641,7 @@ body{background-attachment:fixed}
   }
   var rT; addEventListener('resize',function(){clearTimeout(rT);rT=setTimeout(fitPubs,120)});
   fetch('data/cv.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){DATA=d;paintData();}).catch(function(){});
-  document.addEventListener('langchange',function(){paintData();paintTele();});
+  document.addEventListener('langchange',function(){paintData();paintViz();});
 
 })();
 </script>
