@@ -44,6 +44,7 @@ jobs:
           SCOPUS_INSTTOKEN: ${{ secrets.SCOPUS_INSTTOKEN }}
           WOS_API_KEY: ${{ secrets.WOS_API_KEY }}
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          SEARCHAPI_KEY: ${{ secrets.SEARCHAPI_KEY }}
           S2_API_KEY: ${{ secrets.S2_API_KEY }}
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
