@@ -186,6 +186,7 @@
     'Me encontrarás en MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI e Ingenio Games.':
       ['Em trobaràs a MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI i Ingenio Games.', "You'll find me at MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI and Ingenio Games."],
     'Otros proyectos': ['Altres projectes', 'Other projects'],
+    'Todos los proyectos, con filtros': ['Tots els projectes, amb filtres', 'All projects, with filters'],
     'Escríbeme:': ['Escriu-me:', 'Write to me:'],
 
     /* CV completo */
