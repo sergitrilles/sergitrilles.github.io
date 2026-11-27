@@ -9,33 +9,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&display=swap">
 <style>
-/* Layout: baldosas sobre fondo gris claro. Arriba la presentación; después proyectos y productos en color; al final, texto. */
+/* Layout: baldosas por filas de altura pareja. 1 presentación + foto · 2 impacto (Scholar) · 3 proyectos · 4 productos · 5 publicaciones + investigación · 6 premios + contacto · 7 otros proyectos + divulgación */
 :root{
-  --bg:#EEF0EB; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8;
+  --bg:#EEF0EB; --dot:#D9DDD4; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8;
   --sucre:#FF6A3D; --sucre-ink:#2B0E05; --night:#1B1F3A;
   --vine:#2F6B3E; --vine-soft:#DCEBDA; --vine-ink:#0E2414; --warn:#C2410C;
   --lia:#3446D9; --lia-soft:#E3E7FF; --lia-ink:#0D1240;
   --coi:#7B3FD0; --coi-soft:#EFE6FD; --coi-ink:#22093F;
+  --imp:#141714; --imp-ink:#F1F3EE; --imp-bar:#8EA2FF; --imp-muted:#A7B0A8;
   --blue:#2B55E6;
   --f-head:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body:"Geist", "Segoe UI", system-ui, sans-serif;
   --r:20px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
+  --bg:#0F110F; --dot:#1F231F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
   --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
   --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
+  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650;
   --blue:#7C9BFF; color-scheme:dark }}
 :root[data-theme="dark"]{
-  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
+  --bg:#0F110F; --dot:#1F231F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
   --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
   --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
+  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650;
   --blue:#7C9BFF; color-scheme:dark }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--f-body);
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--dot) 1px,transparent 1.2px);background-size:22px 22px;color:var(--ink);font:400 16px/1.55 var(--f-body);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
 a{color:inherit;text-underline-offset:3px}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
@@ -53,28 +56,49 @@ h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.0
 .langs button[aria-pressed="true"]{background:var(--ink);color:var(--tile)}
 .theme{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:4px}
 
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;grid-auto-flow:dense}
-.t{background:var(--tile);border-radius:var(--r);padding:24px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
-.s2{grid-column:span 2}.s4{grid-column:span 4}.r2{grid-row:span 2}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.t{background:var(--tile);border-radius:var(--r);padding:24px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease}
+@media (hover:hover){.t:hover{transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.35)}}
+.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}
 .tag{font:500 13px var(--f-body);color:var(--muted)}
 h2{font-size:22px;font-weight:800}
 h3{font-size:30px;font-weight:800;line-height:1}
+.go{font-weight:600;margin-top:auto}
 
-/* presentación */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:32px;align-items:center;padding:34px}
-.hero h1{font-size:clamp(42px,6vw,72px);font-weight:800;line-height:.95;letter-spacing:-.035em;margin-bottom:18px}
-.hero .txt{display:grid;gap:12px;max-width:44em}
+/* 1 · presentación + foto */
+.hero{padding:36px;justify-content:center}
+.hero h1{font-size:clamp(46px,6.4vw,84px);font-weight:800;line-height:.92;letter-spacing:-.04em}
+.hero .txt{display:grid;gap:12px;max-width:46em}
 .hero .txt p:first-child{font-size:19px;line-height:1.45}
-.hero .nums{color:var(--muted)}
-.hero img{width:190px;height:auto;aspect-ratio:201/251;object-fit:cover;border-radius:14px;display:block}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .btn{font:500 14px var(--f-body);border-radius:999px;padding:9px 16px;border:1px solid var(--line);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
 .btn.primary{background:var(--ink);color:var(--tile);border-color:var(--ink)}
+.photo{padding:0;min-height:300px}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.photo .cap{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff;font-size:13.5px;line-height:1.35}
+.photo .cap b{display:block;font:700 15px var(--f-head)}
 
-/* proyectos y productos */
+/* 2 · impacto */
+.impact{background:var(--imp);color:var(--imp-ink);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr) minmax(0,1.2fr);gap:28px;align-items:center;padding:26px 30px}
+.impact .tag{color:var(--imp-muted)}
+.impact .big{font:800 clamp(52px,6vw,76px)/.9 var(--f-head);letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.impact .sub{color:var(--imp-muted);font-size:14px;margin-top:6px}
+.bars{position:relative}
+.bars svg{width:100%;height:auto;display:block;overflow:visible}
+.bars text{font:400 10.5px var(--f-body);fill:var(--imp-muted)}
+.bars .hit{fill:transparent}
+.bars .hit:hover{fill:var(--imp-muted);fill-opacity:.18}
+.btip{position:absolute;pointer-events:none;background:var(--tile);color:var(--ink);border-radius:8px;padding:5px 9px;font-size:12.5px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.figs{display:grid;gap:12px}
+.figs div{display:flex;align-items:baseline;gap:10px;border-top:1px solid color-mix(in srgb,var(--imp-muted) 35%,transparent);padding-top:10px}
+.figs div:first-child{border-top:0;padding-top:0}
+.figs b{font:800 30px/1 var(--f-head);letter-spacing:-.03em;font-variant-numeric:tabular-nums;min-width:2.2em}
+.figs span{color:var(--imp-muted);font-size:14px;line-height:1.3}
+
+/* 3 · proyectos */
 .kind{font-size:14px;opacity:.85}
-.cap{font-size:13px;opacity:.8}
-.go{font-weight:600;margin-top:auto}
+.cap2{font-size:13px;opacity:.8}
 .lia{background:var(--lia-soft);color:var(--lia-ink)}.lia .go,.lia .tag{color:var(--lia)}
 .coi{background:var(--coi-soft);color:var(--coi-ink)}.coi .go,.coi .tag{color:var(--coi)}
 .viz{width:100%;height:auto;display:block;overflow:visible}
@@ -86,10 +110,11 @@ h3{font-size:30px;font-weight:800;line-height:1}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pbtn{color:#0F110F}}
 .anom{color:var(--warn);font-weight:600}
 
-.sucre{background:var(--sucre);color:var(--sucre-ink);transition:background .5s}
+/* 4 · productos */
+.sucre{background:var(--sucre);color:var(--sucre-ink);transition:background .5s, transform .25s ease, box-shadow .25s ease}
 .sucre .tag{color:inherit;opacity:.75}
 .sucre.night{background:var(--night);color:#EDEBFF}
-.kit{position:relative;margin:0 -6px;aspect-ratio:1100/679;max-width:100%}
+.kit{position:relative;width:84%;margin:0 auto;aspect-ratio:1100/679;max-width:100%}
 .kit img{width:100%;height:100%;display:block;transition:filter .5s}
 .glow{position:absolute;border-radius:50%;pointer-events:none;transition:opacity .4s;opacity:0}
 .glow.bulb{left:89%;top:55%;width:30%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,236,140,.95),rgba(255,214,70,.35) 40%,transparent 70%)}
@@ -102,7 +127,7 @@ h3{font-size:30px;font-weight:800;line-height:1}
 .sucre.night .blk.w{box-shadow:0 0 0 2px #FFE38A,0 0 18px #FFE38A}
 .ctrl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:13.5px;font-weight:500}
 input[type=range]{width:100%;accent-color:currentColor;min-width:0}
-.sucret{position:absolute;top:16px;right:16px;width:90px;background:none;border:0;padding:0;cursor:pointer;color:inherit;display:grid;justify-items:center;gap:2px}
+.sucret{position:absolute;top:16px;right:16px;width:90px;background:none;border:0;padding:0;cursor:pointer;color:inherit;display:grid;justify-items:center;gap:2px;z-index:1}
 .sucret svg{width:90px;height:auto;overflow:visible}
 .sucret .hint{font:500 11px/1.2 var(--f-body);text-align:center;opacity:.85}
 .bubble{position:absolute;top:-6px;right:74px;background:#fff;color:#2B0E05;border-radius:12px 12px 2px 12px;padding:4px 10px;font:600 13px var(--f-body);white-space:nowrap;opacity:0;transform:scale(.6);transform-origin:bottom right;transition:.25s cubic-bezier(.3,1.6,.5,1)}
@@ -113,44 +138,53 @@ input[type=range]{width:100%;accent-color:currentColor;min-width:0}
 #lids{transform-origin:80px 86px;animation:blink 4.6s infinite}
 @keyframes blink{0%,94%,100%{transform:scaleY(0)}97%{transform:scaleY(1)}}
 .sucre h3,.sucre .tag,.sucre .kind{padding-right:100px}
-
 .senviro{background:var(--vine-soft);color:var(--vine-ink)}
 .senviro .go,.senviro .tag{color:var(--vine)}
-.sim{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:16px;align-items:center}
-.sliders{display:grid;gap:10px;color:var(--vine)}
+.sim{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:18px;align-items:center;flex:1}
+.sliders{display:grid;gap:14px;color:var(--vine)}
 .sliders .ctrl{grid-template-columns:96px 1fr 50px}
 .sliders output{text-align:right;color:var(--vine-ink);font-variant-numeric:tabular-nums}
-.phone{width:120px;aspect-ratio:9/16;border-radius:20px;background:var(--vine-ink);padding:7px;position:relative;justify-self:end}
-.screen{position:absolute;inset:7px;border-radius:14px;background:linear-gradient(160deg,#2F6B3E,#0E2414);overflow:hidden}
-.notif{position:absolute;left:6px;right:6px;top:10px;background:rgba(255,255,255,.95);color:#0E2414;border-radius:9px;padding:7px 8px;font:500 10.5px/1.3 var(--f-body);transform:translateY(-130%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.phone{width:150px;aspect-ratio:9/17;border-radius:24px;background:var(--vine-ink);padding:8px;position:relative;justify-self:end}
+.screen{position:absolute;inset:8px;border-radius:17px;background:linear-gradient(160deg,#2F6B3E,#0E2414);overflow:hidden}
+.notif{position:absolute;left:7px;right:7px;top:12px;background:rgba(255,255,255,.95);color:#0E2414;border-radius:10px;padding:8px 9px;font:500 11px/1.35 var(--f-body);transform:translateY(-130%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
 .notif b{display:block;font:600 9.5px var(--f-body);color:#C2410C;letter-spacing:.04em}
 .senviro.alert .notif{transform:none}
-.clockp{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#DCEFDF;font:500 20px var(--f-body);font-variant-numeric:tabular-nums}
+.clockp{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#DCEFDF;font:500 24px var(--f-body);font-variant-numeric:tabular-nums}
+.clockp small{display:block;font-size:11px;opacity:.7;margin-top:2px}
 .risk{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:600}
 .risk i{flex:1;height:8px;border-radius:4px;background:rgba(47,107,62,.18)}
 .risk i.on{background:var(--vine)}
 .senviro.alert .risk i.on{background:var(--warn)}
 .senviro.alert .risk span{color:var(--warn)}
 
-/* texto */
-.plain{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.plain li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;font-size:14.5px}
-.plain .y{color:var(--muted);font-variant-numeric:tabular-nums}
+/* 5-7 · texto */
 .lines{list-style:none;margin:0;padding:0;display:grid}
-.lines li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.lines li{padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.lines li:first-child{border-top:0;padding-top:0}
 .pubs{list-style:none;margin:0;padding:0;display:grid;gap:14px}
 .pubs a{text-decoration:none;font-weight:500;line-height:1.35}
 .pubs a:hover{text-decoration:underline}
 .pubs small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.awards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.awards li{background:var(--bg);border-radius:14px;padding:14px;display:grid;gap:4px;font-size:14.5px;line-height:1.35}
+.awards .y{font:800 22px/1 var(--f-head);color:var(--muted)}
 .collab{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
 .collab b{font-weight:600}
-.links{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:500}
+.links{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:500;margin-top:auto;padding-top:6px;border-top:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-size:14px;padding:7px 12px;border-radius:999px;background:var(--bg)}
 footer{font-size:13px;color:var(--muted);padding:6px 4px}
 
-@media (max-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.s4{grid-column:span 2}}
+@media (max-width:960px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.s3,.s4{grid-column:span 2}
+  .photo{min-height:340px}
+  .impact{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.impact .bars{grid-column:1/-1;order:3}
+}
 @media (max-width:620px){
-  .grid{grid-template-columns:minmax(0,1fr)}.s2,.s4{grid-column:auto}.r2{grid-row:auto}
-  .hero{grid-template-columns:minmax(0,1fr);padding:24px}.hero figure{order:-1}.hero img{width:110px}
+  .grid{grid-template-columns:minmax(0,1fr)}.s2,.s3,.s4{grid-column:auto}
+  .hero{padding:26px}.photo{min-height:360px}
+  .impact{grid-template-columns:minmax(0,1fr);padding:24px}
+  .awards{grid-template-columns:minmax(0,1fr)}
   .top nav a{display:none}
   .sim{grid-template-columns:minmax(0,1fr)}.phone{justify-self:center}
 }
@@ -169,19 +203,36 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
   </header>
 
   <main class="grid">
-    <section class="t s4 hero" aria-labelledby="nombre">
-      <div>
-        <h1 id="nombre">Sergi Trilles</h1>
-        <div class="txt">
-          <p>Soy profesor titular en la Universitat Jaume I y subdirector del Institut de Noves Tecnologies de la Imatge (INIT), donde trabajo en el grupo GEOTEC.</p>
-          <p>Investigo cómo conseguir que sensores pequeños decidan por sí mismos, sin depender de la nube, y cómo enseñar a programar desde los cuatro años. Casi todo lo que hago acaba en algo que se usa: un kit para escuelas, una estación para viñedos y plataformas para ciudades.</p>
-          <p class="nums" id="nums">Hasta hoy: 61 artículos en revistas, 3.034 citas en Google Scholar y 13 proyectos como investigador principal.</p>
-          <div class="acts"><a class="btn primary" href="cv.html">Ver el CV completo</a><button class="btn" type="button" id="copyMail">strilles@uji.es</button></div>
-        </div>
+    <!-- 1 -->
+    <section class="t s3 hero" aria-labelledby="nombre">
+      <h1 id="nombre">Sergi Trilles</h1>
+      <div class="txt">
+        <p>Soy profesor titular en la Universitat Jaume I y subdirector del Institut de Noves Tecnologies de la Imatge (INIT), donde trabajo en el grupo GEOTEC.</p>
+        <p>Investigo cómo conseguir que sensores pequeños decidan por sí mismos, sin depender de la nube, y cómo enseñar a programar desde los cuatro años. Casi todo lo que hago acaba en algo que se usa: un kit para escuelas, una estación para viñedos y plataformas para ciudades.</p>
+        <div class="acts"><a class="btn primary" href="cv.html">Ver el CV completo</a><button class="btn" type="button" id="copyMail">strilles@uji.es</button></div>
       </div>
-      <figure style="margin:0"><img src="img/foto.jpg" alt="Sergi Trilles" width="201" height="251"></figure>
+    </section>
+    <figure class="t photo" style="margin:0">
+      <img src="img/foto.jpg" alt="Sergi Trilles" width="201" height="251">
+      <figcaption class="cap"><b>Castelló de la Plana</b>Universitat Jaume I · INIT · GEOTEC</figcaption>
+    </figure>
+
+    <!-- 2 -->
+    <section class="t s4 impact" aria-labelledby="imp-h">
+      <div>
+        <span class="tag" id="imp-h">Citas en Google Scholar</span>
+        <div class="big" id="kCites">3.281</div>
+        <p class="sub" id="kHi">índice h 27 · i10 47</p>
+      </div>
+      <div class="bars" id="bars" aria-label="Citas recibidas cada año según Google Scholar"></div>
+      <div class="figs">
+        <div><b id="kArt">61</b><span>artículos en revistas</span></div>
+        <div><b id="kQ1">30</b><span>en el primer cuartil (JCR o SJR)</span></div>
+        <div><b id="kIP">13</b><span>proyectos como investigador principal</span></div>
+      </div>
     </section>
 
+    <!-- 3 -->
     <article class="t s2 lia" id="proyectos" aria-labelledby="lia-h">
       <span class="tag">Proyecto en marcha</span>
       <h3 id="lia-h">LIA</h3>
@@ -189,10 +240,9 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
       <p>Inteligencia local para AIoT. Los dispositivos se agrupan en comunidades y aprenden juntos con aprendizaje federado: cada uno entrena con sus datos y solo envía el modelo a un nodo fog cercano. Lo aplicamos a la calidad del aire y a la salud con wearables.</p>
       <svg class="viz" id="fl" viewBox="0 0 400 170" role="img" aria-label="Simulación de aprendizaje federado: seis dispositivos envían su modelo a un nodo fog y reciben el modelo combinado"></svg>
       <div class="row"><button class="pbtn" type="button" id="flBtn">Entrenar una ronda</button><span id="flTxt" aria-live="polite"></span></div>
-      <p class="cap">Es una simulación: los datos nunca salen del dispositivo, solo viajan los modelos. La plataforma LIA-FL se publicó en SoftwareX en 2026.</p>
+      <p class="cap2">Es una simulación: los datos nunca salen del dispositivo, solo viajan los modelos. La plataforma LIA-FL se publicó en SoftwareX en 2026.</p>
       <a class="go" href="https://lia.uji.es" target="_blank" rel="noopener">lia.uji.es</a>
     </article>
-
     <article class="t s2 coi" aria-labelledby="coi-h">
       <span class="tag">Proyecto en marcha</span>
       <h3 id="coi-h">CoIoTIA</h3>
@@ -200,10 +250,11 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
       <p>Comunidades de IoT e IA. Sensores parecidos comparten micro-modelos TinyML para decidir en local, con menos latencia, menos consumo y más privacidad. Hay pilotos en calidad del aire, logística de última milla y posicionamiento en interiores.</p>
       <svg class="viz" id="an" viewBox="0 0 400 170" role="img" aria-label="Simulación de cuatro sensores de temperatura de una comunidad; al provocar una anomalía, el modelo compartido la detecta"></svg>
       <div class="row"><button class="pbtn" type="button" id="anBtn">Provocar una anomalía</button><span id="anTxt" aria-live="polite"></span></div>
-      <p class="cap">Es una simulación: el modelo de la comunidad aprende cómo se comportan sus sensores y avisa cuando uno se sale de lo normal. El primer artículo salió en Internet of Things (Elsevier) en 2026.</p>
+      <p class="cap2">Es una simulación: el modelo de la comunidad aprende cómo se comportan sus sensores y avisa cuando uno se sale de lo normal. El primer artículo salió en Internet of Things (Elsevier) en 2026.</p>
       <a class="go" href="https://coiotia.uji.es" target="_blank" rel="noopener">coiotia.uji.es</a>
     </article>
 
+    <!-- 4 -->
     <article class="t s2 sucre" aria-labelledby="sucre-h">
       <button class="sucret" id="sucret" type="button" aria-label="Sucret, la mascota de Sucre. Pulsa para que salude">
         <span class="bubble" id="bubble">¡Hola!</span>
@@ -232,7 +283,6 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
       <label class="ctrl" for="light"><span>☀ luz</span><input type="range" id="light" min="0" max="100" value="70"><output id="lightV" for="light">70</output></label>
       <a class="go" href="https://programasucre.com" target="_blank" rel="noopener">programasucre.com</a>
     </article>
-
     <article class="t s2 senviro" id="senviro" aria-labelledby="senviro-h">
       <span class="tag">Producto</span>
       <h3 id="senviro-h">SEnviro</h3>
@@ -245,17 +295,17 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
           <label class="ctrl" for="shoot"><span>brote</span><input type="range" id="shoot" min="0" max="30" value="12"><output id="shootV" for="shoot">12 cm</output></label>
           <div class="risk" aria-live="polite"><i></i><i></i><i></i><span id="riskT"></span></div>
         </div>
-        <div class="phone" aria-hidden="true"><div class="screen"><div class="notif"><b>SENVIRO · ALERTA</b>Condiciones de mildiu en la parcela. Revisa el viñedo.</div><div class="clockp" id="pclock">08:30</div></div></div>
+        <div class="phone" aria-hidden="true"><div class="screen"><div class="notif"><b>SENVIRO · ALERTA</b>Condiciones de mildiu en la parcela. Revisa el viñedo.</div><div class="clockp"><span id="pclock">08:30</span><small>Castelló</small></div></div></div>
       </div>
       <a class="go" href="https://www.senviro.uji.es" target="_blank" rel="noopener">senviro.uji.es</a>
     </article>
 
-    <section class="t s2 r2" id="publicaciones" aria-labelledby="pub-h">
+    <!-- 5 -->
+    <section class="t s2" id="publicaciones" aria-labelledby="pub-h">
       <h2 id="pub-h">Publicaciones recientes</h2>
       <ul class="pubs" id="latest"></ul>
       <a class="go" href="cv.html">Todas las publicaciones, con factor de impacto y filtros</a>
     </section>
-
     <section class="t s2" id="investigacion" aria-labelledby="inv-h">
       <h2 id="inv-h">Investigación</h2>
       <p>IA que corre en sensores diminutos, redes de dispositivos que aprenden juntas sin compartir datos, y datos geoespaciales que ayudan a decidir en ciudades y campos.</p>
@@ -268,21 +318,16 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
       </ul>
     </section>
 
-    <section class="t" aria-labelledby="prem-h">
+    <!-- 6 -->
+    <section class="t s2" aria-labelledby="prem-h">
       <h2 id="prem-h">Premios</h2>
-      <ul class="plain">
+      <ul class="awards">
         <li><span class="y">2026</span><span>Best Demonstrator Award, TAEE (Sucre4Stem)</span></li>
         <li><span class="y">2025</span><span>Premi Joves Investigadors UJI</span></li>
         <li><span class="y">2018</span><span>Premio Junior 5UCV Startup</span></li>
         <li><span class="y">2018</span><span>Jóvenes Emprendedores COPE (SEnviro)</span></li>
       </ul>
     </section>
-
-    <section class="t" aria-labelledby="div-h">
-      <h2 id="div-h">Divulgación</h2>
-      <p style="font-size:14.5px">Me encontrarás en MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI e Ingenio Games.</p>
-    </section>
-
     <section class="t s2" id="contacto" aria-labelledby="col-h">
       <h2 id="col-h">¿Trabajamos juntos?</h2>
       <ul class="collab">
@@ -291,19 +336,6 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
         <li><b>Empresas y ayuntamientos:</b> transferencia, contratos de I+D y despliegues IoT.</li>
       </ul>
       <p>Escríbeme: <a href="mailto:strilles@uji.es">strilles@uji.es</a></p>
-    </section>
-
-    <section class="t" aria-labelledby="otros-h">
-      <h2 id="otros-h">Otros proyectos</h2>
-      <ul class="lines" style="font-size:14.5px">
-        <li style="border-top:0;padding-top:0">CoAIoT: plataforma de IA para el Internet de las Cosas (Becas Leonardo, Fundación BBVA)</li>
-        <li><a href="https://nextcity-project.eu" target="_blank" rel="noopener">NexTCity</a>: gemelos digitales para ciudades sostenibles (Horizon Europe)</li>
-      </ul>
-      <a class="go" href="cv.html#proyectos">Todos los proyectos, con filtros</a>
-    </section>
-
-    <section class="t" aria-labelledby="links-h">
-      <h2 id="links-h">Perfiles</h2>
       <div class="links">
         <a href="https://orcid.org/0000-0002-9304-0719" target="_blank" rel="noopener">ORCID</a>
         <a href="https://scholar.google.es/citations?user=s628OEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
@@ -313,11 +345,26 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
         <a href="https://geotec.uji.es/staff/" target="_blank" rel="noopener">GEOTEC</a>
       </div>
     </section>
+
+    <!-- 7 -->
+    <section class="t s2" aria-labelledby="otros-h">
+      <h2 id="otros-h">Otros proyectos</h2>
+      <ul class="lines">
+        <li>CoAIoT: plataforma de IA para el Internet de las Cosas (Becas Leonardo, Fundación BBVA)</li>
+        <li><a href="https://nextcity-project.eu" target="_blank" rel="noopener">NexTCity</a>: gemelos digitales para ciudades sostenibles (Horizon Europe)</li>
+      </ul>
+      <a class="go" href="cv.html#proyectos">Todos los proyectos, con filtros</a>
+    </section>
+    <section class="t s2" aria-labelledby="div-h">
+      <h2 id="div-h">Divulgación</h2>
+      <p>Me encontrarás con un kit de Sucre en estas ferias y actividades:</p>
+      <div class="chips"><span>MedNight</span><span>FirUJICiència</span><span>Connecta amb la Ciència</span><span>Practica la UJI</span><span>Ingenio Games</span></div>
+    </section>
   </main>
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=11"></script>
+<script src="i18n.js?v=12"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
@@ -369,13 +416,41 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
   ['tC','rain','shoot'].forEach(function(id){$(id).addEventListener('input',upRisk)}); upRisk();
   try{$('pclock').textContent=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'}).format(new Date())}catch(e){}
 
+  var NS='http://www.w3.org/2000/svg', REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(tag,attrs,parent){var e=document.createElementNS(NS,tag),css='';
+    for(var k in attrs){var v=String(attrs[k]); if(v.indexOf('var(')===0&&(k==='fill'||k==='stroke'))css+=k+':'+v+';'; else e.setAttribute(k,v);}
+    if(css)e.setAttribute('style',(e.getAttribute('style')||'')+css);
+    if(parent)parent.appendChild(e);return e}
+
   /* Datos vivos: data/cv.json se regenera cada semana */
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var DATA=null;
+  function citeBars(hist){
+    var box=$('bars'); box.innerHTML=''; if(!hist||!hist.length) return;
+    var W=420,H=130,B=18,T=6,n=hist.length,band=W/n,bw=Math.min(20,band*.62),max=Math.max.apply(null,hist.map(function(h){return h[1]}))||1;
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Citas recibidas cada año según Google Scholar'},box);
+    var tip=document.createElement('div'); tip.className='btip'; tip.hidden=true; box.appendChild(tip);
+    hist.forEach(function(h,i){
+      var x=band*i+(band-bw)/2, hgt=(H-B-T)*h[1]/max, y=H-B-hgt, r=Math.min(4,hgt,bw/2);
+      el('path',{d:'M'+x+','+(H-B)+'V'+(y+r)+'Q'+x+','+y+' '+(x+r)+','+y+'H'+(x+bw-r)+'Q'+(x+bw)+','+y+' '+(x+bw)+','+(y+r)+'V'+(H-B)+'Z',fill:'var(--imp-bar)'},svg);
+      if(i%2===(n-1)%2) el('text',{x:x+bw/2,y:H-4,'text-anchor':'middle'},svg).textContent="'"+String(h[0]).slice(2);
+      var hit=el('rect',{x:band*i,y:0,width:band,height:H-B,'class':'hit'},svg);
+      hit.addEventListener('mouseenter',function(){
+        tip.textContent=h[0]+': '+I18N.nf(h[1],{useGrouping:'always'})+' '+t('citas'); tip.hidden=false;
+        var r=svg.getBoundingClientRect(), br=box.getBoundingClientRect();
+        tip.style.left=Math.max(0,Math.min((band*i+band/2)/W*r.width-tip.offsetWidth/2, br.width-tip.offsetWidth))+'px';
+        tip.style.top=Math.max(-28,(y/H)*r.height-34)+'px';
+      });
+      hit.addEventListener('mouseleave',function(){tip.hidden=true});
+    });
+  }
   function paintData(){
     var d=DATA; if(!d) return;
-    var sch=d.profiles.scholar||d.profiles.openalex, st=d.stats, nf=I18N.nf;
-    $('nums').textContent='Hasta hoy: '+st.articles+' artículos en revistas, '+nf(sch?sch.cites:0,{useGrouping:'always'})+' citas en Google Scholar y '+st.ip+' proyectos como investigador principal.';
+    var sch=d.profiles.scholar||{}, st=d.stats, nf=I18N.nf;
+    if(sch.cites!=null) $('kCites').textContent=nf(sch.cites,{useGrouping:'always'});
+    $('kHi').textContent='índice h '+sch.h+(sch.i10?' · i10 '+sch.i10:'');
+    $('kArt').textContent=st.articles; $('kQ1').textContent=st.q1; $('kIP').textContent=st.ip;
+    citeBars(sch.hist);
     var arts=d.pubs.filter(function(p){return p.kind==='Artículo'}).slice(0,5);
     $('latest').innerHTML=arts.map(function(p){
       var extra=(p.qb?'. Q'+p.qb:'')+(p.jcr?', '+t('FI {x}',{x:nf(p.jcr)}):'');
@@ -385,12 +460,6 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
   }
   fetch('data/cv.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){DATA=d;paintData();}).catch(function(){});
   document.addEventListener('langchange',paintData);
-
-  var NS='http://www.w3.org/2000/svg', REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function el(tag,attrs,parent){var e=document.createElementNS(NS,tag),css='';
-    for(var k in attrs){var v=String(attrs[k]); if(v.indexOf('var(')===0&&(k==='fill'||k==='stroke'))css+=k+':'+v+';'; else e.setAttribute(k,v);}
-    if(css)e.setAttribute('style',(e.getAttribute('style')||'')+css);
-    if(parent)parent.appendChild(e);return e}
 
   /* LIA: aprendizaje federado. Los modelos viajan al nodo fog y vuelven; los datos se quedan */
   (function(){
