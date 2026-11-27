@@ -139,6 +139,53 @@
     'comunicaciones en congresos nacionales e internacionales': ['comunicacions en congressos nacionals i internacionals', 'papers at national and international conferences'],
     'FI {x}': ['FI {x}', 'IF {x}'],
 
+    /* portada (versión editorial) */
+    'Investigación': ['Recerca', 'Research'],
+    'Contacto': ['Contacte', 'Contact'],
+    'Productos': ['Productes', 'Products'],
+    'Soy profesor titular en la Universitat Jaume I y subdirector del Institut de Noves Tecnologies de la Imatge (INIT), donde trabajo en el grupo GEOTEC.':
+      ["Sóc professor titular a la Universitat Jaume I i sotsdirector de l'Institut de Noves Tecnologies de la Imatge (INIT), on treballe en el grup GEOTEC.",
+       "I'm an associate professor at Universitat Jaume I and deputy director of its Institute of New Imaging Technologies (INIT), where I work in the GEOTEC group."],
+    'Investigo cómo conseguir que sensores pequeños decidan por sí mismos, sin depender de la nube, y cómo enseñar a programar desde los cuatro años. Casi todo lo que hago acaba en algo que se usa: un kit para escuelas, una estación para viñedos y plataformas para ciudades.':
+      ['Investigue com aconseguir que sensors menuts decidisquen per si mateixos, sense dependre del núvol, i com ensenyar a programar des dels quatre anys. Quasi tot el que faig acaba en alguna cosa que es fa servir: un kit per a escoles, una estació per a vinyes i plataformes per a ciutats.',
+       'I research how to get small sensors to make decisions on their own, without relying on the cloud, and how to teach programming from the age of four. Almost everything I do ends up as something people use: a kit for schools, a station for vineyards and platforms for cities.'],
+    'Hasta hoy: {a} artículos en revistas, {c} citas en Google Scholar y {p} proyectos como investigador principal.':
+      ['Fins ara: {a} articles en revistes, {c} cites a Google Scholar i {p} projectes com a investigador principal.',
+       'So far: {a} journal articles, {c} citations on Google Scholar and {p} projects as principal investigator.'],
+    'Ver el CV completo': ['Veure el CV complet', 'See the full CV'],
+    'Proyectos en marcha': ['Projectes en marxa', 'Current projects'],
+    'Proyecto que dirijo desde 2025, financiado por el Ministerio de Ciencia (CNS2024-154145).':
+      ['Projecte que dirigisc des de 2025, finançat pel Ministeri de Ciència (CNS2024-154145).', 'A project I have led since 2025, funded by the Spanish Ministry of Science (CNS2024-154145).'],
+    'Es una simulación: los datos nunca salen del dispositivo, solo viajan los modelos. La plataforma LIA-FL se publicó en SoftwareX en 2026.':
+      ['És una simulació: les dades no ixen mai del dispositiu, només viatgen els models. La plataforma LIA-FL es va publicar a SoftwareX el 2026.',
+       "It's a simulation: the data never leaves the device; only the models travel. The LIA-FL platform was published in SoftwareX in 2026."],
+    'Proyecto de la Agencia Estatal de Investigación en cuyo equipo participo (PID2022-141813OB-I00).':
+      ["Projecte de l'Agència Estatal d'Investigació en l'equip del qual participe (PID2022-141813OB-I00).", "A Spanish State Research Agency project whose team I'm part of (PID2022-141813OB-I00)."],
+    'Es una simulación: el modelo de la comunidad aprende cómo se comportan sus sensores y avisa cuando uno se sale de lo normal. El primer artículo salió en Internet of Things (Elsevier) en 2026.':
+      ['És una simulació: el model de la comunitat aprén com es comporten els seus sensors i avisa quan un ix del normal. El primer article va eixir a Internet of Things (Elsevier) el 2026.',
+       "It's a simulation: the community model learns how its sensors behave and warns when one goes out of the ordinary. The first paper came out in Internet of Things (Elsevier) in 2026."],
+    'Sucret, la mascota de Sucre. Tócala.': ['Sucret, la mascota de Sucre. Toca-la.', "Sucret, Sucre's mascot. Give it a tap."],
+    'Desde 2016, con más de 20.000 jóvenes en talleres, ferias y aulas.': ['Des de 2016, amb més de 20.000 joves en tallers, fires i aules.', 'Since 2016, with more than 20,000 young people in workshops, fairs and classrooms.'],
+    'Un kit de sensores y una app para aprender pensamiento computacional. Con Sucre4Kids se programa con tarjetas y sin pantallas desde los cuatro años; con Sucre4Stem, con bloques, hasta FP. Baja la luz y mira qué hace el kit.':
+      ['Un kit de sensors i una aplicació per a aprendre pensament computacional. Amb Sucre4Kids es programa amb targetes i sense pantalles des dels quatre anys; amb Sucre4Stem, amb blocs, fins a FP. Abaixa la llum i mira què fa el kit.',
+       'A kit of sensors and an app for learning computational thinking. With Sucre4Kids children code with cards and no screens from the age of four; with Sucre4Stem they use blocks, up to vocational training. Turn the light down and see what the kit does.'],
+    'Estación para viñedos, protegida en el banco de patentes de la Generalitat e instalada en seis bodegas.':
+      ['Estació per a vinyes, protegida en el banc de patents de la Generalitat i instal·lada en sis cellers.', "A vineyard station, protected in the Generalitat Valenciana's patent bank and installed in six wineries."],
+    'Mide el microclima de la parcela y avisa al móvil cuando el tiempo favorece el mildiu. Prueba la regla de los tres dieces: 10 °C, 10 mm de lluvia y brotes de 10 cm.':
+      ['Mesura el microclima de la parcel·la i avisa al mòbil quan el temps afavoreix el míldiu. Prova la regla dels tres deus: 10 °C, 10 mm de pluja i brots de 10 cm.',
+       "It measures the plot's microclimate and alerts your phone when the weather favours downy mildew. Try the 10-10-10 rule: 10 °C, 10 mm of rain and 10 cm shoots."],
+    'IA en microcontroladores (TinyML)': ['IA en microcontroladors (TinyML)', 'AI on microcontrollers (TinyML)'],
+    'Aprendizaje federado y confianza en redes IoT': ['Aprenentatge federat i confiança en xarxes IoT', 'Federated learning and trust in IoT networks'],
+    'Calidad del aire y movilidad': ["Qualitat de l'aire i mobilitat", 'Air quality and mobility'],
+    'Ciudades y agricultura inteligentes': ['Ciutats i agricultura intel·ligents', 'Smart cities and smart farming'],
+    'Pensamiento computacional en la escuela': ["Pensament computacional a l'escola", 'Computational thinking at school'],
+    'Publicaciones recientes': ['Publicacions recents', 'Recent publications'],
+    'Todas las publicaciones, con factor de impacto y filtros': ["Totes les publicacions, amb factor d'impacte i filtres", 'All publications, with impact factor and filters'],
+    'Me encontrarás en MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI e Ingenio Games.':
+      ['Em trobaràs a MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI i Ingenio Games.', "You'll find me at MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI and Ingenio Games."],
+    'Otros proyectos': ['Altres projectes', 'Other projects'],
+    'Escríbeme:': ['Escriu-me:', 'Write to me:'],
+
     /* CV completo */
     'Currículum completo': ['Currículum complet', 'Full CV'],
     'Publicaciones con factor de impacto y cuartil, congresos, proyectos y tesis dirigidas. Las citas se recogen cada semana de varias fuentes.':
