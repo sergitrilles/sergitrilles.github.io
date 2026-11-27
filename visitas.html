@@ -173,6 +173,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px;display:flex;justify-co
   }
 
   function list(title,items,label){
+    items=(items||[]).filter(function(x){return x.c>0});
     var max=Math.max.apply(null,items.map(function(x){return x.c}).concat([1]));
     return '<section class="t list"><div><h2>'+esc(t(title))+'</h2><span class="sub">'+esc(t('últimos {d} días',{d:D.days}))+'</span></div>'+
       (items.length?'<ol>'+items.map(function(x){var nm=label(x);return '<li><span class="n" title="'+esc(nm)+'">'+esc(nm)+'</span><span class="c">'+nf(x.c)+'</span><span class="bar"><i style="width:'+(x.c/max*100).toFixed(1)+'%"></i></span></li>'}).join('')+'</ol>'
