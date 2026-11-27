@@ -143,6 +143,8 @@
     'Investigación': ['Recerca', 'Research'],
     'Contacto': ['Contacte', 'Contact'],
     'Productos': ['Productes', 'Products'],
+    'Proyecto en marcha': ['Projecte en marxa', 'Current project'],
+    'Producto': ['Producte', 'Product'],
     'Soy profesor titular en la Universitat Jaume I y subdirector del Institut de Noves Tecnologies de la Imatge (INIT), donde trabajo en el grupo GEOTEC.':
       ["Sóc professor titular a la Universitat Jaume I i sotsdirector de l'Institut de Noves Tecnologies de la Imatge (INIT), on treballe en el grup GEOTEC.",
        "I'm an associate professor at Universitat Jaume I and deputy director of its Institute of New Imaging Technologies (INIT), where I work in the GEOTEC group."],

@@ -7,114 +7,88 @@
 <meta name="description" content="Sergi Trilles Oliver, profesor titular en la Universitat Jaume I. Inteligencia artificial en dispositivos IoT, datos geoespaciales y pensamiento computacional.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Geist:wght@400;500;600&display=swap">
 <style>
-/* Layout: página editorial a dos columnas (título de sección a la izquierda, contenido a la derecha).
-   Solo los proyectos y productos llevan panel de color; todo lo demás es texto. */
+/* Layout: baldosas sobre fondo gris claro. Arriba la presentación; después proyectos y productos en color; al final, texto. */
 :root{
-  --bg:#FFFFFF; --ink:#16181A; --muted:#60666A; --line:#E4E6E2; --soft:#F3F4F1;
+  --bg:#EEF0EB; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8;
   --sucre:#FF6A3D; --sucre-ink:#2B0E05; --night:#1B1F3A;
-  --vine:#2F6B3E; --vine-soft:#E2EDE0; --vine-ink:#0E2414; --warn:#C2410C;
-  --lia:#3446D9; --lia-soft:#E6E9FF; --lia-ink:#0D1240;
-  --coi:#7B3FD0; --coi-soft:#F1E9FD; --coi-ink:#22093F;
-  --tile:#FFFFFF; --blue:#2B55E6;
+  --vine:#2F6B3E; --vine-soft:#DCEBDA; --vine-ink:#0E2414; --warn:#C2410C;
+  --lia:#3446D9; --lia-soft:#E3E7FF; --lia-ink:#0D1240;
+  --coi:#7B3FD0; --coi-soft:#EFE6FD; --coi-ink:#22093F;
+  --blue:#2B55E6;
   --f-head:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-text:"Newsreader", Georgia, "Times New Roman", serif;
-  --f-ui:"Geist", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Geist", "Segoe UI", system-ui, sans-serif;
+  --r:20px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#121413; --ink:#ECEFEA; --muted:#9DA5A0; --line:#2A2E2B; --soft:#1B1E1C;
+  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
-  --vine:#86C493; --vine-soft:#17261A; --vine-ink:#DCEFDF; --warn:#FB923C;
-  --lia:#8C9BFF; --lia-soft:#171B38; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#21173A; --coi-ink:#EFE6FD;
-  --tile:#1B1E1C; --blue:#8EA2FF; color-scheme:dark }}
+  --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
+  --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
+  --blue:#7C9BFF; color-scheme:dark }}
 :root[data-theme="dark"]{
-  --bg:#121413; --ink:#ECEFEA; --muted:#9DA5A0; --line:#2A2E2B; --soft:#1B1E1C;
+  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
-  --vine:#86C493; --vine-soft:#17261A; --vine-ink:#DCEFDF; --warn:#FB923C;
-  --lia:#8C9BFF; --lia-soft:#171B38; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#21173A; --coi-ink:#EFE6FD;
-  --tile:#1B1E1C; --blue:#8EA2FF; color-scheme:dark }
+  --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
+  --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
+  --blue:#7C9BFF; color-scheme:dark }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 19px/1.55 var(--f-text);
-  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
-a:hover{text-decoration-thickness:2px}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 p{margin:0}
-.w{max-width:1120px;margin:0 auto}
-h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance}
+h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.02em}
+.wrap{max-width:1160px;margin:0 auto;display:grid;gap:14px}
 
-/* cabecera */
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:22px;font:500 15px var(--f-ui)}
-.top .me-link{font:700 17px var(--f-head);text-decoration:none}
-.top nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:4px 4px 6px;font:500 14.5px var(--f-body)}
+.top .me-link{font:800 17px var(--f-head);text-decoration:none}
+.top nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .top nav a{text-decoration:none;color:var(--muted)}
 .top nav a:hover{color:var(--ink)}
-.langs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}
-.langs button{font:500 12px var(--f-ui);background:none;border:0;color:var(--muted);padding:3px 8px;border-radius:999px;cursor:pointer}
-.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.langs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--tile)}
+.langs button{font:500 12px var(--f-body);background:none;border:0;color:var(--muted);padding:3px 8px;border-radius:999px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--tile)}
 .theme{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:4px}
 
-/* portada */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:48px;align-items:start;padding-block:56px 64px;border-bottom:1px solid var(--line)}
-.hero h1{font-size:clamp(48px,7vw,92px);font-weight:700;line-height:.92;letter-spacing:-.035em;margin-bottom:28px}
-.hero .txt{display:grid;gap:16px;max-width:38em}
-.hero .txt p:first-child{font-size:22px;line-height:1.45}
-.hero .nums{color:var(--muted);font-size:17px}
-.hero img{width:210px;height:auto;aspect-ratio:201/251;object-fit:cover;border-radius:6px;display:block;filter:saturate(.9)}
-.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font:500 15px var(--f-ui)}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--ink);text-decoration:none;cursor:pointer;font:inherit}
-.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;grid-auto-flow:dense}
+.t{background:var(--tile);border-radius:var(--r);padding:24px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.s2{grid-column:span 2}.s4{grid-column:span 4}.r2{grid-row:span 2}
+.tag{font:500 13px var(--f-body);color:var(--muted)}
+h2{font-size:22px;font-weight:800}
+h3{font-size:30px;font-weight:800;line-height:1}
 
-/* secciones */
-.sec{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:52px;border-bottom:1px solid var(--line)}
-.sec>h2{font-size:22px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
-.sec>h2 small{display:block;font:400 15px/1.4 var(--f-ui);color:var(--muted);margin-top:8px;letter-spacing:0}
-.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.prose{max-width:40em;display:grid;gap:14px}
-.plain{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.plain li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px}
-.plain .y{font:500 14px var(--f-ui);color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
-.lines{list-style:none;margin:0;padding:0;columns:2;column-gap:32px}
-.lines li{padding:8px 0;border-top:1px solid var(--line);break-inside:avoid}
-.pubs{list-style:none;margin:0;padding:0;display:grid}
-.pubs li{padding:14px 0;border-top:1px solid var(--line)}
-.pubs li:first-child{border-top:0;padding-top:0}
-.pubs a{text-decoration:none;font-weight:500}
-.pubs a:hover{text-decoration:underline}
-.pubs small{display:block;font:400 14px var(--f-ui);color:var(--muted);margin-top:3px}
-.more{display:inline-block;margin-top:18px;font:500 15px var(--f-ui)}
-.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;padding-block:52px;border-bottom:1px solid var(--line)}
-.trio h2{font-size:20px;font-weight:700;margin-bottom:14px}
-.trio p,.trio li{font-size:17px}
-.links{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 15px var(--f-ui);margin-top:6px}
-.collab{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.collab b{font-weight:500}
+/* presentación */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:32px;align-items:center;padding:34px}
+.hero h1{font-size:clamp(42px,6vw,72px);font-weight:800;line-height:.95;letter-spacing:-.035em;margin-bottom:18px}
+.hero .txt{display:grid;gap:12px;max-width:44em}
+.hero .txt p:first-child{font-size:19px;line-height:1.45}
+.hero .nums{color:var(--muted)}
+.hero img{width:190px;height:auto;aspect-ratio:201/251;object-fit:cover;border-radius:14px;display:block}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.btn{font:500 14px var(--f-body);border-radius:999px;padding:9px 16px;border:1px solid var(--line);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--tile);border-color:var(--ink)}
 
-/* paneles de proyecto */
-.panel{border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px;position:relative;min-width:0;font-size:17px}
-.panel h3{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1}
-.panel .kind{font:400 14.5px/1.45 var(--f-ui);opacity:.85}
-.panel .cap{font:400 13.5px/1.45 var(--f-ui);opacity:.8}
-.panel .go{font:600 15px var(--f-ui);margin-top:auto}
-.ui{font-family:var(--f-ui)}
-.lia{background:var(--lia-soft);color:var(--lia-ink)}
-.coi{background:var(--coi-soft);color:var(--coi-ink)}
-.lia .go{color:var(--lia)}.coi .go{color:var(--coi)}
+/* proyectos y productos */
+.kind{font-size:14px;opacity:.85}
+.cap{font-size:13px;opacity:.8}
+.go{font-weight:600;margin-top:auto}
+.lia{background:var(--lia-soft);color:var(--lia-ink)}.lia .go,.lia .tag{color:var(--lia)}
+.coi{background:var(--coi-soft);color:var(--coi-ink)}.coi .go,.coi .tag{color:var(--coi)}
 .viz{width:100%;height:auto;display:block;overflow:visible}
-.viz text{font:500 11px var(--f-ui);fill:currentColor}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font:500 13.5px var(--f-ui)}
-.pbtn{font:600 14px var(--f-ui);border-radius:8px;padding:9px 14px;border:0;cursor:pointer;color:#fff}
+.viz text{font:500 11px var(--f-body);fill:currentColor}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13.5px;font-weight:500}
+.pbtn{font:600 14px var(--f-body);border-radius:999px;padding:8px 15px;border:0;cursor:pointer;color:#fff}
 .lia .pbtn{background:var(--lia)}.coi .pbtn{background:var(--coi)}
-:root[data-theme="dark"] .pbtn{color:#121413}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pbtn{color:#121413}}
+:root[data-theme="dark"] .pbtn{color:#0F110F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pbtn{color:#0F110F}}
 .anom{color:var(--warn);font-weight:600}
 
-/* Sucre */
 .sucre{background:var(--sucre);color:var(--sucre-ink);transition:background .5s}
+.sucre .tag{color:inherit;opacity:.75}
 .sucre.night{background:var(--night);color:#EDEBFF}
-.sucre .go{color:inherit}
 .kit{position:relative;margin:0 -6px;aspect-ratio:1100/679;max-width:100%}
 .kit img{width:100%;height:100%;display:block;transition:filter .5s}
 .glow{position:absolute;border-radius:50%;pointer-events:none;transition:opacity .4s;opacity:0}
@@ -122,55 +96,61 @@ h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance}
 .glow.led{left:45.2%;top:19.7%;width:9%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(90,255,250,.9),transparent 70%);opacity:.6;animation:pulse 1.6s infinite}
 @keyframes pulse{50%{opacity:.25}}
 .sucre.night .glow.bulb{opacity:1}
-.prog{display:flex;gap:6px;flex-wrap:wrap;font:600 13px var(--f-ui)}
+.prog{display:flex;gap:6px;flex-wrap:wrap;font:600 13px var(--f-body)}
 .blk{padding:7px 11px;border-radius:7px 7px 7px 2px;background:var(--sucre-ink);color:var(--sucre)}
 .blk.y{background:#FFF3B0;color:#3A2C00}.blk.w{background:#fff;color:#2B0E05;transition:box-shadow .3s}
 .sucre.night .blk.w{box-shadow:0 0 0 2px #FFE38A,0 0 18px #FFE38A}
-.ctrl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font:500 13.5px var(--f-ui)}
+.ctrl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:13.5px;font-weight:500}
 input[type=range]{width:100%;accent-color:currentColor;min-width:0}
-.sucret{position:absolute;top:14px;right:14px;width:92px;background:none;border:0;padding:0;cursor:pointer;color:inherit;display:grid;justify-items:center;gap:2px}
-.sucret svg{width:92px;height:auto;overflow:visible}
-.sucret .hint{font:500 11px/1.2 var(--f-ui);text-align:center;opacity:.85}
-.bubble{position:absolute;top:-8px;right:76px;background:#fff;color:#2B0E05;border-radius:12px 12px 2px 12px;padding:4px 10px;font:600 13px var(--f-ui);white-space:nowrap;opacity:0;transform:scale(.6);transform-origin:bottom right;transition:.25s cubic-bezier(.3,1.6,.5,1)}
+.sucret{position:absolute;top:16px;right:16px;width:90px;background:none;border:0;padding:0;cursor:pointer;color:inherit;display:grid;justify-items:center;gap:2px}
+.sucret svg{width:90px;height:auto;overflow:visible}
+.sucret .hint{font:500 11px/1.2 var(--f-body);text-align:center;opacity:.85}
+.bubble{position:absolute;top:-6px;right:74px;background:#fff;color:#2B0E05;border-radius:12px 12px 2px 12px;padding:4px 10px;font:600 13px var(--f-body);white-space:nowrap;opacity:0;transform:scale(.6);transform-origin:bottom right;transition:.25s cubic-bezier(.3,1.6,.5,1)}
 .sucret.hi .bubble{opacity:1;transform:none}
 #armR{transform-origin:118px 96px}
 .sucret.hi #armR{animation:wave .9s ease-in-out}
 @keyframes wave{0%,100%{transform:rotate(0)}25%{transform:rotate(-55deg)}50%{transform:rotate(-25deg)}75%{transform:rotate(-55deg)}}
 #lids{transform-origin:80px 86px;animation:blink 4.6s infinite}
 @keyframes blink{0%,94%,100%{transform:scaleY(0)}97%{transform:scaleY(1)}}
-.sucre h3,.sucre .kind{padding-right:100px}
+.sucre h3,.sucre .tag,.sucre .kind{padding-right:100px}
 
-/* SEnviro */
 .senviro{background:var(--vine-soft);color:var(--vine-ink)}
-.senviro .go{color:var(--vine)}
+.senviro .go,.senviro .tag{color:var(--vine)}
 .sim{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:16px;align-items:center}
 .sliders{display:grid;gap:10px;color:var(--vine)}
 .sliders .ctrl{grid-template-columns:96px 1fr 50px}
 .sliders output{text-align:right;color:var(--vine-ink);font-variant-numeric:tabular-nums}
 .phone{width:120px;aspect-ratio:9/16;border-radius:20px;background:var(--vine-ink);padding:7px;position:relative;justify-self:end}
 .screen{position:absolute;inset:7px;border-radius:14px;background:linear-gradient(160deg,#2F6B3E,#0E2414);overflow:hidden}
-.notif{position:absolute;left:6px;right:6px;top:10px;background:rgba(255,255,255,.95);color:#0E2414;border-radius:9px;padding:7px 8px;font:500 10.5px/1.3 var(--f-ui);transform:translateY(-130%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
-.notif b{display:block;font:600 9.5px var(--f-ui);color:#C2410C;letter-spacing:.04em}
+.notif{position:absolute;left:6px;right:6px;top:10px;background:rgba(255,255,255,.95);color:#0E2414;border-radius:9px;padding:7px 8px;font:500 10.5px/1.3 var(--f-body);transform:translateY(-130%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.notif b{display:block;font:600 9.5px var(--f-body);color:#C2410C;letter-spacing:.04em}
 .senviro.alert .notif{transform:none}
-.clockp{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#DCEFDF;font:500 20px var(--f-ui);font-variant-numeric:tabular-nums}
-.risk{display:flex;gap:6px;align-items:center;font:600 13px var(--f-ui)}
+.clockp{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#DCEFDF;font:500 20px var(--f-body);font-variant-numeric:tabular-nums}
+.risk{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:600}
 .risk i{flex:1;height:8px;border-radius:4px;background:rgba(47,107,62,.18)}
 .risk i.on{background:var(--vine)}
 .senviro.alert .risk i.on{background:var(--warn)}
 .senviro.alert .risk span{color:var(--warn)}
 
-footer{padding-block:36px 48px;font:400 14px var(--f-ui);color:var(--muted)}
+/* texto */
+.plain{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.plain li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;font-size:14.5px}
+.plain .y{color:var(--muted);font-variant-numeric:tabular-nums}
+.lines{list-style:none;margin:0;padding:0;display:grid}
+.lines li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.pubs{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.pubs a{text-decoration:none;font-weight:500;line-height:1.35}
+.pubs a:hover{text-decoration:underline}
+.pubs small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.collab{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
+.collab b{font-weight:600}
+.links{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:500}
+footer{font-size:13px;color:var(--muted);padding:6px 4px}
 
-@media (max-width:900px){
-  .sec{grid-template-columns:minmax(0,1fr);gap:20px}
-  .cols,.trio{grid-template-columns:minmax(0,1fr)}
-  .lines{columns:1}
-}
-@media (max-width:640px){
-  body{font-size:18px}
-  .hero{grid-template-columns:minmax(0,1fr);gap:24px;padding-block:32px 44px}
-  .hero figure{order:-1}
-  .hero img{width:120px}
+@media (max-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.s4{grid-column:span 2}}
+@media (max-width:620px){
+  .grid{grid-template-columns:minmax(0,1fr)}.s2,.s4{grid-column:auto}.r2{grid-row:auto}
+  .hero{grid-template-columns:minmax(0,1fr);padding:24px}.hero figure{order:-1}.hero img{width:110px}
   .top nav a{display:none}
   .sim{grid-template-columns:minmax(0,1fr)}.phone{justify-self:center}
 }
@@ -178,7 +158,7 @@ footer{padding-block:36px 48px;font:400 14px var(--f-ui);color:var(--muted)}
 </style>
 </head>
 <body>
-<div class="w">
+<div class="wrap">
   <header class="top">
     <a class="me-link" href="./">Sergi Trilles</a>
     <nav>
@@ -188,8 +168,8 @@ footer{padding-block:36px 48px;font:400 14px var(--f-ui);color:var(--muted)}
     </nav>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="nombre">
+  <main class="grid">
+    <section class="t s4 hero" aria-labelledby="nombre">
       <div>
         <h1 id="nombre">Sergi Trilles</h1>
         <div class="txt">
@@ -202,149 +182,141 @@ footer{padding-block:36px 48px;font:400 14px var(--f-ui);color:var(--muted)}
       <figure style="margin:0"><img src="img/foto.jpg" alt="Sergi Trilles" width="201" height="251"></figure>
     </section>
 
-    <section class="sec" id="proyectos" aria-labelledby="now-h">
-      <h2 id="now-h">Proyectos en marcha</h2>
-      <div class="cols">
-        <article class="panel lia" aria-labelledby="lia-h">
-          <h3 id="lia-h">LIA</h3>
-          <p class="kind">Proyecto que dirijo desde 2025, financiado por el Ministerio de Ciencia (CNS2024-154145).</p>
-          <p>Inteligencia local para AIoT. Los dispositivos se agrupan en comunidades y aprenden juntos con aprendizaje federado: cada uno entrena con sus datos y solo envía el modelo a un nodo fog cercano. Lo aplicamos a la calidad del aire y a la salud con wearables.</p>
-          <svg class="viz" id="fl" viewBox="0 0 400 170" role="img" aria-label="Simulación de aprendizaje federado: seis dispositivos envían su modelo a un nodo fog y reciben el modelo combinado"></svg>
-          <div class="row"><button class="pbtn" type="button" id="flBtn">Entrenar una ronda</button><span id="flTxt" aria-live="polite"></span></div>
-          <p class="cap">Es una simulación: los datos nunca salen del dispositivo, solo viajan los modelos. La plataforma LIA-FL se publicó en SoftwareX en 2026.</p>
-          <a class="go" href="https://lia.uji.es" target="_blank" rel="noopener">lia.uji.es</a>
-        </article>
+    <article class="t s2 lia" id="proyectos" aria-labelledby="lia-h">
+      <span class="tag">Proyecto en marcha</span>
+      <h3 id="lia-h">LIA</h3>
+      <p class="kind">Proyecto que dirijo desde 2025, financiado por el Ministerio de Ciencia (CNS2024-154145).</p>
+      <p>Inteligencia local para AIoT. Los dispositivos se agrupan en comunidades y aprenden juntos con aprendizaje federado: cada uno entrena con sus datos y solo envía el modelo a un nodo fog cercano. Lo aplicamos a la calidad del aire y a la salud con wearables.</p>
+      <svg class="viz" id="fl" viewBox="0 0 400 170" role="img" aria-label="Simulación de aprendizaje federado: seis dispositivos envían su modelo a un nodo fog y reciben el modelo combinado"></svg>
+      <div class="row"><button class="pbtn" type="button" id="flBtn">Entrenar una ronda</button><span id="flTxt" aria-live="polite"></span></div>
+      <p class="cap">Es una simulación: los datos nunca salen del dispositivo, solo viajan los modelos. La plataforma LIA-FL se publicó en SoftwareX en 2026.</p>
+      <a class="go" href="https://lia.uji.es" target="_blank" rel="noopener">lia.uji.es</a>
+    </article>
 
-        <article class="panel coi" aria-labelledby="coi-h">
-          <h3 id="coi-h">CoIoTIA</h3>
-          <p class="kind">Proyecto de la Agencia Estatal de Investigación en cuyo equipo participo (PID2022-141813OB-I00).</p>
-          <p>Comunidades de IoT e IA. Sensores parecidos comparten micro-modelos TinyML para decidir en local, con menos latencia, menos consumo y más privacidad. Hay pilotos en calidad del aire, logística de última milla y posicionamiento en interiores.</p>
-          <svg class="viz" id="an" viewBox="0 0 400 170" role="img" aria-label="Simulación de cuatro sensores de temperatura de una comunidad; al provocar una anomalía, el modelo compartido la detecta"></svg>
-          <div class="row"><button class="pbtn" type="button" id="anBtn">Provocar una anomalía</button><span id="anTxt" aria-live="polite"></span></div>
-          <p class="cap">Es una simulación: el modelo de la comunidad aprende cómo se comportan sus sensores y avisa cuando uno se sale de lo normal. El primer artículo salió en Internet of Things (Elsevier) en 2026.</p>
-          <a class="go" href="https://coiotia.uji.es" target="_blank" rel="noopener">coiotia.uji.es</a>
-        </article>
-      </div>
-    </section>
+    <article class="t s2 coi" aria-labelledby="coi-h">
+      <span class="tag">Proyecto en marcha</span>
+      <h3 id="coi-h">CoIoTIA</h3>
+      <p class="kind">Proyecto de la Agencia Estatal de Investigación en cuyo equipo participo (PID2022-141813OB-I00).</p>
+      <p>Comunidades de IoT e IA. Sensores parecidos comparten micro-modelos TinyML para decidir en local, con menos latencia, menos consumo y más privacidad. Hay pilotos en calidad del aire, logística de última milla y posicionamiento en interiores.</p>
+      <svg class="viz" id="an" viewBox="0 0 400 170" role="img" aria-label="Simulación de cuatro sensores de temperatura de una comunidad; al provocar una anomalía, el modelo compartido la detecta"></svg>
+      <div class="row"><button class="pbtn" type="button" id="anBtn">Provocar una anomalía</button><span id="anTxt" aria-live="polite"></span></div>
+      <p class="cap">Es una simulación: el modelo de la comunidad aprende cómo se comportan sus sensores y avisa cuando uno se sale de lo normal. El primer artículo salió en Internet of Things (Elsevier) en 2026.</p>
+      <a class="go" href="https://coiotia.uji.es" target="_blank" rel="noopener">coiotia.uji.es</a>
+    </article>
 
-    <section class="sec" aria-labelledby="prod-h">
-      <h2 id="prod-h">Productos</h2>
-      <div class="cols">
-        <article class="panel sucre" aria-labelledby="sucre-h">
-          <button class="sucret" id="sucret" type="button" aria-label="Sucret, la mascota de Sucre. Pulsa para que salude">
-            <span class="bubble" id="bubble">¡Hola!</span>
-            <svg viewBox="0 0 160 150" aria-hidden="true">
-              <defs><linearGradient id="cube" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9D9DE"/></linearGradient></defs>
-              <path d="M42,96 C26,98 18,108 16,120" fill="none" stroke="#1E2A44" stroke-width="9" stroke-linecap="round"/>
-              <circle cx="16" cy="121" r="8" fill="#1E2A44"/>
-              <g id="armR"><path d="M118,96 C134,98 142,108 144,120" fill="none" stroke="#1E2A44" stroke-width="9" stroke-linecap="round"/><circle cx="144" cy="121" r="8" fill="#1E2A44"/></g>
-              <rect x="34" y="34" width="92" height="92" rx="26" fill="url(#cube)" stroke="#C9C9D0" stroke-width="1.5"/>
-              <rect x="40" y="40" width="80" height="80" rx="20" fill="#EEEEF1"/>
-              <ellipse cx="56" cy="98" rx="9" ry="5.5" fill="#F2B9A5"/>
-              <ellipse cx="104" cy="98" rx="9" ry="5.5" fill="#F2B9A5"/>
-              <g id="eyes"><circle cx="64" cy="80" r="7.5" fill="#1E2A44"/><circle cx="96" cy="80" r="7.5" fill="#1E2A44"/>
-                <circle cx="66.5" cy="77.5" r="2.2" fill="#fff"/><circle cx="98.5" cy="77.5" r="2.2" fill="#fff"/></g>
-              <g id="lids"><rect x="54" y="70" width="20" height="20" rx="10" fill="#EEEEF1"/><rect x="86" y="70" width="20" height="20" rx="10" fill="#EEEEF1"/></g>
-              <path d="M70,101 Q80,110 90,101" fill="none" stroke="#1E2A44" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-            <span class="hint">Sucret, la mascota de Sucre. Tócala.</span>
-          </button>
-          <h3 id="sucre-h">Sucre</h3>
-          <p class="kind">Desde 2016, con más de 20.000 jóvenes en talleres, ferias y aulas.</p>
-          <p>Un kit de sensores y una app para aprender pensamiento computacional. Con Sucre4Kids se programa con tarjetas y sin pantallas desde los cuatro años; con Sucre4Stem, con bloques, hasta FP. Baja la luz y mira qué hace el kit.</p>
-          <div class="kit"><img src="img/sucrecore-kit.webp" alt="Kit SucreCore con sensores de luz, pulsador, altavoz y bombilla conectados" width="1100" height="679"><span class="glow led"></span><span class="glow bulb"></span></div>
-          <div class="prog" aria-label="Programa de ejemplo"><span class="blk">cuando</span><span class="blk y">luz &lt; 30</span><span class="blk w">encender bombilla</span></div>
-          <label class="ctrl" for="light"><span>☀ luz</span><input type="range" id="light" min="0" max="100" value="70"><output id="lightV" for="light">70</output></label>
-          <a class="go" href="https://programasucre.com" target="_blank" rel="noopener">programasucre.com</a>
-        </article>
+    <article class="t s2 sucre" aria-labelledby="sucre-h">
+      <button class="sucret" id="sucret" type="button" aria-label="Sucret, la mascota de Sucre. Pulsa para que salude">
+        <span class="bubble" id="bubble">¡Hola!</span>
+        <svg viewBox="0 0 160 150" aria-hidden="true">
+          <defs><linearGradient id="cube" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9D9DE"/></linearGradient></defs>
+          <path d="M42,96 C26,98 18,108 16,120" fill="none" stroke="#1E2A44" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="16" cy="121" r="8" fill="#1E2A44"/>
+          <g id="armR"><path d="M118,96 C134,98 142,108 144,120" fill="none" stroke="#1E2A44" stroke-width="9" stroke-linecap="round"/><circle cx="144" cy="121" r="8" fill="#1E2A44"/></g>
+          <rect x="34" y="34" width="92" height="92" rx="26" fill="url(#cube)" stroke="#C9C9D0" stroke-width="1.5"/>
+          <rect x="40" y="40" width="80" height="80" rx="20" fill="#EEEEF1"/>
+          <ellipse cx="56" cy="98" rx="9" ry="5.5" fill="#F2B9A5"/>
+          <ellipse cx="104" cy="98" rx="9" ry="5.5" fill="#F2B9A5"/>
+          <g id="eyes"><circle cx="64" cy="80" r="7.5" fill="#1E2A44"/><circle cx="96" cy="80" r="7.5" fill="#1E2A44"/>
+            <circle cx="66.5" cy="77.5" r="2.2" fill="#fff"/><circle cx="98.5" cy="77.5" r="2.2" fill="#fff"/></g>
+          <g id="lids"><rect x="54" y="70" width="20" height="20" rx="10" fill="#EEEEF1"/><rect x="86" y="70" width="20" height="20" rx="10" fill="#EEEEF1"/></g>
+          <path d="M70,101 Q80,110 90,101" fill="none" stroke="#1E2A44" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="hint">Sucret, la mascota de Sucre. Tócala.</span>
+      </button>
+      <span class="tag">Producto</span>
+      <h3 id="sucre-h">Sucre</h3>
+      <p class="kind">Desde 2016, con más de 20.000 jóvenes en talleres, ferias y aulas.</p>
+      <p>Un kit de sensores y una app para aprender pensamiento computacional. Con Sucre4Kids se programa con tarjetas y sin pantallas desde los cuatro años; con Sucre4Stem, con bloques, hasta FP. Baja la luz y mira qué hace el kit.</p>
+      <div class="kit"><img src="img/sucrecore-kit.webp" alt="Kit SucreCore con sensores de luz, pulsador, altavoz y bombilla conectados" width="1100" height="679"><span class="glow led"></span><span class="glow bulb"></span></div>
+      <div class="prog" aria-label="Programa de ejemplo"><span class="blk">cuando</span><span class="blk y">luz &lt; 30</span><span class="blk w">encender bombilla</span></div>
+      <label class="ctrl" for="light"><span>☀ luz</span><input type="range" id="light" min="0" max="100" value="70"><output id="lightV" for="light">70</output></label>
+      <a class="go" href="https://programasucre.com" target="_blank" rel="noopener">programasucre.com</a>
+    </article>
 
-        <article class="panel senviro" id="senviro" aria-labelledby="senviro-h">
-          <h3 id="senviro-h">SEnviro</h3>
-          <p class="kind">Estación para viñedos, protegida en el banco de patentes de la Generalitat e instalada en seis bodegas.</p>
-          <p>Mide el microclima de la parcela y avisa al móvil cuando el tiempo favorece el mildiu. Prueba la regla de los tres dieces: 10 °C, 10 mm de lluvia y brotes de 10 cm.</p>
-          <div class="sim">
-            <div class="sliders">
-              <label class="ctrl" for="tC"><span>temperatura</span><input type="range" id="tC" min="0" max="30" value="14"><output id="tCv" for="tC">14 °C</output></label>
-              <label class="ctrl" for="rain"><span>lluvia 48 h</span><input type="range" id="rain" min="0" max="30" value="4"><output id="rainV" for="rain">4 mm</output></label>
-              <label class="ctrl" for="shoot"><span>brote</span><input type="range" id="shoot" min="0" max="30" value="12"><output id="shootV" for="shoot">12 cm</output></label>
-              <div class="risk" aria-live="polite"><i></i><i></i><i></i><span id="riskT"></span></div>
-            </div>
-            <div class="phone" aria-hidden="true"><div class="screen"><div class="notif"><b>SENVIRO · ALERTA</b>Condiciones de mildiu en la parcela. Revisa el viñedo.</div><div class="clockp" id="pclock">08:30</div></div></div>
-          </div>
-          <a class="go" href="https://www.senviro.uji.es" target="_blank" rel="noopener">senviro.uji.es</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="sec" id="investigacion" aria-labelledby="inv-h">
-      <h2 id="inv-h">Investigación</h2>
-      <div class="prose">
-        <p>IA que corre en sensores diminutos, redes de dispositivos que aprenden juntas sin compartir datos, y datos geoespaciales que ayudan a decidir en ciudades y campos.</p>
-        <ul class="lines">
-          <li>IA en microcontroladores (TinyML)</li>
-          <li>Aprendizaje federado y confianza en redes IoT</li>
-          <li>Calidad del aire y movilidad</li>
-          <li>Ciudades y agricultura inteligentes</li>
-          <li>Pensamiento computacional en la escuela</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="sec" id="publicaciones" aria-labelledby="pub-h">
-      <h2 id="pub-h">Publicaciones recientes</h2>
-      <div>
-        <ul class="pubs" id="latest"></ul>
-        <a class="more" href="cv.html">Todas las publicaciones, con factor de impacto y filtros</a>
-      </div>
-    </section>
-
-    <div class="trio">
-      <section aria-labelledby="div-h">
-        <h2 id="div-h">Divulgación</h2>
-        <p>Me encontrarás en MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI e Ingenio Games.</p>
-      </section>
-      <section aria-labelledby="prem-h">
-        <h2 id="prem-h">Premios</h2>
-        <ul class="plain">
-          <li><span class="y">2026</span><span>Best Demonstrator Award, TAEE (Sucre4Stem)</span></li>
-          <li><span class="y">2025</span><span>Premi Joves Investigadors UJI</span></li>
-          <li><span class="y">2018</span><span>Premio Junior 5UCV Startup</span></li>
-          <li><span class="y">2018</span><span>Jóvenes Emprendedores COPE (SEnviro)</span></li>
-        </ul>
-      </section>
-      <section aria-labelledby="otros-h">
-        <h2 id="otros-h">Otros proyectos</h2>
-        <ul class="plain" style="grid-template-columns:1fr">
-          <li style="display:block">CoAIoT: plataforma de IA para el Internet de las Cosas (Becas Leonardo, Fundación BBVA)</li>
-          <li style="display:block"><a href="https://nextcity-project.eu" target="_blank" rel="noopener">NexTCity</a>: gemelos digitales para ciudades sostenibles (Horizon Europe)</li>
-        </ul>
-      </section>
-    </div>
-
-    <section class="sec" id="contacto" aria-labelledby="col-h">
-      <h2 id="col-h">¿Trabajamos juntos?</h2>
-      <div class="prose">
-        <ul class="collab">
-          <li><b>Estudiantes:</b> TFG, TFM o doctorado en AIoT, TinyML o datos geoespaciales.</li>
-          <li><b>Centros educativos:</b> talleres y formación docente con Sucre.</li>
-          <li><b>Empresas y ayuntamientos:</b> transferencia, contratos de I+D y despliegues IoT.</li>
-        </ul>
-        <p>Escríbeme: <a href="mailto:strilles@uji.es">strilles@uji.es</a></p>
-        <div class="links">
-          <a href="https://orcid.org/0000-0002-9304-0719" target="_blank" rel="noopener">ORCID</a>
-          <a href="https://scholar.google.es/citations?user=s628OEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
-          <a href="https://www.scopus.com/authid/detail.uri?authorId=55557104000" target="_blank" rel="noopener">Scopus</a>
-          <a href="https://www.linkedin.com/in/strilles/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://twitter.com/SergiTrilles" target="_blank" rel="noopener">X</a>
-          <a href="https://geotec.uji.es/staff/" target="_blank" rel="noopener">GEOTEC</a>
+    <article class="t s2 senviro" id="senviro" aria-labelledby="senviro-h">
+      <span class="tag">Producto</span>
+      <h3 id="senviro-h">SEnviro</h3>
+      <p class="kind">Estación para viñedos, protegida en el banco de patentes de la Generalitat e instalada en seis bodegas.</p>
+      <p>Mide el microclima de la parcela y avisa al móvil cuando el tiempo favorece el mildiu. Prueba la regla de los tres dieces: 10 °C, 10 mm de lluvia y brotes de 10 cm.</p>
+      <div class="sim">
+        <div class="sliders">
+          <label class="ctrl" for="tC"><span>temperatura</span><input type="range" id="tC" min="0" max="30" value="14"><output id="tCv" for="tC">14 °C</output></label>
+          <label class="ctrl" for="rain"><span>lluvia 48 h</span><input type="range" id="rain" min="0" max="30" value="4"><output id="rainV" for="rain">4 mm</output></label>
+          <label class="ctrl" for="shoot"><span>brote</span><input type="range" id="shoot" min="0" max="30" value="12"><output id="shootV" for="shoot">12 cm</output></label>
+          <div class="risk" aria-live="polite"><i></i><i></i><i></i><span id="riskT"></span></div>
         </div>
+        <div class="phone" aria-hidden="true"><div class="screen"><div class="notif"><b>SENVIRO · ALERTA</b>Condiciones de mildiu en la parcela. Revisa el viñedo.</div><div class="clockp" id="pclock">08:30</div></div></div>
+      </div>
+      <a class="go" href="https://www.senviro.uji.es" target="_blank" rel="noopener">senviro.uji.es</a>
+    </article>
+
+    <section class="t s2 r2" id="publicaciones" aria-labelledby="pub-h">
+      <h2 id="pub-h">Publicaciones recientes</h2>
+      <ul class="pubs" id="latest"></ul>
+      <a class="go" href="cv.html">Todas las publicaciones, con factor de impacto y filtros</a>
+    </section>
+
+    <section class="t s2" id="investigacion" aria-labelledby="inv-h">
+      <h2 id="inv-h">Investigación</h2>
+      <p>IA que corre en sensores diminutos, redes de dispositivos que aprenden juntas sin compartir datos, y datos geoespaciales que ayudan a decidir en ciudades y campos.</p>
+      <ul class="lines">
+        <li>IA en microcontroladores (TinyML)</li>
+        <li>Aprendizaje federado y confianza en redes IoT</li>
+        <li>Calidad del aire y movilidad</li>
+        <li>Ciudades y agricultura inteligentes</li>
+        <li>Pensamiento computacional en la escuela</li>
+      </ul>
+    </section>
+
+    <section class="t" aria-labelledby="prem-h">
+      <h2 id="prem-h">Premios</h2>
+      <ul class="plain">
+        <li><span class="y">2026</span><span>Best Demonstrator Award, TAEE (Sucre4Stem)</span></li>
+        <li><span class="y">2025</span><span>Premi Joves Investigadors UJI</span></li>
+        <li><span class="y">2018</span><span>Premio Junior 5UCV Startup</span></li>
+        <li><span class="y">2018</span><span>Jóvenes Emprendedores COPE (SEnviro)</span></li>
+      </ul>
+    </section>
+
+    <section class="t" aria-labelledby="div-h">
+      <h2 id="div-h">Divulgación</h2>
+      <p style="font-size:14.5px">Me encontrarás en MedNight, FirUJICiència, Connecta amb la Ciència, Practica la UJI e Ingenio Games.</p>
+    </section>
+
+    <section class="t s2" id="contacto" aria-labelledby="col-h">
+      <h2 id="col-h">¿Trabajamos juntos?</h2>
+      <ul class="collab">
+        <li><b>Estudiantes:</b> TFG, TFM o doctorado en AIoT, TinyML o datos geoespaciales.</li>
+        <li><b>Centros educativos:</b> talleres y formación docente con Sucre.</li>
+        <li><b>Empresas y ayuntamientos:</b> transferencia, contratos de I+D y despliegues IoT.</li>
+      </ul>
+      <p>Escríbeme: <a href="mailto:strilles@uji.es">strilles@uji.es</a></p>
+    </section>
+
+    <section class="t" aria-labelledby="otros-h">
+      <h2 id="otros-h">Otros proyectos</h2>
+      <ul class="lines" style="font-size:14.5px">
+        <li style="border-top:0;padding-top:0">CoAIoT: plataforma de IA para el Internet de las Cosas (Becas Leonardo, Fundación BBVA)</li>
+        <li><a href="https://nextcity-project.eu" target="_blank" rel="noopener">NexTCity</a>: gemelos digitales para ciudades sostenibles (Horizon Europe)</li>
+      </ul>
+    </section>
+
+    <section class="t" aria-labelledby="links-h">
+      <h2 id="links-h">Perfiles</h2>
+      <div class="links">
+        <a href="https://orcid.org/0000-0002-9304-0719" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://scholar.google.es/citations?user=s628OEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=55557104000" target="_blank" rel="noopener">Scopus</a>
+        <a href="https://www.linkedin.com/in/strilles/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com/SergiTrilles" target="_blank" rel="noopener">X</a>
+        <a href="https://geotec.uji.es/staff/" target="_blank" rel="noopener">GEOTEC</a>
       </div>
     </section>
   </main>
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=3"></script>
+<script src="i18n.js?v=4"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
