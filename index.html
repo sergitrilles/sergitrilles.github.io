@@ -191,6 +191,7 @@ body{background-attachment:fixed}
   --ink:var(--imp-ink);--muted:var(--imp-muted);--tile:var(--imp);--blue:var(--imp-bar);--vine:var(--imp-vine);
   --line:color-mix(in srgb,var(--imp-muted) 32%,transparent);--bg:color-mix(in srgb,var(--imp-ink) 9%,var(--imp));--lia:var(--imp-lia)}
 .brand.ink .plate{border-color:transparent}
+.brand.ink .viz{background:#FFFFFF;--tile:#FFFFFF;--ink:#141714;--muted:#5B635C;--line:#DCE0D8;--lia:#3446D9}
 .t.ink a{color:var(--imp-ink)}
 .t.ink a:focus-visible{outline-color:var(--imp-bar)}
 .t.ink h2::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2FBF71;margin-right:10px;vertical-align:.18em;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 25%,transparent)}
@@ -239,7 +240,7 @@ body{background-attachment:fixed}
     </a>
     <a class="t brand ink" href="https://coiotia.uji.es" target="_blank" rel="noopener">
       <span class="plate dark"><img src="img/logos/coiotia.png" alt="CoIoTIA · Communities of IoT and AI" width="630" height="240"></span>
-      <span class="viz dark" data-viz="coi" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
+      <span class="viz" data-viz="coi" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
       <span class="tag">Proyecto AEI · equipo de investigación</span>
       <span class="desc">Comunidades de IoT e IA que comparten micro-modelos TinyML.</span>
       <span class="go">coiotia.uji.es</span>
@@ -427,11 +428,11 @@ body{background-attachment:fixed}
     CL.forEach(function(c,ci){
       var g=[];
       for(var i=0;i<6;i++){var a=i/6*Math.PI*2+ci, r=i%2?13:9;
-        g.push(el('circle',{cx:c[0]+Math.cos(a)*r,cy:c[1]+Math.sin(a)*r*.8,r:2.6,fill:'#7B6BD8'},V.svg))}
-      el('circle',{cx:c[0],cy:c[1],r:3.2,fill:'#C9B8FF'},V.svg);
+        g.push(el('circle',{cx:c[0]+Math.cos(a)*r,cy:c[1]+Math.sin(a)*r*.8,r:2.6,fill:'#7B3FD0'},V.svg))}
+      el('circle',{cx:c[0],cy:c[1],r:3.4,fill:'#181B30'},V.svg);
       nodes.push(g);
     });
-    var pk=el('rect',{width:9,height:7,rx:1.5,fill:'#FFD166'},V.svg), from=0, ph=0;
+    var pk=el('rect',{width:9,height:7,rx:1.5,fill:'#F29E0C'},V.svg), from=0, ph=0;
     function lab(){V.lab.textContent=t('micro-modelo TinyML → comunidad {k}',{k:(from+1)%3+1})}
     lab();
     VZ.coi=function(now,dt){
@@ -440,7 +441,7 @@ body{background-attachment:fixed}
       var a=CL[from], b=CL[(from+1)%3], k=ease(Math.min(1,ph/.7));
       var x=lerp(a[0],b[0],k), y=lerp(a[1],b[1],k)-Math.sin(k*Math.PI)*(from===2?-14:18);
       pk.setAttribute('x',x-4.5);pk.setAttribute('y',y-3.5);
-      nodes.forEach(function(g,gi){var on=(gi===(from+1)%3&&ph>.7);g.forEach(function(n){n.style.fill=on?'#FFD166':'#7B6BD8'})});
+      nodes.forEach(function(g,gi){var on=(gi===(from+1)%3&&ph>.7);g.forEach(function(n){n.style.fill=on?'#F29E0C':'#7B3FD0'})});
     };
   })();
 
