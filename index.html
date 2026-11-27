@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&text=sucre&display=swap">
 <style>
 /* Layout: panel de instrumentación IoT; baldosas por filas de altura pareja. 1 presentación + foto · 2 impacto (Scholar) · 3 proyectos · 4 productos · 5 publicaciones + investigación · 6 premios + contacto · 7 otros proyectos + divulgación */
 :root{
@@ -158,6 +159,17 @@ input[type=range]{width:100%;accent-color:currentColor;min-width:0}
 .senviro.alert .risk i.on{background:var(--warn)}
 .senviro.alert .risk span{color:var(--warn)}
 
+
+/* 3 · proyectos y productos: baldosas compactas con el logo original */
+.brand{text-decoration:none;color:var(--ink);gap:10px;padding:16px 16px 18px}
+.brand .plate{display:grid;place-items:center;height:96px;border-radius:4px;background:#FFFFFF;border:1px solid var(--line);padding:14px}
+.brand .plate.dark{background:#181B30;border-color:#181B30}
+.brand .plate img{max-width:100%;max-height:64px;width:auto;height:auto;display:block}
+.brand .desc{font-size:15px;line-height:1.4}
+.brand .go{font:600 13.5px var(--f-mono);color:var(--muted)}
+.brand:hover .go{color:var(--ink);text-decoration:underline}
+.sucre-logo{display:inline-flex;align-items:center;gap:.2em;font:600 40px/1 "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;letter-spacing:-.025em;color:#1d1d1b}
+.sucre-logo svg{width:1.05em;height:1.05em}
 /* 5-7 · texto */
 .lines{list-style:none;margin:0;padding:0;display:grid}
 .lines li{padding:9px 0;border-top:1px solid var(--line);font-size:15px}
@@ -240,73 +252,31 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
       </div>
     </section>
 
-    <!-- 3 -->
-    <article class="t s2 lia" id="proyectos" aria-labelledby="lia-h">
-      <span class="tag">Proyecto en marcha</span>
-      <h3 id="lia-h">LIA</h3>
-      <p class="kind">Proyecto que dirijo desde 2025, financiado por el Ministerio de Ciencia (CNS2024-154145).</p>
-      <p>Inteligencia local para AIoT. Los dispositivos se agrupan en comunidades y aprenden juntos con aprendizaje federado: cada uno entrena con sus datos y solo envía el modelo a un nodo fog cercano. Lo aplicamos a la calidad del aire y a la salud con wearables.</p>
-      <svg class="viz" id="fl" viewBox="0 0 400 170" role="img" aria-label="Simulación de aprendizaje federado: seis dispositivos envían su modelo a un nodo fog y reciben el modelo combinado"></svg>
-      <div class="row"><button class="pbtn" type="button" id="flBtn">Entrenar una ronda</button><span id="flTxt" aria-live="polite"></span></div>
-      <p class="cap2">Es una simulación: los datos nunca salen del dispositivo, solo viajan los modelos. La plataforma LIA-FL se publicó en SoftwareX en 2026.</p>
-      <a class="go" href="https://lia.uji.es" target="_blank" rel="noopener">lia.uji.es</a>
-    </article>
-    <article class="t s2 coi" aria-labelledby="coi-h">
-      <span class="tag">Proyecto en marcha</span>
-      <h3 id="coi-h">CoIoTIA</h3>
-      <p class="kind">Proyecto de la Agencia Estatal de Investigación en cuyo equipo participo (PID2022-141813OB-I00).</p>
-      <p>Comunidades de IoT e IA. Sensores parecidos comparten micro-modelos TinyML para decidir en local, con menos latencia, menos consumo y más privacidad. Hay pilotos en calidad del aire, logística de última milla y posicionamiento en interiores.</p>
-      <svg class="viz" id="an" viewBox="0 0 400 170" role="img" aria-label="Simulación de cuatro sensores de temperatura de una comunidad; al provocar una anomalía, el modelo compartido la detecta"></svg>
-      <div class="row"><button class="pbtn" type="button" id="anBtn">Provocar una anomalía</button><span id="anTxt" aria-live="polite"></span></div>
-      <p class="cap2">Es una simulación: el modelo de la comunidad aprende cómo se comportan sus sensores y avisa cuando uno se sale de lo normal. El primer artículo salió en Internet of Things (Elsevier) en 2026.</p>
-      <a class="go" href="https://coiotia.uji.es" target="_blank" rel="noopener">coiotia.uji.es</a>
-    </article>
-
-    <!-- 4 -->
-    <article class="t s2 sucre" aria-labelledby="sucre-h">
-      <button class="sucret" id="sucret" type="button" aria-label="Sucret, la mascota de Sucre. Pulsa para que salude">
-        <span class="bubble" id="bubble">¡Hola!</span>
-        <svg viewBox="0 0 160 150" aria-hidden="true">
-          <defs><linearGradient id="cube" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D9D9DE"/></linearGradient></defs>
-          <path d="M42,96 C26,98 18,108 16,120" fill="none" stroke="#1E2A44" stroke-width="9" stroke-linecap="round"/>
-          <circle cx="16" cy="121" r="8" fill="#1E2A44"/>
-          <g id="armR"><path d="M118,96 C134,98 142,108 144,120" fill="none" stroke="#1E2A44" stroke-width="9" stroke-linecap="round"/><circle cx="144" cy="121" r="8" fill="#1E2A44"/></g>
-          <rect x="34" y="34" width="92" height="92" rx="26" fill="url(#cube)" stroke="#C9C9D0" stroke-width="1.5"/>
-          <rect x="40" y="40" width="80" height="80" rx="20" fill="#EEEEF1"/>
-          <ellipse cx="56" cy="98" rx="9" ry="5.5" fill="#F2B9A5"/>
-          <ellipse cx="104" cy="98" rx="9" ry="5.5" fill="#F2B9A5"/>
-          <g id="eyes"><circle cx="64" cy="80" r="7.5" fill="#1E2A44"/><circle cx="96" cy="80" r="7.5" fill="#1E2A44"/>
-            <circle cx="66.5" cy="77.5" r="2.2" fill="#fff"/><circle cx="98.5" cy="77.5" r="2.2" fill="#fff"/></g>
-          <g id="lids"><rect x="54" y="70" width="20" height="20" rx="10" fill="#EEEEF1"/><rect x="86" y="70" width="20" height="20" rx="10" fill="#EEEEF1"/></g>
-          <path d="M70,101 Q80,110 90,101" fill="none" stroke="#1E2A44" stroke-width="4" stroke-linecap="round"/>
-        </svg>
-        <span class="hint">Sucret, la mascota de Sucre. Tócala.</span>
-      </button>
-      <span class="tag">Producto</span>
-      <h3 id="sucre-h">Sucre</h3>
-      <p class="kind">Desde 2016, con más de 20.000 jóvenes en talleres, ferias y aulas.</p>
-      <p>Un kit de sensores y una app para aprender pensamiento computacional. Con Sucre4Kids se programa con tarjetas y sin pantallas desde los cuatro años; con Sucre4Stem, con bloques, hasta FP. Baja la luz y mira qué hace el kit.</p>
-      <div class="kit"><img src="img/sucrecore-kit.webp" alt="Kit SucreCore con sensores de luz, pulsador, altavoz y bombilla conectados" width="1100" height="679"><span class="glow led"></span><span class="glow bulb"></span></div>
-      <div class="prog" aria-label="Programa de ejemplo"><span class="blk">cuando</span><span class="blk y">luz &lt; 30</span><span class="blk w">encender bombilla</span></div>
-      <label class="ctrl" for="light"><span>☀ luz</span><input type="range" id="light" min="0" max="100" value="70"><output id="lightV" for="light">70</output></label>
-      <a class="go" href="https://programasucre.com" target="_blank" rel="noopener">programasucre.com</a>
-    </article>
-    <article class="t s2 senviro" id="senviro" aria-labelledby="senviro-h">
-      <span class="tag">Producto</span>
-      <h3 id="senviro-h">SEnviro</h3>
-      <p class="kind">Estación para viñedos, protegida en el banco de patentes de la Generalitat e instalada en seis bodegas.</p>
-      <p>Mide el microclima de la parcela y avisa al móvil cuando el tiempo favorece el mildiu. Prueba la regla de los tres dieces: 10 °C, 10 mm de lluvia y brotes de 10 cm.</p>
-      <div class="sim">
-        <div class="sliders">
-          <label class="ctrl" for="tC"><span>temperatura</span><input type="range" id="tC" min="0" max="30" value="14"><output id="tCv" for="tC">14 °C</output></label>
-          <label class="ctrl" for="rain"><span>lluvia 48 h</span><input type="range" id="rain" min="0" max="30" value="4"><output id="rainV" for="rain">4 mm</output></label>
-          <label class="ctrl" for="shoot"><span>brote</span><input type="range" id="shoot" min="0" max="30" value="12"><output id="shootV" for="shoot">12 cm</output></label>
-          <div class="risk" aria-live="polite"><i></i><i></i><i></i><span id="riskT"></span></div>
-        </div>
-        <div class="phone" aria-hidden="true"><div class="screen"><div class="notif"><b>SENVIRO · ALERTA</b>Condiciones de mildiu en la parcela. Revisa el viñedo.</div><div class="clockp"><span id="pclock">08:30</span><small>Castelló</small></div></div></div>
-      </div>
-      <a class="go" href="https://www.senviro.uji.es" target="_blank" rel="noopener">senviro.uji.es</a>
-    </article>
+    <!-- 3 · proyectos y productos -->
+    <a class="t brand" id="proyectos" href="https://lia.uji.es" target="_blank" rel="noopener">
+      <span class="plate"><img src="img/logos/lia.png" alt="LIA · AIoT &amp; Communities" width="823" height="240"></span>
+      <span class="tag">Proyecto que dirijo · desde 2025</span>
+      <span class="desc">Aprendizaje federado en comunidades de dispositivos AIoT.</span>
+      <span class="go">lia.uji.es</span>
+    </a>
+    <a class="t brand" href="https://coiotia.uji.es" target="_blank" rel="noopener">
+      <span class="plate dark"><img src="img/logos/coiotia.png" alt="CoIoTIA · Communities of IoT and AI" width="630" height="240"></span>
+      <span class="tag">Proyecto AEI · equipo de investigación</span>
+      <span class="desc">Comunidades de IoT e IA que comparten micro-modelos TinyML.</span>
+      <span class="go">coiotia.uji.es</span>
+    </a>
+    <a class="t brand" href="https://programasucre.com" target="_blank" rel="noopener">
+      <span class="plate"><span class="sucre-logo" role="img" aria-label="Sucre"><svg viewBox="0 0 66 66" aria-hidden="true"><rect x="5" y="9" width="26" height="26" rx="6.5" fill="#1d1d1b"/><rect x="5" y="39" width="26" height="26" rx="6.5" fill="#1d1d1b"/><rect x="35" y="39" width="26" height="26" rx="6.5" fill="#1d1d1b"/><rect x="37" y="4" width="26" height="26" rx="6.5" fill="#1d1d1b" opacity=".5" transform="rotate(15 50 17)"/></svg><span aria-hidden="true">sucre</span></span></span>
+      <span class="tag">Producto · desde 2016</span>
+      <span class="desc">Kit y app para aprender pensamiento computacional desde los 4 años.</span>
+      <span class="go">programasucre.com</span>
+    </a>
+    <a class="t brand" href="https://www.senviro.uji.es" target="_blank" rel="noopener">
+      <span class="plate"><img src="img/logos/senviro.png" alt="SEnviro" width="283" height="83"></span>
+      <span class="tag">Producto · viticultura de precisión</span>
+      <span class="desc">Estación IoT que avisa al móvil del riesgo de mildiu en el viñedo.</span>
+      <span class="go">senviro.uji.es</span>
+    </a>
 
     <!-- 5 -->
     <section class="t s2 r2" id="publicaciones" aria-labelledby="pub-h">
@@ -373,7 +343,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
 
   <footer>© 2026 Sergi Trilles Oliver</footer>
 </div>
-<script src="i18n.js?v=13"></script>
+<script src="i18n.js?v=14"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
@@ -389,43 +359,7 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
     navigator.clipboard.writeText('strilles@uji.es').then(function(){m.textContent='Copiado ✓';setTimeout(function(){m.textContent='strilles@uji.es'},1400)},function(){});
   });
 
-  /* Sucret: los ojos siguen al cursor y saluda al pulsar */
-  var eyes=$('eyes'), suc=$('sucret'), ssvg=suc.querySelector('svg');
-  addEventListener('pointermove',function(e){
-    var r=ssvg.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height*.53;
-    var dx=e.clientX-cx, dy=e.clientY-cy, d=Math.hypot(dx,dy)||1, k=Math.min(1,d/300);
-    eyes.setAttribute('transform','translate('+(dx/d*4*k).toFixed(2)+' '+(dy/d*3.5*k).toFixed(2)+')');
-  });
-  var hellos=['¡Hola!','Bon dia!','Hello!'], hi=0, tmr;
-  suc.addEventListener('click',function(){
-    $('bubble').textContent=hellos[hi++%hellos.length];
-    suc.classList.remove('hi'); void suc.offsetWidth; suc.classList.add('hi');
-    clearTimeout(tmr); tmr=setTimeout(function(){suc.classList.remove('hi')},1800);
-  });
-
-  /* Sucre: si la luz baja de 30 se enciende la bombilla */
-  var light=$('light'), sucre=document.querySelector('.sucre'), img=sucre.querySelector('.kit img');
-  function upLight(){
-    var v=+light.value; $('lightV').textContent=v;
-    sucre.classList.toggle('night', v<30);
-    img.style.filter='brightness('+(0.55+v/100*0.45).toFixed(2)+')';
-  }
-  light.addEventListener('input',upLight); upLight();
-
-  /* SEnviro: regla de los tres dieces */
-  var sen=$('senviro'), bars=sen.querySelectorAll('.risk i');
-  function upRisk(){
-    var tc=+$('tC').value, r=+$('rain').value, s=+$('shoot').value;
-    $('tCv').textContent=tc+' °C'; $('rainV').textContent=r+' mm'; $('shootV').textContent=s+' cm';
-    var n=(tc>=10)+(r>=10)+(s>=10);
-    bars.forEach(function(b,i){b.classList.toggle('on',i<n)});
-    $('riskT').textContent = n===3?'riesgo alto · alerta enviada':(n===2?'riesgo medio':'riesgo bajo');
-    sen.classList.toggle('alert', n===3);
-  }
-  ['tC','rain','shoot'].forEach(function(id){$(id).addEventListener('input',upRisk)}); upRisk();
-  try{$('pclock').textContent=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'}).format(new Date())}catch(e){}
-
-  var NS='http://www.w3.org/2000/svg', REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS='http://www.w3.org/2000/svg';
   function el(tag,attrs,parent){var e=document.createElementNS(NS,tag),css='';
     for(var k in attrs){var v=String(attrs[k]); if(v.indexOf('var(')===0&&(k==='fill'||k==='stroke'))css+=k+':'+v+';'; else e.setAttribute(k,v);}
     if(css)e.setAttribute('style',(e.getAttribute('style')||'')+css);
@@ -470,80 +404,6 @@ footer{font-size:13px;color:var(--muted);padding:6px 4px}
   fetch('data/cv.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){DATA=d;paintData();}).catch(function(){});
   document.addEventListener('langchange',paintData);
 
-  /* LIA: aprendizaje federado. Los modelos viajan al nodo fog y vuelven; los datos se quedan */
-  (function(){
-    var svg=$('fl'), fog={x:200,y:85}, devs=[], round=0, busy=false;
-    var pos=[[46,30],[30,85],[46,140],[354,30],[370,85],[354,140]];
-    pos.forEach(function(p){el('line',{x1:p[0],y1:p[1],x2:fog.x,y2:fog.y,stroke:'currentColor','stroke-opacity':.2,'stroke-dasharray':'3 4'},svg)});
-    el('rect',{x:fog.x-34,y:fog.y-22,width:68,height:44,rx:10,fill:'var(--lia)'},svg);
-    var fogT=el('text',{x:fog.x,y:fog.y+4,'text-anchor':'middle',style:'fill:var(--lia-soft);font-weight:600'},svg); fogT.textContent='nodo fog';
-    pos.forEach(function(p){
-      el('circle',{cx:p[0],cy:p[1],r:13,fill:'var(--tile)',stroke:'var(--lia)','stroke-width':2},svg);
-      el('rect',{x:p[0]-4,y:p[1]-4,width:8,height:8,rx:2,fill:'var(--lia)'},svg);
-      devs.push(p);
-    });
-    el('text',{x:38,y:166,'text-anchor':'middle'},svg).textContent='aire (NO₂, CO₂)';
-    el('text',{x:362,y:166,'text-anchor':'middle'},svg).textContent='salud (wearables)';
-    var txt=$('flTxt'); txt.textContent='ronda 0 · precisión 62 %';
-    function acc(r){return Math.round(62+31*(1-Math.pow(.62,r)))}
-    function fly(from,to,color,ms,done){
-      var c=el('circle',{r:5,fill:color,cx:from[0],cy:from[1]},svg), t0=performance.now();
-      (function step(now){var k=Math.min(1,(now-t0)/ms), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
-        c.setAttribute('cx',from[0]+(to[0]-from[0])*e); c.setAttribute('cy',from[1]+(to[1]-from[1])*e);
-        if(k<1)requestAnimationFrame(step); else {c.remove(); done&&done();}})(t0);
-    }
-    $('flBtn').addEventListener('click',function(){
-      if(busy) return; busy=true; round++;
-      var f=[fog.x,fog.y];
-      if(REDUCE){txt.textContent='ronda '+round+' · precisión '+acc(round)+' %';busy=false;return;}
-      txt.textContent='ronda '+round+' · enviando modelos locales…';
-      var n=0; devs.forEach(function(d,i){setTimeout(function(){fly(d,f,'var(--lia)',700,function(){
-        if(++n<devs.length) return;
-        txt.textContent='ronda '+round+' · combinando modelos…';
-        setTimeout(function(){var m2=0; devs.forEach(function(d2){fly(f,d2,'var(--warn)',700,function(){
-          if(++m2===devs.length){txt.textContent='ronda '+round+' · precisión '+acc(round)+' %';busy=false;}
-        })})},450);
-      })},i*90)});
-    });
-  })();
-
-  /* CoIoTIA: comunidad de sensores de temperatura con detección de anomalías */
-  (function(){
-    var svg=$('an'), N=48, S=4, data=[], lines=[], spike=-1, x0=10, x1=390, y0=20, y1=150, shown='';
-    el('text',{x:x0,y:10},svg).textContent='°C · últimos minutos';
-    for(var s=0;s<S;s++){var arr=[];for(var i=0;i<N;i++)arr.push(21+s*.35+Math.sin(i/6+s)*.35+(Math.random()-.5)*.25);data.push(arr);
-      lines.push(el('polyline',{fill:'none',stroke:'var(--coi)','stroke-width':1.8,'stroke-opacity':.35+s*.18,'stroke-linejoin':'round'},svg));}
-    var band=el('rect',{x:x0,y:0,width:0,height:0,fill:'var(--coi)','fill-opacity':.08},svg);
-    var mark=el('circle',{r:6,fill:'none',stroke:'var(--warn)','stroke-width':2.5,opacity:0},svg);
-    var lo=19.5, hi=27.5;
-    function rescale(){var all=[].concat.apply([],data), mn=Math.min.apply(null,all), mx=Math.max.apply(null,all); lo=lo+((mn-.4)-lo)*.25; hi=hi+((Math.max(mx+.4,mn+2.6))-hi)*.25;}
-    (function(){var all=[].concat.apply([],data); lo=Math.min.apply(null,all)-.4; hi=Math.max(Math.max.apply(null,all)+.4,lo+3);})();
-    function Y(v){return y1-(v-lo)/(hi-lo)*(y1-y0)}
-    function X(i){return x0+i*(x1-x0)/(N-1)}
-    function status(s){ if(s===shown) return; shown=s;
-      $('anTxt').innerHTML= s==='anom' ? '<span class="anom">anomalía en el sensor 3</span> · los otros 3 de la comunidad no la ven' : 'comunidad estable · 4 sensores'; }
-    function draw(){
-      rescale();
-      band.setAttribute('y',Y(Math.min(23.2,hi)));band.setAttribute('height',Math.max(0,Y(Math.max(20.3,lo))-Y(Math.min(23.2,hi))));band.setAttribute('width',x1-x0);
-      for(var s=0;s<S;s++)lines[s].setAttribute('points',data[s].map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1)}).join(' '));
-      var last=N-1, v=data[2][last];
-      if(v>24){mark.setAttribute('cx',X(last));mark.setAttribute('cy',Y(v));mark.setAttribute('opacity',1);status('anom');}
-      else if(spike<0){mark.setAttribute('opacity',0);status('ok');}
-    }
-    function tick(){
-      for(var s=0;s<S;s++){data[s].shift();var prev=data[s][N-2];var base=21+s*.35;
-        var nv=prev+(base-prev)*.15+(Math.random()-.5)*.3;
-        if(s===2&&spike>=0){nv=spike>2?26.4-(5-spike)*.2:22+spike*1.6;spike++;if(spike>9)spike=-1;}
-        data[s].push(nv);}
-      draw();
-    }
-    draw();
-    if(!REDUCE) setInterval(tick,450);
-    $('anBtn').addEventListener('click',function(){
-      if(REDUCE){data[2][N-1]=26.2;draw();return;}
-      spike=0;
-    });
-  })();
 })();
 </script>
 </body>
