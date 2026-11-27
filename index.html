@@ -17,7 +17,7 @@
   --vine:#2F6B3E; --vine-soft:#DCEBDA; --vine-ink:#0E2414; --warn:#C2410C;
   --lia:#3446D9; --lia-soft:#E3E7FF; --lia-ink:#0D1240;
   --coi:#7B3FD0; --coi-soft:#EFE6FD; --coi-ink:#22093F;
-  --imp:#141714; --imp-ink:#F1F3EE; --imp-bar:#8EA2FF; --imp-muted:#A7B0A8; --imp-vine:#86D39A;
+  --imp:#141714; --imp-ink:#F1F3EE; --imp-bar:#8EA2FF; --imp-muted:#A7B0A8; --imp-vine:#86D39A; --imp-lia:#8C9BFF;
   --blue:#2B55E6;
   --f-head:"Archivo", "Arial Narrow", system-ui, sans-serif;
   --f-body:"Archivo", "Segoe UI", system-ui, sans-serif;
@@ -29,14 +29,14 @@
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
   --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
   --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
-  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650; --imp-vine:#2F6B3E;
+  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650; --imp-vine:#2F6B3E; --imp-lia:#3446D9;
   --blue:#7C9BFF; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0F110F; --dot:#1F231F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
   --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
   --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
-  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650; --imp-vine:#2F6B3E;
+  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650; --imp-vine:#2F6B3E; --imp-lia:#3446D9;
   --blue:#7C9BFF; color-scheme:dark }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -189,7 +189,8 @@ body{background-attachment:fixed}
 /* baldosas oscuras (claras en el tema oscuro): mismo contenido, colores invertidos */
 .t.ink{background:var(--imp);color:var(--imp-ink);
   --ink:var(--imp-ink);--muted:var(--imp-muted);--tile:var(--imp);--blue:var(--imp-bar);--vine:var(--imp-vine);
-  --line:color-mix(in srgb,var(--imp-muted) 32%,transparent);--bg:color-mix(in srgb,var(--imp-ink) 9%,var(--imp))}
+  --line:color-mix(in srgb,var(--imp-muted) 32%,transparent);--bg:color-mix(in srgb,var(--imp-ink) 9%,var(--imp));--lia:var(--imp-lia)}
+.brand.ink .plate{border-color:transparent}
 .t.ink a{color:var(--imp-ink)}
 .t.ink a:focus-visible{outline-color:var(--imp-bar)}
 .t.ink h2::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2FBF71;margin-right:10px;vertical-align:.18em;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 25%,transparent)}
@@ -229,14 +230,14 @@ body{background-attachment:fixed}
     </figure>
 
     <!-- 3 · proyectos y productos -->
-    <a class="t brand" id="proyectos" href="https://lia.uji.es" target="_blank" rel="noopener">
+    <a class="t brand ink" id="proyectos" href="https://lia.uji.es" target="_blank" rel="noopener">
       <span class="plate"><img src="img/logos/lia.png" alt="LIA · AIoT &amp; Communities" width="823" height="240"></span>
       <span class="viz" data-viz="lia" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
       <span class="tag">Proyecto que dirijo · desde 2025</span>
       <span class="desc">Aprendizaje federado en comunidades de dispositivos AIoT.</span>
       <span class="go">lia.uji.es</span>
     </a>
-    <a class="t brand" href="https://coiotia.uji.es" target="_blank" rel="noopener">
+    <a class="t brand ink" href="https://coiotia.uji.es" target="_blank" rel="noopener">
       <span class="plate dark"><img src="img/logos/coiotia.png" alt="CoIoTIA · Communities of IoT and AI" width="630" height="240"></span>
       <span class="viz dark" data-viz="coi" aria-hidden="true"><svg viewBox="0 0 240 64"></svg><small></small></span>
       <span class="tag">Proyecto AEI · equipo de investigación</span>
