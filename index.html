@@ -17,7 +17,7 @@
   --vine:#2F6B3E; --vine-soft:#DCEBDA; --vine-ink:#0E2414; --warn:#C2410C;
   --lia:#3446D9; --lia-soft:#E3E7FF; --lia-ink:#0D1240;
   --coi:#7B3FD0; --coi-soft:#EFE6FD; --coi-ink:#22093F;
-  --imp:#141714; --imp-ink:#F1F3EE; --imp-bar:#8EA2FF; --imp-muted:#A7B0A8;
+  --imp:#141714; --imp-ink:#F1F3EE; --imp-bar:#8EA2FF; --imp-muted:#A7B0A8; --imp-vine:#86D39A;
   --blue:#2B55E6;
   --f-head:"Archivo", "Arial Narrow", system-ui, sans-serif;
   --f-body:"Archivo", "Segoe UI", system-ui, sans-serif;
@@ -29,14 +29,14 @@
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
   --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
   --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
-  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650;
+  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650; --imp-vine:#2F6B3E;
   --blue:#7C9BFF; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0F110F; --dot:#1F231F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A;
   --sucre:#FF7A50; --sucre-ink:#1C0A04; --night:#0B0D1C;
   --vine:#7CC08A; --vine-soft:#16291A; --vine-ink:#DCEFDF; --warn:#FB923C;
   --lia:#8C9BFF; --lia-soft:#161A3A; --lia-ink:#E3E7FF; --coi:#C29BFF; --coi-soft:#22163A; --coi-ink:#EFE6FD;
-  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650;
+  --imp:#E9ECE6; --imp-ink:#141714; --imp-bar:#2A55C8; --imp-muted:#4E5650; --imp-vine:#2F6B3E;
   --blue:#7C9BFF; color-scheme:dark }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -185,6 +185,14 @@ body{background-attachment:fixed}
 .os-list .ty.publication{background:var(--bg);color:var(--muted)}
 .os-list .y{font:500 12.5px var(--f-mono);color:var(--muted)}
 @media (max-width:960px){.open{grid-template-columns:minmax(0,1fr)}}
+
+/* baldosas oscuras (claras en el tema oscuro): mismo contenido, colores invertidos */
+.t.ink{background:var(--imp);color:var(--imp-ink);
+  --ink:var(--imp-ink);--muted:var(--imp-muted);--tile:var(--imp);--blue:var(--imp-bar);--vine:var(--imp-vine);
+  --line:color-mix(in srgb,var(--imp-muted) 32%,transparent);--bg:color-mix(in srgb,var(--imp-ink) 9%,var(--imp))}
+.t.ink a{color:var(--imp-ink)}
+.t.ink a:focus-visible{outline-color:var(--imp-bar)}
+.t.ink h2::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2FBF71;margin-right:10px;vertical-align:.18em;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 25%,transparent)}
 /* marca: nodo IoT con LED de estado */
 .node{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 14px var(--f-mono);color:var(--ink);letter-spacing:.02em}
 .node .led{width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
@@ -265,7 +273,7 @@ body{background-attachment:fixed}
       <ul class="pubs" id="latest"></ul>
       <a class="go" href="cv.html">Todas las publicaciones, con factor de impacto y filtros</a>
     </section>
-    <section class="t s2" id="investigacion" aria-labelledby="inv-h">
+    <section class="t s2 ink" id="investigacion" aria-labelledby="inv-h">
       <h2 id="inv-h">Investigación</h2>
       <p>IA que corre en sensores diminutos, redes de dispositivos que aprenden juntas sin compartir datos, y datos geoespaciales que ayudan a decidir en ciudades y campos.</p>
       <ul class="lines">
@@ -290,7 +298,7 @@ body{background-attachment:fixed}
     </section>
 
     <!-- 5 · ciencia abierta -->
-    <section class="t s4 open" id="ciencia-abierta" aria-labelledby="os-h">
+    <section class="t s4 open ink" id="ciencia-abierta" aria-labelledby="os-h">
       <div class="os-txt">
         <h2 id="os-h">Ciencia abierta</h2>
         <p>Publico los datos, el código y los paquetes de reproducibilidad de los artículos para que cualquiera pueda comprobar los resultados y reutilizarlos. También investigamos cómo hacer más reproducible la investigación en GIScience.</p>
@@ -315,7 +323,7 @@ body{background-attachment:fixed}
         <li><span class="y">2018</span><span>Jóvenes Emprendedores COPE (SEnviro)</span></li>
       </ul>
     </section>
-    <section class="t s2" id="contacto" aria-labelledby="col-h">
+    <section class="t s2 ink" id="contacto" aria-labelledby="col-h">
       <h2 id="col-h">¿Trabajamos juntos?</h2>
       <ul class="collab">
         <li><b>Estudiantes:</b> TFG, TFM o doctorado en AIoT, TinyML o datos geoespaciales.</li>
