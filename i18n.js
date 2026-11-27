@@ -274,7 +274,17 @@
     'en curso': ['en curs', 'in progress'],
     'Tesis doctoral': ['Tesi doctoral', 'PhD thesis'],
     'TFM': ['TFM', "Master's"],
-    'TFG': ['TFG', "Bachelor's"]
+    'TFG': ['TFG', "Bachelor's"],
+    'Artículos por año y cuartil': ['Articles per any i quartil', 'Articles per year and quartile'],
+    'Citas según el año de publicación': ["Cites segons l'any de publicació", 'Citations by year of publication'],
+    'Citas que han recibido los artículos de cada año': ["Cites que han rebut els articles de cada any", 'Citations received by the articles published each year'],
+    'Artículos por año, apilados por cuartil': ['Articles per any, apilats per quartil', 'Articles per year, stacked by quartile'],
+    'Citas por año de publicación': ['Cites per any de publicació', 'Citations per year of publication'],
+    'Ver como tabla': ['Veure com a taula', 'Show as table'],
+    'Ocultar tabla': ['Amagar la taula', 'Hide table'],
+    'Año': ['Any', 'Year'],
+    'Total': ['Total', 'Total'],
+    'Citas': ['Cites', 'Citations']
   };
 
   // plantillas: claves con {x}, de la más larga a la más corta
