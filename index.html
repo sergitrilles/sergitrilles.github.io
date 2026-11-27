@@ -222,6 +222,8 @@ body{background-attachment:fixed}
   --line:color-mix(in srgb,var(--imp-muted) 32%,transparent);--bg:color-mix(in srgb,var(--imp-ink) 9%,var(--imp));--lia:var(--imp-lia)}
 .brand.ink .plate{border-color:transparent}
 .brand.ink .viz{background:#FFFFFF;--tile:#FFFFFF;--ink:#141714;--muted:#5B635C;--line:#DCE0D8;--lia:#3446D9}
+/* productos (baldosa blanca): panel de la animación en negro (claro en el tema oscuro) */
+.brand:not(.ink) .viz{background:var(--imp);--tile:var(--imp);--ink:var(--imp-ink);--muted:var(--imp-muted);--vine:var(--imp-vine);--line:color-mix(in srgb,var(--imp-muted) 30%,transparent)}
 .t.ink a{color:var(--imp-ink)}
 .t.ink a:focus-visible{outline-color:var(--imp-bar)}
 .t.ink h2::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2FBF71;margin-right:10px;vertical-align:.18em;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 25%,transparent)}
