@@ -1,0 +1,44 @@
+name: Actualizar visitas
+
+on:
+  schedule:
+    - cron: "20 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-datos
+  cancel-in-progress: false
+
+jobs:
+  visitas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: sergitrilles/web-cv-privado
+          token: ${{ secrets.PRIVATE_TOKEN }}
+          path: .privado
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Actualizar
+        env:
+          SITE_DIR: ${{ github.workspace }}
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+        run: python .privado/tools/visitas.py | grep -i -E "error|aviso|visitas:" || true
+
+      - name: Publicar
+        run: |
+          rm -rf .privado
+          git config user.name "Sergi Trilles"
+          git config user.email "sergitrilles@users.noreply.github.com"
+          [ -f data/visitas.json ] || exit 0
+          git add data/visitas.json
+          git diff --cached --quiet || { git commit -m "Actualiza visitas"; git pull --rebase -q; git push; }

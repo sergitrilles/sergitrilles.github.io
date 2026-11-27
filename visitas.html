@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visitas · Sergi Trilles</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Visitas a la web de Sergi Trilles según GoatCounter, sin cookies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: cabecera con periodo y cifras, una gráfica de visitantes por día y seis listas (páginas, procedencia, países, navegadores, sistemas, pantallas) */
+:root{
+  --bg:#EEF0EB; --tile:#FFFFFF; --ink:#141714; --muted:#5B635C; --line:#DCE0D8; --soft:#F4F5F2;
+  --blue:#2B55E6; --s1:#2a78d6; --track:#E4E7E1;
+  --f-display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body:"Archivo", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+  --r:6px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A; --soft:#1F231F;
+  --blue:#7C9BFF; --s1:#3987e5; --track:#2A2F2A; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0F110F; --tile:#181B18; --ink:#EEF1EC; --muted:#9BA59C; --line:#2A2F2A; --soft:#1F231F;
+  --blue:#7C9BFF; --s1:#3987e5; --track:#2A2F2A; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(color-mix(in srgb,var(--line) 70%,transparent) 1px,transparent 1.2px);background-size:22px 22px;color:var(--ink);font:400 15px/1.5 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;display:grid;gap:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:4px 4px 6px;font:500 14.5px var(--f-body)}
+.top nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--muted)}
+.top nav a:hover{color:var(--ink)}
+.theme{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:4px}
+.langs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:6px;padding:2px;background:var(--tile)}
+.langs button{font:500 12px var(--f-mono);background:none;border:0;color:var(--muted);padding:3px 8px;border-radius:4px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--tile)}
+@media (max-width:620px){.top nav a{display:none}}
+.node{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:600 14px var(--f-mono);color:var(--ink);letter-spacing:.02em}
+.node .led{width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px color-mix(in srgb,#2FBF71 22%,transparent);animation:led 2.4s ease-in-out infinite}
+.node small{font:500 11px var(--f-mono);color:var(--muted);padding:2px 6px;border:1px solid var(--line);border-radius:4px}
+@keyframes led{50%{box-shadow:0 0 0 6px color-mix(in srgb,#2FBF71 0%,transparent)}}
+@media (prefers-reduced-motion:reduce){.node .led{animation:none}}
+
+.t{background:var(--tile);border-radius:var(--r);padding:22px;min-width:0}
+h1,h2{font-family:var(--f-display);font-stretch:125%;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(34px,4.6vw,54px);font-weight:800;line-height:1}
+h2{font-size:17px;font-weight:800}
+.intro{display:flex;justify-content:space-between;gap:16px 20px;flex-wrap:wrap;align-items:flex-end}
+.intro p{color:var(--muted);max-width:60ch;margin:8px 0 0}
+.seg{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:6px;padding:2px}
+.seg button{font:500 13px var(--f-mono);background:none;border:0;color:var(--muted);padding:6px 11px;border-radius:4px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--tile)}
+
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}
+.kpi{background:var(--soft);border-radius:4px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.kpi span{font:500 12.5px var(--f-mono);color:var(--muted)}
+.kpi b{font:600 34px/1 var(--f-mono);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.kpi small{font-size:13px;color:var(--muted)}
+
+.chart{margin-top:14px;background:var(--soft);border-radius:4px;padding:16px 18px;position:relative}
+.chart h2{margin-bottom:10px}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart svg text{font:400 11px var(--f-body);fill:var(--muted)}
+.chart .gl{stroke:var(--line)}
+.chart .hit{fill:transparent}
+.chart .hit:hover{fill:var(--line);fill-opacity:.55}
+.tip{position:absolute;pointer-events:none;background:var(--tile);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12.5px;line-height:1.4;box-shadow:0 6px 18px rgba(0,0,0,.08);white-space:nowrap;z-index:2}
+.tip b{display:block;font-weight:600}
+.tbtn{font:500 12.5px var(--f-body);background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0;margin-top:8px}
+.ctable{width:100%;max-width:360px;border-collapse:collapse;font-size:12.5px;margin-top:8px;font-variant-numeric:tabular-nums}
+.ctable th,.ctable td{text-align:right;padding:3px 6px;border-bottom:1px solid var(--line)}
+.ctable th:first-child,.ctable td:first-child{text-align:left}
+
+.lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.list{display:flex;flex-direction:column;gap:12px}
+.list .sub{font:500 12px var(--f-mono);color:var(--muted)}
+.list ol{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;font-size:14px;align-items:baseline}
+.list li .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list li .c{font:500 13px var(--f-mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.list li .bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--track);overflow:hidden}
+.list li .bar i{display:block;height:100%;background:var(--s1);border-radius:2px}
+.list .empty{color:var(--muted);font-size:14px}
+.note{font-size:14px;color:var(--muted)}
+footer{font-size:13px;color:var(--muted);padding:6px 4px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.lists,.kpis{grid-template-columns:minmax(0,1fr)}.kpi b{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="node" href="./" aria-label="Inicio"><i class="led" aria-hidden="true"></i><span>st-01</span><small>online</small></a>
+    <nav>
+      <a href="./#proyectos">Proyectos</a><a href="./#investigacion">Investigación</a><a href="cv.html">CV</a><a href="./#contacto">Contacto</a>
+      <span class="langs" role="group" aria-label="Idioma"><button type="button" data-lang="es">ES</button><button type="button" data-lang="va">VA</button><button type="button" data-lang="en">EN</button></span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+    </nav>
+  </header>
+
+  <section class="t">
+    <div class="intro">
+      <div>
+        <h1>Visitas</h1>
+        <p>Quién pasa por la web, según GoatCounter. No usa cookies ni guarda direcciones IP. Se actualiza cada día.</p>
+      </div>
+      <div class="seg" role="group" aria-label="Periodo" id="seg">
+        <button type="button" data-d="7">7 días</button><button type="button" data-d="30" aria-pressed="true">30 días</button><button type="button" data-d="90">90 días</button>
+      </div>
+    </div>
+    <div id="body">
+      <p class="note" id="msg" style="margin-top:18px">Cargando datos…</p>
+    </div>
+  </section>
+
+  <div class="lists" id="lists" hidden></div>
+
+  <footer><span id="upd"></span><a href="https://sergitrilles.goatcounter.com" target="_blank" rel="noopener">Panel completo en GoatCounter</a></footer>
+</div>
+<script src="i18n.js?v=17"></script>
+<script>
+(function(){
+  var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t, nf=function(n){return I18N.nf(n,{useGrouping:'always'})};
+  try{var s=localStorage.getItem('theme'); if(s) root.dataset.theme=s;}catch(e){}
+  $('themeBtn').addEventListener('click',function(){
+    var dark = root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light':'dark';
+    try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}
+  });
+  var NS='http://www.w3.org/2000/svg';
+  function sv(tag,a,p){var e=document.createElementNS(NS,tag);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  function day(iso,opt){return new Date(iso+'T12:00:00').toLocaleDateString(I18N.locale(),opt||{day:'numeric',month:'short'})}
+
+  var D=null, PERIOD=30;
+  var SIZES={phone:'Móviles',largephone:'Móviles grandes y tabletas pequeñas',tablet:'Tabletas y portátiles pequeños',desktop:'Ordenadores',desktophd:'Pantallas grandes (más que HD)',unknown:'Desconocido'};
+  function niceStep(m){var r=Math.max(1,m/4),p=Math.pow(10,Math.floor(Math.log10(r))),f=r/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p}
+
+  function chart(box,rows){
+    box.innerHTML='<h2>'+esc(t('Visitantes por día'))+'</h2>';
+    var W=1000,H=230,L=36,R=6,T=8,B=24,n=rows.length,band=(W-L-R)/n,gap=Math.min(2,band*.2),bw=Math.max(1,band-gap);
+    var top=Math.max.apply(null,rows.map(function(r){return r[1]}))||1, step=niceStep(top), ticks=Math.ceil(top/step), max=step*ticks;
+    var svg=sv('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':t('Visitantes por día')});
+    for(var k=0;k<=ticks;k++){var v=step*k,y=H-B-(H-T-B)*k/ticks;
+      sv('line',{x1:L,x2:W-R,y1:y,y2:y,'class':'gl'},svg);
+      sv('text',{x:L-6,y:y+4,'text-anchor':'end'},svg).textContent=nf(v)}
+    var every=Math.ceil(n/7), tip=document.createElement('div'); tip.className='tip'; tip.hidden=true;
+    rows.forEach(function(r,i){
+      var x=L+band*i+gap/2, h=(H-T-B)*r[1]/max, y=H-B-h, rr=Math.min(4,h,bw/2);
+      if(h>0) sv('path',{d:'M'+x+','+(H-B)+'V'+(y+rr)+'Q'+x+','+y+' '+(x+rr)+','+y+'H'+(x+bw-rr)+'Q'+(x+bw)+','+y+' '+(x+bw)+','+(y+rr)+'V'+(H-B)+'Z',fill:'var(--s1)',style:'fill:var(--s1)'},svg);
+      if((n-1-i)%every===0) sv('text',{x:x+bw/2,y:H-6,'text-anchor':'middle'},svg).textContent=day(r[0]);
+      var hit=sv('rect',{x:L+band*i,y:T,width:band,height:H-T-B,'class':'hit'},svg);
+      hit.addEventListener('mouseenter',function(){
+        tip.innerHTML='<b>'+esc(day(r[0],{weekday:'short',day:'numeric',month:'short'}))+'</b>'+esc(t('{n} visitantes',{n:nf(r[1])}));
+        tip.hidden=false;
+        var sr=svg.getBoundingClientRect(), br=box.getBoundingClientRect(), px=(L+band*i+band/2)/W*sr.width+(sr.left-br.left);
+        tip.style.left=Math.max(6,Math.min(px+10,br.width-tip.offsetWidth-6))+'px'; tip.style.top=(sr.top-br.top+4)+'px';
+      });
+      hit.addEventListener('mouseleave',function(){tip.hidden=true});
+    });
+    box.appendChild(svg); box.appendChild(tip);
+    var btn=document.createElement('button'); btn.type='button'; btn.className='tbtn'; btn.textContent=t('Ver como tabla');
+    var tbl=document.createElement('table'); tbl.className='ctable'; tbl.hidden=true;
+    tbl.innerHTML='<thead><tr><th>'+esc(t('Día'))+'</th><th>'+esc(t('Visitantes'))+'</th></tr></thead><tbody>'+
+      rows.slice().reverse().map(function(r){return '<tr><td>'+esc(day(r[0],{weekday:'short',day:'numeric',month:'short'}))+'</td><td>'+nf(r[1])+'</td></tr>'}).join('')+'</tbody>';
+    btn.onclick=function(){tbl.hidden=!tbl.hidden; btn.textContent=t(tbl.hidden?'Ver como tabla':'Ocultar tabla')};
+    box.appendChild(btn); box.appendChild(tbl);
+  }
+
+  function list(title,items,label){
+    var max=Math.max.apply(null,items.map(function(x){return x.c}).concat([1]));
+    return '<section class="t list"><div><h2>'+esc(t(title))+'</h2><span class="sub">'+esc(t('últimos {d} días',{d:D.days}))+'</span></div>'+
+      (items.length?'<ol>'+items.map(function(x){var nm=label(x);return '<li><span class="n" title="'+esc(nm)+'">'+esc(nm)+'</span><span class="c">'+nf(x.c)+'</span><span class="bar"><i style="width:'+(x.c/max*100).toFixed(1)+'%"></i></span></li>'}).join('')+'</ol>'
+        :'<p class="empty">'+esc(t('Sin datos todavía.'))+'</p>')+'</section>';
+  }
+  function country(x){var id=(x.i||'').slice(0,2).toUpperCase();
+    try{ if(/^[A-Z]{2}$/.test(id)) return new Intl.DisplayNames([I18N.locale()],{type:'region'}).of(id); }catch(e){}
+    return x.n||t('Desconocido')}
+
+  function paint(){
+    document.querySelectorAll('#seg button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.d===PERIOD))});
+    if(!D){ return; }
+    var rows=D.daily.slice(-PERIOD), sum=rows.reduce(function(a,r){return a+r[1]},0), best=rows.reduce(function(a,r){return r[1]>a[1]?r:a},rows[0]||['',0]);
+    $('body').innerHTML='<div class="kpis">'+
+      '<div class="kpi"><span>'+esc(t('visitantes'))+'</span><b>'+nf(sum)+'</b><small>'+esc(t('en los últimos {d} días',{d:PERIOD}))+'</small></div>'+
+      '<div class="kpi"><span>'+esc(t('media al día'))+'</span><b>'+I18N.nf(rows.length?sum/rows.length:0,{maximumFractionDigits:1})+'</b><small>'+esc(t('visitantes por día'))+'</small></div>'+
+      '<div class="kpi"><span>'+esc(t('día con más visitas'))+'</span><b>'+nf(best[1])+'</b><small>'+(best[1]?esc(day(best[0],{weekday:'long',day:'numeric',month:'long'})):'–')+'</small></div>'+
+      '</div><div class="chart" id="chart"></div>';
+    chart($('chart'),rows);
+    var L=$('lists'); L.hidden=false;
+    L.innerHTML=list('Páginas',D.pages,function(x){return x.p==='/'?t('Portada'):x.p})+
+      list('Procedencia',D.refs,function(x){return x.n||t('Directo o desconocido')})+
+      list('Países',D.countries,country)+
+      list('Navegadores',D.browsers,function(x){return x.n||t('Desconocido')})+
+      list('Sistemas',D.systems,function(x){return x.n||t('Desconocido')})+
+      list('Pantallas',D.sizes,function(x){return SIZES[x.i]?t(SIZES[x.i]):(x.n||t('Desconocido'))});
+    $('upd').textContent=t('Actualizado el {d}',{d:new Date(D.updated.replace('Z',':00Z')).toLocaleString(I18N.locale(),{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})});
+  }
+  $('seg').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; PERIOD=+b.dataset.d; paint();});
+  fetch('data/visitas.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){
+    if(!d||!d.daily){ $('msg').textContent=t('Todavía no hay datos: la primera actualización llegará en las próximas horas.'); return; }
+    D=d; paint();
+  }).catch(function(){ $('msg').textContent=t('Todavía no hay datos: la primera actualización llegará en las próximas horas.'); });
+  document.addEventListener('langchange',paint);
+})();
+</script>
+</body>
+</html>
