@@ -91,6 +91,7 @@ h1,h2,h3{font-family:var(--f-head);font-stretch:125%;margin:0;text-wrap:balance;
 .t{background:var(--tile);border-radius:var(--r);padding:24px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
   transition:transform .25s ease, box-shadow .25s ease}
 .s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.r2{grid-row:span 2}
+.ongoing{row-gap:14px}.ongoing b{font-weight:600}.ongoing small{display:block;font:500 12.5px var(--f-mono);color:var(--muted);margin-top:3px}
 .lines.two{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}.lines.two li{border-top:0;padding-top:0}
 .tag{font:500 12.5px var(--f-mono);color:var(--muted)}
 h2{font-size:21px;font-weight:800}
@@ -316,11 +317,8 @@ body{background-attachment:fixed}
     </a>
 
     <section class="t s4" aria-labelledby="otros-h">
-      <h2 id="otros-h">Otros proyectos</h2>
-      <ul class="lines two">
-        <li>CoAIoT: plataforma de IA para el Internet de las Cosas (Becas Leonardo, Fundación BBVA)</li>
-        <li><a href="https://nextcity-project.eu" target="_blank" rel="noopener">NexTCity</a>: gemelos digitales para ciudades sostenibles (Horizon Europe)</li>
-      </ul>
+      <h2 id="otros-h">Otros proyectos en curso</h2>
+      <ul class="lines two ongoing" id="ongoing"></ul>
       <a class="go" href="cv.html#proyectos">Todos los proyectos, con filtros</a>
     </section>
 
@@ -421,7 +419,7 @@ body{background-attachment:fixed}
 
   <footer><span>© 2026 Sergi Trilles Oliver</span><span class="org"><a href="https://www.uji.es/institucional/estructura/personal/?p_profesor=178620" target="_blank" rel="noopener">Universitat Jaume I</a> · <a href="https://www.init.uji.es/en/the-institute/" target="_blank" rel="noopener">INIT</a> · <a href="https://geotec.uji.es/" target="_blank" rel="noopener">GEOTEC</a></span></footer>
 </div>
-<script src="i18n.js?v=23"></script>
+<script src="i18n.js?v=24"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
@@ -622,10 +620,24 @@ body{background-attachment:fixed}
       return '<li><span class="ty '+esc(x.type)+'">'+esc(t(LAB[x.type]||x.type))+'</span><a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(x.t)+'</a><span class="y">'+(x.y||'')+'</span></li>';
     }).join('');
   }
+
+  /* otros proyectos en curso: los del CVN que aún no han terminado (sin LIA ni CoIoTIA, que ya tienen baldosa) */
+  function paintOngoing(d){
+    var today=new Date().toISOString().slice(0,10), ym=function(s){return (s||'').slice(0,4)};
+    var L=(d.projects||[]).filter(function(p){return p.kind==='Proyecto'&&(p.end||'9999')>=today&&!/lia\.uji|coiotia/.test(p.url||'')})
+      .sort(function(a,b){return (a.start||'').localeCompare(b.start||'')});
+    $('ongoing').innerHTML=L.map(function(p){
+      var tt=p.t||'', m=tt.match(/^([^:]{2,24}?)\s*(?::| - )\s*(.+)$/), name, rest;
+      if(m){name=m[1];rest=m[2];} else { var a=tt.match(/\s([A-Z][A-Z0-9-]{3,})\s*$/); name=a?a[1]:tt; rest=a?tt.slice(0,a.index):''; }
+      var nm=p.url?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener"><b>'+esc(name)+'</b></a>':'<b>'+esc(name)+'</b>';
+      var meta=[p.funder, ym(p.start)+'–'+ym(p.end).slice(2), p.role==='IP'?t('IP'):null].filter(Boolean).join(' · ');
+      return '<li>'+nm+(rest?': '+esc(rest):'')+'<small>'+esc(meta)+'</small></li>';
+    }).join('');
+  }
   function paintData(){
     var d=DATA; if(!d) return;
     var nf=I18N.nf;
-    paintOpen(d.openscience);
+    paintOpen(d.openscience); paintOngoing(d);
     var arts=d.pubs.filter(function(p){return p.kind==='Artículo'}).slice(0,12);
     $('latest').innerHTML=arts.map(function(p){
       var extra=(p.qb?'. Q'+p.qb:'')+(p.jcr?', '+t('FI {x}',{x:nf(p.jcr)}):'');
