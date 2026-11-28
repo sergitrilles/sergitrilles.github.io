@@ -228,7 +228,7 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
     $('sources').innerHTML=[['Citas',gs.cites],['Índice h',gs.h],['Índice i10',gs.i10]].filter(function(x){return x[1]!=null})
       .map(function(x){return '<div class="src"><span>'+x[0]+'</span><b>'+fmt(x[1])+'</b><small>Google Scholar</small></div>'}).join('');
     var st=d.stats;
-    $('kpis').innerHTML=[['artículos',st.articles],['Q1 (JCR o SJR)',st.q1],['Top 10 %',st.top10],['como primer autor',st.first],['congresos',st.confs],['capítulos',st.chapters],['proyectos como IP',st.ip],['tesis dirigidas',st.phd],['TFM',st.tfm]]
+    $('kpis').innerHTML=[['artículos',st.articles],['Q1 (JCR o SJR)',st.q1],['Top 10 %',st.top10],['congresos',st.confs],['capítulos',st.chapters],['proyectos como IP',st.ip],['tesis dirigidas',st.phd],['TFM',st.tfm]]
       .map(function(k){return '<span class="kpi"><b>'+fmt(k[1])+'</b> '+k[0]+'</span>'}).join('');
     renderCharts($('charts'));
     TABS.forEach(function(t){t.n=t.count(d)});
