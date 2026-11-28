@@ -23,7 +23,7 @@
     'Producto': ['Producte', 'Product'],
     'Agencia Estatal de Investigación · CNS2024-154145': ["Agència Estatal d'Investigació · CNS2024-154145", 'Spanish State Research Agency · CNS2024-154145'],
     'Kit SucreCore + app SucreCode': ['Kit SucreCore + app SucreCode', 'SucreCore kit + SucreCode app'],
-    'Nodo SEnviro + app de avisos': ["Node SEnviro + app d'avisos", 'SEnviro node + alerts app'],
+    'Nodo SEnviro + app de monitorización': ['Node SEnviro + app de monitoratge', 'SEnviro node + monitoring app'],
     'Profesor Titular de Universidad · Universitat Jaume I': ["Professor Titular d'Universitat · Universitat Jaume I", 'Associate Professor · Universitat Jaume I'],
     'Soy subdirector del Institut de Noves Tecnologies de la Imatge (INIT) de la Universitat Jaume I, donde trabajo en el grupo GEOTEC.': ["Soc sotsdirector de l'Institut de Noves Tecnologies de la Imatge (INIT) de la Universitat Jaume I, on treballe en el grup GEOTEC.", 'I am deputy director of the Institute of New Imaging Technologies (INIT) at Universitat Jaume I, where I work in the GEOTEC group.'],
     'Juan de la Cierva-Incorporación': ['Juan de la Cierva-Incorporació', 'Juan de la Cierva-Incorporación'],
