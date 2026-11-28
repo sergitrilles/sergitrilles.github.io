@@ -13,6 +13,7 @@
     'Cambiar entre tema claro y oscuro': ['Canviar entre tema clar i fosc', 'Switch between light and dark theme'],
     'Idioma': ['Idioma', 'Language'],
     'Inicio': ['Inici', 'Home'],
+    'Proyecto de investigación': ['Projecte de recerca', 'Research project'],
     'Proyecto que dirijo · 2025–2028': ['Projecte que dirigisc · 2025–2028', 'Project I lead · 2025–2028'],
     'Proyecto · equipo de investigación · 2023–2027': ["Projecte · equip d'investigació · 2023–2027", 'Project · research team · 2023–2027'],
     'Financiación': ['Finançament', 'Funding'],
