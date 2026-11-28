@@ -196,7 +196,7 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
   <footer><span>© 2026 Sergi Trilles Oliver</span><span class="org"><a href="https://www.uji.es/institucional/estructura/personal/?p_profesor=178620" target="_blank" rel="noopener">Universitat Jaume I</a> · <a href="https://www.init.uji.es/en/the-institute/" target="_blank" rel="noopener">INIT</a> · <a href="https://geotec.uji.es/" target="_blank" rel="noopener">GEOTEC</a></span><span>Citas: Google Scholar</span></footer>
 </div>
 
-<script src="i18n.js?v=21"></script>
+<script src="i18n.js?v=22"></script>
 <script>
 (function(){
   var root=document.documentElement;
@@ -466,28 +466,28 @@ footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
   }
 
 
-  /* becas predoctoral y postdoctorales (ayudas personales del CVN); las estancias siguen en Proyectos */
-  function becas(d){
-    return (d.projects||[]).filter(function(p){return p.kind==='Ayuda personal'&&/doctoral/i.test(p.t||'')})
-      .sort(function(a,b){return (b.start||'').localeCompare(a.start||'')});
-  }
+  /* becas pre y postdoctorales y el Ramón y Cajal (trayectoria y distinciones del CVN: fellowships) */
+  function becas(d){ return (d.fellowships||[]).slice(); }
   function becaInfo(p){
-    var txt=(p.t||'')+' '+(p.call||'')+' '+(p.ref||'');
-    if(/leonardo/i.test(txt)) return {n:'Beca Leonardo a Investigadores y Creadores Culturales',x:p.t};
-    if(/joint research centre/i.test(txt)) return {n:'Estancia de investigación en el Joint Research Centre de la Comisión Europea (Italia)'};
-    if(/tesis doctoral/i.test(txt)) return {n:'Beca predoctoral para la tesis doctoral'};
-    if(/postdoctoral/i.test(txt)) return {n:'Contrato postdoctoral',x:/:\s*(.+)$/.test(p.t||'')?(p.t.match(/:\s*(.+)$/)[1]):(/PINV/i.test(p.t||'')?'Plan de Promoción de la Investigación (PINV 2018)':'')};
-    if(/empresa/i.test(txt)) return {n:'Estancia de investigador doctor en empresa'};
-    return {n:p.t};
+    var t=p.t||'';
+    if(/ram[oó]n y cajal/i.test(t)) return {n:'Ramón y Cajal 2023',k:'Seleccionado',f:'Ministerio de Ciencia, Innovación y Universidades',x:'Seleccionado en 4.ª posición en Tecnologías de la Información y las Comunicaciones (RYC2023-042469-I). Renuncia tras obtener la plaza de Profesor Titular de Universidad.',y:'2023'};
+    if(/cierva/i.test(t)) return {n:'Juan de la Cierva-Incorporación',k:'Postdoc',f:'Ministerio de Ciencia e Innovación',x:'Contrato postdoctoral en el INIT, Universitat Jaume I'};
+    if(/PINV/i.test(t)) return {n:'Ayuda postdoctoral PINV',k:'Postdoc',f:'Universitat Jaume I',x:'Plan de Promoción de la Investigación 2018, acción 3.2'};
+    if(/GENT/i.test(t)) return {n:'Beca postdoctoral GENT (CPTT-GENT)',k:'Postdoc',f:'Generalitat Valenciana',x:'Transferencia: localización en interiores para museos'};
+    if(/postdoctoral/i.test(t)) return {n:'Beca postdoctoral VALi+D (APOSTD)',k:'Postdoc',f:'Generalitat Valenciana',x:'Plataforma de análisis de datos de sensores en tiempo real'};
+    if(/predoctoral/i.test(t)) return {n:'Beca predoctoral VALi+D (ACIF)',k:'Predoc',f:'Generalitat Valenciana',x:'Tesis doctoral, defendida en 2015'};
+    if(/colaboraci/i.test(t)) return {n:'Beca de colaboración de tercer ciclo',k:'Iniciación',f:'Universitat Jaume I'};
+    if(/investigaci/i.test(t)) return {n:'Beca de investigación',k:'Iniciación',f:'Universitat Jaume I'};
+    return {n:t,k:'Beca',f:p.ent};
   }
   function renderBecas(v){
     var t=I18N.t, L=becas(D);
     var yr=function(s,e){var a=(s||'').slice(0,4), b=(e||'').slice(0,4); return a&&b&&a!==b?a+'–'+b.slice(2):a||b||''};
-    v.innerHTML='<p class="note" style="margin:0 0 14px;color:var(--muted)">'+esc(t('Beca predoctoral y contratos postdoctorales obtenidos en convocatorias competitivas.'))+'</p>'+
+    v.innerHTML='<p class="note" style="margin:0 0 14px;color:var(--muted)">'+esc(t('Becas y contratos predoctorales y postdoctorales obtenidos en convocatorias competitivas, según el CVN.'))+'</p>'+
       '<ul class="rows bec">'+L.map(function(p){var b=becaInfo(p);
-        return '<li class="row"><span class="yr">'+yr(p.start,p.end)+'</span><div><span class="ttl">'+esc(t(b.n))+'</span>'+
-          (b.x?'<div class="au">'+esc(b.x)+'</div>':'')+
-          '<div class="venue">'+esc(p.funder||'')+(p.ref&&p.ref!=='BEFPI'?' · '+esc(p.ref):'')+'</div></div><div><span class="b">'+esc(t(/estancia/i.test(b.n)?'Estancia':/contrato/i.test(b.n)?'Contrato':'Beca'))+'</span></div></li>'}).join('')+'</ul>';
+        return '<li class="row"><span class="yr">'+(b.y||yr(p.start,p.end))+'</span><div><span class="ttl">'+esc(t(b.n))+'</span>'+
+          (b.x?'<div class="au">'+esc(t(b.x))+'</div>':'')+
+          '<div class="venue">'+esc(b.f||'')+'</div></div><div><span class="b">'+esc(t(b.k))+'</span></div></li>'}).join('')+'</ul>';
   }
 
   /* datos, código y paquetes de reproducibilidad publicados en Zenodo */

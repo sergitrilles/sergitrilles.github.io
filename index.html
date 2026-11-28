@@ -101,6 +101,7 @@ h3{font-size:30px;font-weight:800;line-height:1}
 .hero{padding:36px;justify-content:center}
 .hero h1{font-size:clamp(44px,6vw,80px);font-weight:900;line-height:.9;letter-spacing:-.02em}
 .hero .txt{display:grid;gap:12px;max-width:46em}
+.hero .role{font:600 15px var(--f-mono);letter-spacing:.01em;display:inline-flex;align-self:flex-start;padding:6px 10px;border-radius:4px;background:var(--ink);color:var(--tile);margin:-2px 0 4px}
 .hero .txt p:first-child{font-size:19px;line-height:1.45}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .btn{font:500 14px var(--f-body);border-radius:6px;padding:9px 16px;border:1px solid var(--line);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
@@ -265,8 +266,9 @@ body{background-attachment:fixed}
     <!-- 1 -->
     <section class="t s3 hero" aria-labelledby="nombre">
       <h1 id="nombre">Sergi Trilles</h1>
+      <p class="role">Profesor Titular de Universidad · Universitat Jaume I</p>
       <div class="txt">
-        <p>Soy profesor titular en la Universitat Jaume I y subdirector del Institut de Noves Tecnologies de la Imatge (INIT), donde trabajo en el grupo GEOTEC.</p>
+        <p>Soy subdirector del Institut de Noves Tecnologies de la Imatge (INIT) de la Universitat Jaume I, donde trabajo en el grupo GEOTEC.</p>
         <p>Investigo cómo conseguir que sensores pequeños decidan por sí mismos, sin depender de la nube, y cómo enseñar a programar desde los cuatro años. Casi todo lo que hago acaba en algo que se usa: un kit para escuelas, una estación para viñedos y plataformas para ciudades.</p>
         <div class="acts"><a class="btn primary" href="cv.html">Ver el CV completo</a><button class="btn" type="button" id="copyMail">strilles@uji.es</button></div>
       </div>
@@ -374,11 +376,14 @@ body{background-attachment:fixed}
     <section class="t s2" id="becas" aria-labelledby="bec-h">
       <h2 id="bec-h">Becas predoctorales y postdoctorales</h2>
       <ul class="grants">
-        <li><span class="y">2019–21</span><span><b>Contrato postdoctoral</b> · Universitat Jaume I<small>Plan de Promoción de la Investigación (PINV 2018)</small></span></li>
-        <li><span class="y">2016–18</span><span><b>Contrato postdoctoral</b> · Universitat Jaume I<small>Plataforma para la obtención, visualización y análisis de flujos</small></span></li>
-        <li><span class="y">2012–15</span><span><b>Beca predoctoral</b> · Universitat Jaume I<small>Contrato para la realización de la tesis doctoral</small></span></li>
+        <li><span class="y">2020–23</span><span><b>Juan de la Cierva-Incorporación</b> · Ministerio de Ciencia e Innovación</span></li>
+        <li><span class="y">2019–20</span><span><b>Postdoctoral PINV</b> · Universitat Jaume I</span></li>
+        <li><span class="y">2018–19</span><span><b>Postdoctoral GENT</b> · Generalitat Valenciana</span></li>
+        <li><span class="y">2016–18</span><span><b>Postdoctoral VALi+D (APOSTD)</b> · Generalitat Valenciana</span></li>
+        <li><span class="y">2012–15</span><span><b>Predoctoral VALi+D (ACIF)</b> · Generalitat Valenciana</span></li>
       </ul>
-      <a class="go" href="cv.html#becas">Ver en el CV</a>
+      <p class="gnote">Seleccionado en el Ramón y Cajal 2023 (4.º en Tecnologías de la Información y las Comunicaciones); renuncié al obtener la plaza de Profesor Titular.</p>
+      <a class="go" href="cv.html#becas">Todas en el CV</a>
     </section>
     <section class="t s4 ink" id="contacto" aria-labelledby="col-h">
       <div class="ct-a">
@@ -409,7 +414,7 @@ body{background-attachment:fixed}
 
   <footer><span>© 2026 Sergi Trilles Oliver</span><span class="org"><a href="https://www.uji.es/institucional/estructura/personal/?p_profesor=178620" target="_blank" rel="noopener">Universitat Jaume I</a> · <a href="https://www.init.uji.es/en/the-institute/" target="_blank" rel="noopener">INIT</a> · <a href="https://geotec.uji.es/" target="_blank" rel="noopener">GEOTEC</a></span></footer>
 </div>
-<script src="i18n.js?v=21"></script>
+<script src="i18n.js?v=22"></script>
 <script>
 (function(){
   var root=document.documentElement, $=function(id){return document.getElementById(id)}, t=I18N.t;
